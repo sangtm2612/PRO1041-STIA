@@ -70,7 +70,6 @@ public class MHNhanVien extends javax.swing.JInternalFrame {
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
         pn_danhsach = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tb_nhanvien = new javax.swing.JTable();
@@ -224,8 +223,8 @@ public class MHNhanVien extends javax.swing.JInternalFrame {
         jLabel8.setText("Trạng thái:");
 
         lb_trangthai.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lb_trangthai.setForeground(new java.awt.Color(0, 153, 51));
-        lb_trangthai.setText("Đang hoạt động");
+        lb_trangthai.setForeground(new java.awt.Color(51, 51, 255));
+        lb_trangthai.setText("null");
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -245,8 +244,6 @@ public class MHNhanVien extends javax.swing.JInternalFrame {
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/cleaning.png"))); // NOI18N
         jButton6.setText("Làm mới");
 
-        jButton7.setText("jButton7");
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -260,20 +257,17 @@ public class MHNhanVien extends javax.swing.JInternalFrame {
                 .addComponent(jButton5)
                 .addGap(31, 31, 31)
                 .addComponent(jButton6)
-                .addGap(27, 27, 27)
-                .addComponent(jButton7)
-                .addContainerGap(201, Short.MAX_VALUE))
+                .addContainerGap(303, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(19, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
                     .addComponent(jButton4)
                     .addComponent(jButton5)
-                    .addComponent(jButton6)
-                    .addComponent(jButton7))
+                    .addComponent(jButton6))
                 .addContainerGap())
         );
 
@@ -496,7 +490,7 @@ public class MHNhanVien extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 817, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
@@ -534,7 +528,6 @@ public class MHNhanVien extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
