@@ -22,16 +22,16 @@ import java.util.logging.Logger;
  */
 public class DanhMucDAO extends StiaDAO<DanhMuc, String>{
     
-    final String INSERT_SQL = "INSERT INTO dbo.DanhMuc(TenDanhMuc)VALUES(?)";
-    final String UPDATE_SQL = "UPDATE dbo.DanhMuc SET TenDanhMuc = ? WHERE Id = ?";
+    final String INSERT_SQL = "INSERT INTO dbo.DanhMuc(TenDanhMuc,TrangThai)VALUES(?,?)";
+    final String UPDATE_SQL = "UPDATE dbo.DanhMuc SET TenDanhMuc=?, TrangThai=? WHERE Id = ?";
     final String DELETE_SQL = "";
-    final String SELECT_ALL_SQL = "SELECT * FROM DanhMuc";
+    final String SELECT_ALL_SQL = "SELECT * FROM DanhMuc WHERE TrangThai = 1";
     final String SELECT_BY_ID_SQL = "SELECT * FROM DanhMuc WHERE Id = ?";
 
     @Override
     public void insert(DanhMuc entity) {
         try {
-            jdbcHelper.Update(INSERT_SQL, entity.getTenDanhMuc());
+            jdbcHelper.Update(INSERT_SQL, entity.getTenDanhMuc(), entity.isTrangThai());
         } catch (SQLException ex) {
             Logger.getLogger(NhaCungCapDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -40,7 +40,7 @@ public class DanhMucDAO extends StiaDAO<DanhMuc, String>{
     @Override
     public void update(DanhMuc entity) {
         try {
-            jdbcHelper.Update(UPDATE_SQL, entity.getTenDanhMuc(), entity.getId());
+            jdbcHelper.Update(UPDATE_SQL, entity.getTenDanhMuc(), entity.isTrangThai(), entity.getId());
         } catch (SQLException ex) {
             Logger.getLogger(DanhMucDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -75,6 +75,7 @@ public class DanhMucDAO extends StiaDAO<DanhMuc, String>{
                 DanhMuc entity = new DanhMuc();
                 entity.setId(rs.getInt("Id"));
                 entity.setTenDanhMuc(rs.getString("TenDanhMuc"));
+                entity.setTrangThai(rs.getBoolean("TrangThai"));
                 list.add(entity);
             }
         } catch (Exception e) {

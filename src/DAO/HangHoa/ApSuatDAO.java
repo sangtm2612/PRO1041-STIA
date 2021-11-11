@@ -21,16 +21,16 @@ import java.util.logging.Logger;
  */
 public class ApSuatDAO extends StiaDAO<ApSuat, Integer>{
     
-    final String INSERT_SQL = "INSERT INTO dbo.ApSuat(TenApSuat)VALUES(?)";
-    final String UPDATE_SQL = "UPDATE dbo.ApSuat SET TenApSuat = ? WHERE Id = ?";
+    final String INSERT_SQL = "INSERT INTO dbo.ApSuat(TenApSuat,TrangThai)VALUES(?,?)";
+    final String UPDATE_SQL = "UPDATE dbo.ApSuat SET TenApSuat=?, TrangThai=? WHERE Id = ?";
     final String DELETE_SQL = "";
-    final String SELECT_ALL_SQL = "SELECT * FROM ApSuat";
+    final String SELECT_ALL_SQL = "SELECT * FROM ApSuat Where TrangThai = 1";
     final String SELECT_BY_ID_SQL = "SELECT * FROM ApSuat WHERE Id = ?";
 
     @Override
     public void insert(ApSuat entity) {
         try {
-            jdbcHelper.Update(INSERT_SQL, entity.getTenApSuat());
+            jdbcHelper.Update(INSERT_SQL, entity.getTenApSuat(), entity.isTrangThai());
         } catch (SQLException ex) {
             Logger.getLogger(ApSuatDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -39,7 +39,7 @@ public class ApSuatDAO extends StiaDAO<ApSuat, Integer>{
     @Override
     public void update(ApSuat entity) {
         try {
-            jdbcHelper.Update(UPDATE_SQL, entity.getTenApSuat(), entity.getId());
+            jdbcHelper.Update(UPDATE_SQL, entity.getTenApSuat(), entity.isTrangThai(), entity.getId());
         } catch (SQLException ex) {
             Logger.getLogger(ApSuatDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -73,6 +73,7 @@ public class ApSuatDAO extends StiaDAO<ApSuat, Integer>{
                 ApSuat entity = new ApSuat();
                 entity.setId(rs.getInt("Id"));
                 entity.setTenApSuat(rs.getString("TenApSuat"));
+                entity.setTrangThai(rs.getBoolean("TrangThai"));
                 list.add(entity);
             }
         } catch (Exception e) {

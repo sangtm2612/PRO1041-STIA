@@ -12,17 +12,20 @@ package Models.HangHoa;
 public class DanhMuc {
     private int Id;
     private String TenDanhMuc; 
-
-    public DanhMuc(int Id, String TenDanhMuc) {
-        this.Id = Id;
-        this.TenDanhMuc = TenDanhMuc;
-    }
+    private boolean TrangThai;
 
     public DanhMuc() {
     }
 
-    public DanhMuc(String TenDanhMuc) {
+    public DanhMuc(int Id, String TenDanhMuc, boolean TrangThai) {
+        this.Id = Id;
         this.TenDanhMuc = TenDanhMuc;
+        this.TrangThai = TrangThai;
+    }
+
+    public DanhMuc(String TenDanhMuc, boolean TrangThai) {
+        this.TenDanhMuc = TenDanhMuc;
+        this.TrangThai = TrangThai;
     }
 
     public int getId() {
@@ -40,6 +43,13 @@ public class DanhMuc {
     public void setTenDanhMuc(String TenDanhMuc) {
         this.TenDanhMuc = TenDanhMuc;
     }
-    
-    
+
+    public boolean isTrangThai() {
+        return TrangThai;
+    }
+
+    public void setTrangThai(boolean TrangThai) {
+        this.TrangThai = TrangThai;
+    }
+
 }
