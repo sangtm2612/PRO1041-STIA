@@ -5,17 +5,36 @@
  */
 package UI;
 
+import UI.HangHoa.ApSuatJFrame;
+import UI.HangHoa.DanhMucJFrame;
+import UI.HangHoa.DonViTinhJFrame;
+import UI.HangHoa.LoaiHangJFrame;
+import UI.HangHoa.MauSacJFrame;
+import UI.HangHoa.NhaCungCapJFrame;
+
 /**
  *
  * @author sangt
  */
 public class HangHoaJFrame extends javax.swing.JInternalFrame {
+    NhaCungCapJFrame ncc;
+    ApSuatJFrame as;
+    DanhMucJFrame dm;
+    DonViTinhJFrame dvt;
+    LoaiHangJFrame lh;
+    MauSacJFrame ms;
 
     /**
      * Creates new form HangHoaJFrame
      */
     public HangHoaJFrame() {
         initComponents();
+    }
+    
+    public void Open() {
+        if (ncc==null) {
+            ncc = new NhaCungCapJFrame();
+        }
     }
 
     /**
@@ -60,13 +79,13 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
         lb_trangthai = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         lb_TongTien = new javax.swing.JLabel();
-        btn_themDanhMuc = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
+        btn_QLDanhMuc = new javax.swing.JLabel();
+        btn_QLNhaCungCap = new javax.swing.JLabel();
+        btn_QLMauSac = new javax.swing.JLabel();
+        btn_QLKichThuoc = new javax.swing.JLabel();
+        btn_QLApSuat = new javax.swing.JLabel();
+        btn_QLDonViTinh = new javax.swing.JLabel();
+        btn_themLoaiHang = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         btn_them = new javax.swing.JButton();
         btn_sua = new javax.swing.JButton();
@@ -172,24 +191,49 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
         lb_TongTien.setForeground(new java.awt.Color(204, 0, 0));
         lb_TongTien.setText("300000000");
 
-        btn_themDanhMuc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/suaHangHoa.png"))); // NOI18N
-        btn_themDanhMuc.addMouseListener(new java.awt.event.MouseAdapter() {
+        btn_QLDanhMuc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/suaHangHoa.png"))); // NOI18N
+        btn_QLDanhMuc.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btn_themDanhMucMouseClicked(evt);
+                btn_QLDanhMucMouseClicked(evt);
             }
         });
 
-        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/suaHangHoa.png"))); // NOI18N
+        btn_QLNhaCungCap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/suaHangHoa.png"))); // NOI18N
+        btn_QLNhaCungCap.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_QLNhaCungCapMouseClicked(evt);
+            }
+        });
 
-        jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/suaHangHoa.png"))); // NOI18N
+        btn_QLMauSac.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/suaHangHoa.png"))); // NOI18N
+        btn_QLMauSac.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_QLMauSacMouseClicked(evt);
+            }
+        });
 
-        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/suaHangHoa.png"))); // NOI18N
+        btn_QLKichThuoc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/suaHangHoa.png"))); // NOI18N
 
-        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/suaHangHoa.png"))); // NOI18N
+        btn_QLApSuat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/suaHangHoa.png"))); // NOI18N
+        btn_QLApSuat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_QLApSuatMouseClicked(evt);
+            }
+        });
 
-        jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/suaHangHoa.png"))); // NOI18N
+        btn_QLDonViTinh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/suaHangHoa.png"))); // NOI18N
+        btn_QLDonViTinh.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_QLDonViTinhMouseClicked(evt);
+            }
+        });
 
-        jLabel22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/suaHangHoa.png"))); // NOI18N
+        btn_themLoaiHang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/suaHangHoa.png"))); // NOI18N
+        btn_themLoaiHang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_themLoaiHangMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout pn_iinputLayout = new javax.swing.GroupLayout(pn_iinput);
         pn_iinput.setLayout(pn_iinputLayout);
@@ -208,9 +252,9 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
                     .addComponent(cbb_loaihang, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pn_iinputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btn_themDanhMuc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btn_QLDanhMuc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_QLNhaCungCap, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_themLoaiHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(57, 57, 57)
                 .addGroup(pn_iinputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel6)
@@ -223,9 +267,9 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
                     .addComponent(tf_chieuday, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pn_iinputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel18)
-                    .addComponent(jLabel19)
-                    .addComponent(jLabel20))
+                    .addComponent(btn_QLMauSac)
+                    .addComponent(btn_QLKichThuoc)
+                    .addComponent(btn_QLApSuat))
                 .addGap(61, 61, 61)
                 .addGroup(pn_iinputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel12)
@@ -237,7 +281,7 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
                     .addComponent(tf_gianhap)
                     .addComponent(tf_giaban, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel21)
+                .addComponent(btn_QLDonViTinh)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pn_iinputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel11)
@@ -283,7 +327,7 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addGroup(pn_iinputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(cbb_donvitinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel21))
+                                .addComponent(btn_QLDonViTinh))
                             .addGap(18, 18, 18)
                             .addComponent(jLabel12)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -299,16 +343,16 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(pn_iinputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(cbb_mausac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(btn_QLMauSac, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(pn_iinputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(cbb_kichthuoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel19))
+                                .addGroup(pn_iinputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btn_QLKichThuoc)
+                                    .addComponent(cbb_kichthuoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(41, 41, 41)))
                         .addGroup(pn_iinputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btn_QLApSuat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(cbb_apsuat))
                         .addGap(18, 18, 18)
                         .addComponent(jLabel9)
@@ -319,12 +363,12 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pn_iinputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(cbb_nhacungcap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btn_QLNhaCungCap, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pn_iinputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btn_themDanhMuc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btn_QLDanhMuc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(cbb_danhmuc))
                         .addGap(18, 18, 18)
                         .addGroup(pn_iinputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -336,7 +380,7 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(cbb_loaihang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(btn_themLoaiHang, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -432,17 +476,58 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_themActionPerformed
 
-    private void btn_themDanhMucMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_themDanhMucMouseClicked
+    private void btn_QLDanhMucMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_QLDanhMucMouseClicked
         // TODO add your handling code here:
-        
-    }//GEN-LAST:event_btn_themDanhMucMouseClicked
+        if (dm==null) {
+            dm = new DanhMucJFrame();
+        }
+    }//GEN-LAST:event_btn_QLDanhMucMouseClicked
+
+    private void btn_QLNhaCungCapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_QLNhaCungCapMouseClicked
+        // TODO add your handling code here:
+        Open();
+    }//GEN-LAST:event_btn_QLNhaCungCapMouseClicked
+
+    private void btn_themLoaiHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_themLoaiHangMouseClicked
+        // TODO add your handling code here:
+        if (lh==null) {
+            lh = new LoaiHangJFrame();
+        }
+    }//GEN-LAST:event_btn_themLoaiHangMouseClicked
+
+    private void btn_QLMauSacMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_QLMauSacMouseClicked
+        // TODO add your handling code here:
+        if (ms==null) {
+            ms = new MauSacJFrame();
+        }
+    }//GEN-LAST:event_btn_QLMauSacMouseClicked
+
+    private void btn_QLApSuatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_QLApSuatMouseClicked
+        // TODO add your handling code here:
+        if (as==null) {
+            as = new ApSuatJFrame();
+        }
+    }//GEN-LAST:event_btn_QLApSuatMouseClicked
+
+    private void btn_QLDonViTinhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_QLDonViTinhMouseClicked
+        // TODO add your handling code here:
+        if (dvt==null) {
+            dvt = new DonViTinhJFrame();
+        }
+    }//GEN-LAST:event_btn_QLDonViTinhMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel btn_QLApSuat;
+    private javax.swing.JLabel btn_QLDanhMuc;
+    private javax.swing.JLabel btn_QLDonViTinh;
+    private javax.swing.JLabel btn_QLKichThuoc;
+    private javax.swing.JLabel btn_QLMauSac;
+    private javax.swing.JLabel btn_QLNhaCungCap;
     private javax.swing.JButton btn_lammoi;
     private javax.swing.JButton btn_sua;
     private javax.swing.JButton btn_them;
-    private javax.swing.JLabel btn_themDanhMuc;
+    private javax.swing.JLabel btn_themLoaiHang;
     private javax.swing.JButton btn_xoa;
     private javax.swing.JComboBox<String> cbb_apsuat;
     private javax.swing.JComboBox<String> cbb_danhmuc;
@@ -459,14 +544,8 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

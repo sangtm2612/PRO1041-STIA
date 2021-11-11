@@ -12,17 +12,20 @@ package Models.HangHoa;
 public class LoaiHang {
     private int Id;
     private String TenLoai;
+    private boolean TrangThai;
 
     public LoaiHang() {
     }
 
-    public LoaiHang(String TenLoai) {
+    public LoaiHang(String TenLoai, boolean TrangThai) {
         this.TenLoai = TenLoai;
+        this.TrangThai = TrangThai;
     }
 
-    public LoaiHang(int Id, String TenLoai) {
+    public LoaiHang(int Id, String TenLoai, boolean TrangThai) {
         this.Id = Id;
         this.TenLoai = TenLoai;
+        this.TrangThai = TrangThai;
     }
 
     public int getId() {
@@ -40,6 +43,13 @@ public class LoaiHang {
     public void setTenLoai(String TenLoai) {
         this.TenLoai = TenLoai;
     }
-    
+
+    public boolean isTrangThai() {
+        return TrangThai;
+    }
+
+    public void setTrangThai(boolean TrangThai) {
+        this.TrangThai = TrangThai;
+    }
     
 }

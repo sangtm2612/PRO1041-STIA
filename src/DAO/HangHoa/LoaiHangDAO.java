@@ -20,18 +20,18 @@ import java.util.logging.Logger;
  *
  * @author sangt
  */
-public class LoaiHangDAO extends StiaDAO<LoaiHang, Integer>{
+public class LoaiHangDAO extends StiaDAO<LoaiHang, Integer> {
 
-    final String INSERT_SQL = "INSERT INTO dbo.LoaiHang(TenLoai)VALUES(?)";
-    final String UPDATE_SQL = "UPDATE dbo.LoaiHang SET TenLoai = ? WHERE Id = ?";
+    final String INSERT_SQL = "INSERT INTO dbo.LoaiHang(TenLoai, TrangThai)VALUES(?,?)";
+    final String UPDATE_SQL = "UPDATE dbo.LoaiHang SET TenLoai = ?, TrangThai = ? WHERE Id = ?";
     final String DELETE_SQL = "";
     final String SELECT_ALL_SQL = "SELECT * FROM LoaiHang";
     final String SELECT_BY_ID_SQL = "SELECT * FROM LoaiHang WHERE Id = ?";
-    
+
     @Override
     public void insert(LoaiHang entity) {
         try {
-            jdbcHelper.Update(INSERT_SQL, entity.getTenLoai());
+            jdbcHelper.Update(INSERT_SQL, entity.getTenLoai(), entity.isTrangThai());
         } catch (SQLException ex) {
             Logger.getLogger(LoaiHangDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -40,7 +40,7 @@ public class LoaiHangDAO extends StiaDAO<LoaiHang, Integer>{
     @Override
     public void update(LoaiHang entity) {
         try {
-            jdbcHelper.Update(UPDATE_SQL, entity.getTenLoai(), entity.getId());
+            jdbcHelper.Update(UPDATE_SQL, entity.getTenLoai(), entity.isTrangThai(), entity.getId());
         } catch (SQLException ex) {
             Logger.getLogger(LoaiHangDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -70,10 +70,11 @@ public class LoaiHangDAO extends StiaDAO<LoaiHang, Integer>{
         List<LoaiHang> list = new ArrayList<>();
         try {
             ResultSet rs = jdbcHelper.query(sql, args);
-            while(rs.next()) {
+            while (rs.next()) {
                 LoaiHang entity = new LoaiHang();
                 entity.setId(rs.getInt("Id"));
                 entity.setTenLoai(rs.getString("TenLoai"));
+                entity.setTrangThai(rs.getBoolean("TrangThai"));
                 list.add(entity);
             }
         } catch (Exception e) {
@@ -81,7 +82,5 @@ public class LoaiHangDAO extends StiaDAO<LoaiHang, Integer>{
         }
         return list;
     }
-    
-    
-    
+
 }

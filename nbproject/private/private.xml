@@ -3,7 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/PRO1041/Project/STIA/src/Service/Implement/DanhMucService.java</file>
+            <file>file:/E:/PRO1041/Project/STIA/src/UI/HangHoaJFrame.java</file>
+            <file>file:/E:/PRO1041/Project/STIA/src/DAO/NhanVienDAO.java</file>
+            <file>file:/E:/PRO1041/Project/STIA/src/DAO/HangHoa/ApSuatDAO.java</file>
+            <file>file:/E:/PRO1041/Project/STIA/src/DAO/KhachHangDAO.java</file>
         </group>
     </open-files>
 </project-private>

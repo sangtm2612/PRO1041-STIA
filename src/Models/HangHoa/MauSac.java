@@ -12,19 +12,20 @@ package Models.HangHoa;
 public class MauSac {
     private int Id;
     private String TenMau;
+    private boolean TrangThai;
 
     public MauSac() {
     }
 
-    public MauSac(String TenMau) {
-        this.TenMau = TenMau;
-    }
-    
-    
-
-    public MauSac(int Id, String TenMau) {
+    public MauSac(int Id, String TenMau, boolean TrangThai) {
         this.Id = Id;
         this.TenMau = TenMau;
+        this.TrangThai = TrangThai;
+    }
+
+    public MauSac(String TenMau, boolean TrangThai) {
+        this.TenMau = TenMau;
+        this.TrangThai = TrangThai;
     }
 
     public int getId() {
@@ -42,6 +43,16 @@ public class MauSac {
     public void setTenMau(String TenMau) {
         this.TenMau = TenMau;
     }
+
+    public boolean isTrangThai() {
+        return TrangThai;
+    }
+
+    public void setTrangThai(boolean TrangThai) {
+        this.TrangThai = TrangThai;
+    }
+    
+    
     
     
 }

@@ -103,6 +103,7 @@ CREATE TABLE ApSuat
 	TrangThai BIT NOT NULL
 )
 GO
+--SELECT * FROM dbo.ApSuat
 
 CREATE TABLE DonViTinh
 (
@@ -111,6 +112,7 @@ CREATE TABLE DonViTinh
 	TrangThai BIT NOT NULL
 )
 GO
+--SELECT * FROM dbo.DonViTinh
 
 CREATE TABLE GiaTien
 (
@@ -127,6 +129,7 @@ CREATE TABLE LoaiHang
 	TrangThai BIT NOT NULL
 )
 GO
+--SELECT * FROM dbo.LoaiHang
 
 CREATE TABLE ChieuDay
 (

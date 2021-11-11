@@ -22,8 +22,8 @@ import java.util.logging.Logger;
  */
 public class MauSacDAO extends StiaDAO<MauSac, Integer>{
     
-    final String INSERT_SQL = "INSERT INTO dbo.MauSac(TenMau)VALUES(?)";
-    final String UPDATE_SQL = "UPDATE dbo.MauSac SET TenMau = ? WHERE Id = ?";
+    final String INSERT_SQL = "INSERT INTO dbo.MauSac(TenMau, TrangThai)VALUES(?,?)";
+    final String UPDATE_SQL = "UPDATE dbo.MauSac SET TenMau = ?, TrangThai=? WHERE Id = ?";
     final String DELETE_SQL = "";
     final String SELECT_ALL_SQL = "SELECT * FROM MauSac";
     final String SELECT_BY_ID_SQL = "SELECT * FROM MauSac WHERE Id = ?";
@@ -31,7 +31,7 @@ public class MauSacDAO extends StiaDAO<MauSac, Integer>{
     @Override
     public void insert(MauSac entity) {
         try {
-            jdbcHelper.Update(INSERT_SQL, entity.getTenMau());
+            jdbcHelper.Update(INSERT_SQL, entity.getTenMau(), entity.isTrangThai());
         } catch (SQLException ex) {
             Logger.getLogger(MauSacDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -40,7 +40,7 @@ public class MauSacDAO extends StiaDAO<MauSac, Integer>{
     @Override
     public void update(MauSac entity) {
         try {
-            jdbcHelper.Update(UPDATE_SQL, entity.getTenMau(), entity.getId());
+            jdbcHelper.Update(UPDATE_SQL, entity.getTenMau(),entity.isTrangThai(),entity.getId());
         } catch (SQLException ex) {
             Logger.getLogger(MauSacDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -74,6 +74,7 @@ public class MauSacDAO extends StiaDAO<MauSac, Integer>{
                 MauSac entity = new MauSac();
                 entity.setId(rs.getInt("Id"));
                 entity.setTenMau(rs.getString("TenMau"));
+                entity.setTrangThai(rs.getBoolean("TrangThai"));
                 list.add(entity);
             }
         } catch (Exception e) {

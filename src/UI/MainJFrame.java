@@ -5,6 +5,7 @@
  */
 package UI;
 
+import UI.HangHoa.NhaCungCapJFrame;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 
@@ -13,7 +14,7 @@ import javax.swing.JInternalFrame;
  * @author sangt
  */
 public class MainJFrame extends javax.swing.JFrame {
-
+    NhaCungCapJFrame ncc;
     /**
      * Creates new form MainJFrame
      */
@@ -68,6 +69,11 @@ public class MainJFrame extends javax.swing.JFrame {
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton1.setMargin(new java.awt.Insets(2, 24, 2, 24));
         jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jToolBar1.add(jButton1);
         jToolBar1.add(jSeparator3);
 
@@ -210,6 +216,8 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        HangHoaJFrame hanghoa = new HangHoaJFrame();
+        openX(hanghoa);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -218,6 +226,11 @@ public class MainJFrame extends javax.swing.JFrame {
         openX(banhang);
         
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        ncc = new NhaCungCapJFrame(); 
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     public void openX(JInternalFrame x) {
         for (JInternalFrame frmChild : dp_content.getAllFrames()) {
