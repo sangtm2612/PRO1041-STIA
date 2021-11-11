@@ -25,6 +25,7 @@ public class DanhMucService implements DanhMucInterface{
 
     @Override
     public void suaDanhMuc(DanhMuc d) {
+        
         dDAO.update(d);
     }
 
@@ -32,6 +33,13 @@ public class DanhMucService implements DanhMucInterface{
     public List<DanhMuc> findAllDanhMuc() {
         return dDAO.selectAll();
     }
+
+    @Override
+    public void findDanhMucByName(DanhMuc d) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
     
     
     

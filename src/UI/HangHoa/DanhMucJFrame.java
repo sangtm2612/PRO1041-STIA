@@ -38,15 +38,18 @@ public class DanhMucJFrame extends javax.swing.JFrame {
         dAL = d.findAllDanhMuc();
         dtm = (DefaultTableModel) tb_danhmuc.getModel();
         dtm.setRowCount(0);
-        for (int i = 0; i < dtm.getRowCount(); i++) {
-            dtm.addRow(new Object[]{dAL.get(i).getTenDanhMuc()});
+        for (DanhMuc d : dAL) {
+            dtm.addRow(new Object[]{d.getTenDanhMuc()});
         }
-        
     }
     
     public void add() {
         d.themDanhMuc(new DanhMuc(tf_danhmuc.getText(),true));
         loadTable();
+    }
+    
+    public void edit() {
+        d.suaDanhMuc(new DanhMuc(tf_danhmuc.getText(),true));
     }
     
     /**

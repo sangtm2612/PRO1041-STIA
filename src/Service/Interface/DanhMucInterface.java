@@ -20,4 +20,5 @@ public interface DanhMucInterface {
     
     List<DanhMuc> findAllDanhMuc();
     
+    void findDanhMucByName(DanhMuc d);
 }
