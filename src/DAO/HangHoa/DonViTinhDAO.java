@@ -22,8 +22,8 @@ import java.util.logging.Logger;
  */
 public class DonViTinhDAO extends StiaDAO<DonViTinh, Integer>{
     
-    final String INSERT_SQL = "INSERT INTO dbo.DonViTinh(TenDonVi)VALUES(?)";
-    final String UPDATE_SQL = "UPDATE dbo.DonViTinh SET TenDonVi = ? WHERE Id = ?";
+    final String INSERT_SQL = "INSERT INTO dbo.DonViTinh(TenDonVi,TrangThai)VALUES(?,?)";
+    final String UPDATE_SQL = "UPDATE dbo.DonViTinh SET TenDonVi = ?, TrangThai=? WHERE Id = ?";
     final String DELETE_SQL = "";
     final String SELECT_ALL_SQL = "SELECT * FROM DonViTinh";
     final String SELECT_BY_ID_SQL = "SELECT * FROM DonViTinh WHERE Id = ?";
@@ -31,7 +31,7 @@ public class DonViTinhDAO extends StiaDAO<DonViTinh, Integer>{
     @Override
     public void insert(DonViTinh entity) {
         try {
-            jdbcHelper.Update(INSERT_SQL, entity.getTenDonVi());
+            jdbcHelper.Update(INSERT_SQL, entity.getTenDonVi(),entity.isTrangThai());
         } catch (SQLException ex) {
             Logger.getLogger(DonViTinhDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -40,7 +40,7 @@ public class DonViTinhDAO extends StiaDAO<DonViTinh, Integer>{
     @Override
     public void update(DonViTinh entity) {
         try {
-            jdbcHelper.Update(UPDATE_SQL, entity.getTenDonVi(), entity.getId());
+            jdbcHelper.Update(UPDATE_SQL, entity.getTenDonVi(),entity.isTrangThai(),entity.getId());
         } catch (SQLException ex) {
             Logger.getLogger(DonViTinhDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -74,6 +74,7 @@ public class DonViTinhDAO extends StiaDAO<DonViTinh, Integer>{
                 DonViTinh entity = new DonViTinh();
                 entity.setId(rs.getInt("Id"));
                 entity.setTenDonVi(rs.getString("TenDonVi"));
+                entity.setTrangThai(rs.getBoolean("TrangThai"));
                 list.add(entity);
             }
         } catch (Exception e) {
