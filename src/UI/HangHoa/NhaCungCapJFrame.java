@@ -5,14 +5,20 @@
  */
 package UI.HangHoa;
 
-import javax.swing.JFrame;
+import Models.HangHoa.NhaCungCap;
+import Service.Implement.NhaCungCapService;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author sangt
  */
 public class NhaCungCapJFrame extends javax.swing.JFrame {
-
+    NhaCungCapService nccService = new NhaCungCapService();
+    DefaultTableModel dtm;
+    List<NhaCungCap> list;
+    
     /**
      * Creates new form NhaCungCapJFrame
      */
@@ -21,11 +27,24 @@ public class NhaCungCapJFrame extends javax.swing.JFrame {
         init();
     }
     
+    //Khởi đầu frame
     public void init() {
         setResizable(false);
         setLocationRelativeTo(null);
         setVisible(true);
+        list = nccService.findAllNhaCungCap();
+        dtm = (DefaultTableModel) tb_nhaCungCap.getModel();
+        loadTable();
     }
+    
+    public void loadTable() {
+        dtm.setRowCount(0);
+        for (NhaCungCap ncc : list) {
+            dtm.addRow(new Object[]{ncc.getTenNCC(),ncc.getSDT(),ncc.getEmail(),ncc.getDiaChi(),ncc.getGhiChu()});
+        }
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -56,7 +75,7 @@ public class NhaCungCapJFrame extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tb_nhaCungCap = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -183,8 +202,8 @@ public class NhaCungCapJFrame extends javax.swing.JFrame {
         jButton4.setMargin(new java.awt.Insets(2, 3, 2, 14));
         jPanel3.add(jButton4);
 
-        jTable1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tb_nhaCungCap.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        tb_nhaCungCap.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -195,7 +214,7 @@ public class NhaCungCapJFrame extends javax.swing.JFrame {
                 "Nhà cung cấp", "Số điện thoại", "Email", "Địa chỉ", "Ghi chú"
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(tb_nhaCungCap);
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel7.setText("Bảng quản lý nhà cung cấp:");
@@ -304,11 +323,11 @@ public class NhaCungCapJFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
+    private javax.swing.JTable tb_nhaCungCap;
     // End of variables declaration//GEN-END:variables
 }

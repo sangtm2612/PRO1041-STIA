@@ -52,6 +52,9 @@ public class ApSuat {
         this.TrangThai = TrangThai;
     }
 
-    
-    
+    @Override
+    public String toString() {
+        return TenApSuat; //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

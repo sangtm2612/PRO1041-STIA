@@ -75,25 +75,18 @@ public class NhaCungCapDAO extends StiaDAO<NhaCungCap, String> {
             ResultSet rs = jdbcHelper.query(sql, args);
             while(rs.next()) {
                 NhaCungCap entity = new NhaCungCap();
-                entity.setId(rs.getInt("Id"));
-                entity.setId(rs.getInt("TenNCC"));
-                entity.setId(rs.getInt("DiaChi"));
-                entity.setId(rs.getInt("SDT"));
-                entity.setId(rs.getInt("Email"));
-                entity.setId(rs.getInt("GhiChu"));
-                entity.setId(rs.getInt("TrangThai"));
+                entity.setTenNCC(rs.getString("TenNCC"));
+                entity.setDiaChi(rs.getString("DiaChi"));
+                entity.setSDT(rs.getString("SDT"));
+                entity.setEmail(rs.getString("Email"));
+                entity.setGhiChu(rs.getString("GhiChu"));
+                entity.setTrangThai(rs.getBoolean("TrangThai"));
                 list.add(entity);
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
         return list;
-    }
-    
-    public static void main(String[] args) {
-        NhaCungCapDAO dao = new NhaCungCapDAO();
-        //dao.insert(new NhaCungCap("1","2","3","4","5",true));
-        dao.update(new NhaCungCap(1,"trần sáng","2","098861518","4","5",false));
     }
 
 }

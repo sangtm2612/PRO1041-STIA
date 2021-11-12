@@ -52,4 +52,11 @@ public class DanhMuc {
         this.TrangThai = TrangThai;
     }
 
+    @Override
+    public String toString() {
+        return TenDanhMuc;
+    }
+    
+    
+
 }
