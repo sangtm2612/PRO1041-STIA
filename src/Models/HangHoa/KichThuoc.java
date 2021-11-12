@@ -12,13 +12,20 @@ package Models.HangHoa;
 public class KichThuoc {
     private int Id;
     private String TenKichThuoc;
+    private boolean TrangThai;
 
     public KichThuoc() {
     }
 
-    public KichThuoc(int Id, String TenKichThuoc) {
+    public KichThuoc(int Id, String TenKichThuoc, boolean TrangThai) {
         this.Id = Id;
         this.TenKichThuoc = TenKichThuoc;
+        this.TrangThai = TrangThai;
+    }
+
+    public KichThuoc(String TenKichThuoc, boolean TrangThai) {
+        this.TenKichThuoc = TenKichThuoc;
+        this.TrangThai = TrangThai;
     }
 
     public int getId() {
@@ -36,6 +43,21 @@ public class KichThuoc {
     public void setTenKichThuoc(String TenKichThuoc) {
         this.TenKichThuoc = TenKichThuoc;
     }
+
+    public boolean isTrangThai() {
+        return TrangThai;
+    }
+
+    public void setTrangThai(boolean TrangThai) {
+        this.TrangThai = TrangThai;
+    }
+
+    @Override
+    public String toString() {
+        return TenKichThuoc; //To change body of generated methods, choose Tools | Templates.
+    }
+
+    
     
     
 }

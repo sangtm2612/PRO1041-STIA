@@ -5,10 +5,9 @@
  */
 package UI.HangHoa;
 
-import Models.HangHoa.DanhMuc;
-import Service.Implement.DanhMucService;
-import java.awt.Container;
-import java.util.ArrayList;
+import Models.HangHoa.ApSuat;
+import Models.HangHoa.KichThuoc;
+import Service.Implement.KichThuocService;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -16,41 +15,41 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author sangt
  */
-public class DanhMucJFrame extends javax.swing.JFrame {
-    DanhMucService d = new DanhMucService();
-    List<DanhMuc> dAL;
+public class KichThuocJFrame extends javax.swing.JFrame {
+    KichThuocService k = new KichThuocService();
+    List<KichThuoc> kAL;
     DefaultTableModel dtm;
     /**
      * Creates new form NewJFrame
      */
-    public DanhMucJFrame() {
+    public KichThuocJFrame() {
         initComponents();
         init();
-        setVisible(true);
     }
     
     public void init(){
         setResizable(false);
         setLocationRelativeTo(null);
+        setVisible(true);
         loadTable();
     }
     
     public void loadTable() {
-        dAL = d.findAllDanhMuc();
-        dtm = (DefaultTableModel) tb_danhmuc.getModel();
+        kAL = k.findAllKichThuoc();
+        dtm = (DefaultTableModel) tb_kichthuoc.getModel();
         dtm.setRowCount(0);
-        for (DanhMuc d : dAL) {
-            dtm.addRow(new Object[]{d.getTenDanhMuc()});
+        for (KichThuoc k : kAL) {
+            dtm.addRow(new Object[]{k.getTenKichThuoc()});
         }
     }
     
     public void add() {
-        d.themDanhMuc(new DanhMuc(tf_danhmuc.getText(),true));
+        k.themKichThuoc(new KichThuoc(tf_KichThuoc.getText(),true));
         loadTable();
     }
     
     public void edit() {
-        d.suaDanhMuc(new DanhMuc(tf_danhmuc.getText(),true));
+        k.suaKichThuoc(new KichThuoc(tf_KichThuoc.getText(),true));
     }
     
     /**
@@ -63,20 +62,20 @@ public class DanhMucJFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        tf_danhmuc = new javax.swing.JTextField();
+        tf_KichThuoc = new javax.swing.JTextField();
         btn_them = new javax.swing.JButton();
         btn_xoa = new javax.swing.JButton();
         btn_luu = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tb_danhmuc = new javax.swing.JTable();
+        tb_kichthuoc = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Danh mục");
+        setTitle("Kích thước");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel1.setText("Tên danh mục:");
+        jLabel1.setText("Kích thước:");
 
-        tf_danhmuc.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        tf_KichThuoc.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
         btn_them.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btn_them.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/them.png"))); // NOI18N
@@ -94,13 +93,18 @@ public class DanhMucJFrame extends javax.swing.JFrame {
         btn_luu.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btn_luu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/luu.png"))); // NOI18N
         btn_luu.setText("Lưu  ");
+        btn_luu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_luuActionPerformed(evt);
+            }
+        });
 
-        tb_danhmuc.setModel(new javax.swing.table.DefaultTableModel(
+        tb_kichthuoc.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Tên danh mục"
+                "Kích thước"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -111,7 +115,7 @@ public class DanhMucJFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tb_danhmuc);
+        jScrollPane1.setViewportView(tb_kichthuoc);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -122,7 +126,7 @@ public class DanhMucJFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(btn_them, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tf_danhmuc)
+                    .addComponent(tf_KichThuoc)
                     .addComponent(btn_luu, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_xoa, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(35, 35, 35)
@@ -137,7 +141,7 @@ public class DanhMucJFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(tf_danhmuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tf_KichThuoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn_them, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -157,6 +161,11 @@ public class DanhMucJFrame extends javax.swing.JFrame {
         add();
     }//GEN-LAST:event_btn_themActionPerformed
 
+    private void btn_luuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_luuActionPerformed
+        // TODO add your handling code here:
+        edit();
+    }//GEN-LAST:event_btn_luuActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -174,21 +183,27 @@ public class DanhMucJFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DanhMucJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(KichThuocJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DanhMucJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(KichThuocJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DanhMucJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(KichThuocJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DanhMucJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(KichThuocJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DanhMucJFrame().setVisible(true);
+                new KichThuocJFrame().setVisible(true);
             }
         });
     }
@@ -199,7 +214,7 @@ public class DanhMucJFrame extends javax.swing.JFrame {
     private javax.swing.JButton btn_xoa;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tb_danhmuc;
-    private javax.swing.JTextField tf_danhmuc;
+    private javax.swing.JTable tb_kichthuoc;
+    private javax.swing.JTextField tf_KichThuoc;
     // End of variables declaration//GEN-END:variables
 }

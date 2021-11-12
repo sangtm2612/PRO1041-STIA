@@ -51,8 +51,11 @@ public class MauSac {
     public void setTrangThai(boolean TrangThai) {
         this.TrangThai = TrangThai;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return TenMau;
+    }
     
     
 }
