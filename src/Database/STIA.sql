@@ -57,7 +57,12 @@ CREATE TABLE NhaCungCap
 GO
 
 --select * from nhacungcap
---INSERT INTO dbo.NHASANXUAT(TenNCC,DiaChi,SDT,Email,GhiChu,TrangThai)VALUES(?,?,?,?,?,?,?)
+INSERT INTO dbo.NhaCungCap(TenNCC,DiaChi,SDT,Email,GhiChu,TrangThai)VALUES(N'Rạng Đông',N'Hà Nội','0987654321',N'rangdong@gmail.com',null,1)
+INSERT INTO dbo.NhaCungCap(TenNCC,DiaChi,SDT,Email,GhiChu,TrangThai)VALUES(N'Cadisun',N'Hà Nội','0987614321',N'randong@gmail.com',null,1)
+INSERT INTO dbo.NhaCungCap(TenNCC,DiaChi,SDT,Email,GhiChu,TrangThai)VALUES(N'Sino',N'Hà Nội','0987653321',N'rangdng@gmail.com',null,1)
+INSERT INTO dbo.NhaCungCap(TenNCC,DiaChi,SDT,Email,GhiChu,TrangThai)VALUES(N'Sino/ Vanloock',N'Hà Nội','0984654321',N'randng@gmail.com',null,1)
+INSERT INTO dbo.NhaCungCap(TenNCC,DiaChi,SDT,Email,GhiChu,TrangThai)VALUES(N'Điện cơ',N'Hà Nội','0987655621',N'rngdong@gmail.com',null,1)
+INSERT INTO dbo.NhaCungCap(TenNCC,DiaChi,SDT,Email,GhiChu,TrangThai)VALUES(N'Tiền phong/ Deko',N'Hà Nội','0945654321',N'randong@gmail.com',null,1)
 --UPDATE dbo.NHASANXUAT SET TenNCC = ?, DiaChi = ?, SDT = ?, Email = ?, GhiChu = ?, TrangThai = ? WHERE Id = ?
 
 CREATE TABLE DanhMuc
@@ -67,7 +72,13 @@ CREATE TABLE DanhMuc
 	TrangThai BIT NOT NULL
 )
 GO
+INSERT INTO dbo.DanhMuc(TenDanhMuc,TrangThai)VALUES(N'Vật tư điện',1)
+INSERT INTO dbo.DanhMuc(TenDanhMuc,TrangThai)VALUES(N'Vật tư nước',1)
+INSERT INTO dbo.DanhMuc(TenDanhMuc,TrangThai)VALUES(N'Bảo hộ lao động',1)
 --SELECT * FROM dbo.DANHMUC
+--DELETE FROM DanhMuc
+
+
 
 CREATE TABLE HangHoa
 (
@@ -86,6 +97,7 @@ CREATE TABLE KichThuoc
 	TrangThai BIT NOT NULL
 )
 GO
+--select * from kichthuoc
 
 CREATE TABLE MauSac
 (
@@ -94,6 +106,12 @@ CREATE TABLE MauSac
 	TrangThai BIT NOT NULL
 )
 GO
+INSERT INTO dbo.MauSac(TenMau,TrangThai)VALUES(N'Vàng',1)
+INSERT INTO dbo.MauSac(TenMau,TrangThai)VALUES(N'Xanh',1)
+INSERT INTO dbo.MauSac(TenMau,TrangThai)VALUES(N'Đỏ',1)
+INSERT INTO dbo.MauSac(TenMau,TrangThai)VALUES(N'Trắng',1)
+--SELECT * FROM dbo.MauSac
+--DELETE FROM dbo.MauSac
 
 
 CREATE TABLE ApSuat
@@ -103,6 +121,10 @@ CREATE TABLE ApSuat
 	TrangThai BIT NOT NULL
 )
 GO
+INSERT INTO dbo.ApSuat(TenApSuat,TrangThai)VALUES(N'PN10',1)
+INSERT INTO dbo.ApSuat(TenApSuat,TrangThai)VALUES(N'class 2',1)
+INSERT INTO dbo.ApSuat(TenApSuat,TrangThai)VALUES(N'class 3',1)
+--DELETE FROM dbo.ApSuat
 --SELECT * FROM dbo.ApSuat
 
 CREATE TABLE DonViTinh
@@ -112,6 +134,16 @@ CREATE TABLE DonViTinh
 	TrangThai BIT NOT NULL
 )
 GO
+INSERT INTO dbo.DonViTinh(TenDonVi,TrangThai)VALUES(N'M',1)
+INSERT INTO dbo.DonViTinh(TenDonVi,TrangThai)VALUES(N'Cái',1)
+INSERT INTO dbo.DonViTinh(TenDonVi,TrangThai)VALUES(N'Bộ',1)
+INSERT INTO dbo.DonViTinh(TenDonVi,TrangThai)VALUES(N'Cuộn',1)
+INSERT INTO dbo.DonViTinh(TenDonVi,TrangThai)VALUES(N'Tủ',1)
+INSERT INTO dbo.DonViTinh(TenDonVi,TrangThai)VALUES(N'Bình',1)
+INSERT INTO dbo.DonViTinh(TenDonVi,TrangThai)VALUES(N'Cọc',1)
+INSERT INTO dbo.DonViTinh(TenDonVi,TrangThai)VALUES(N'Kg',1)
+INSERT INTO dbo.DonViTinh(TenDonVi,TrangThai)VALUES(N'Đôi',1)
+--DELETE FROM dbo.DonViTinh
 --SELECT * FROM dbo.DonViTinh
 
 CREATE TABLE GiaTien
@@ -129,6 +161,12 @@ CREATE TABLE LoaiHang
 	TrangThai BIT NOT NULL
 )
 GO
+INSERT INTO dbo.LoaiHang(TenLoai,TrangThai)VALUES(N'Cấp nước',1)
+INSERT INTO dbo.LoaiHang(TenLoai,TrangThai)VALUES(N'Thoát nước',1)
+INSERT INTO dbo.LoaiHang(TenLoai,TrangThai)VALUES(N'Chống sét',1)
+INSERT INTO dbo.LoaiHang(TenLoai,TrangThai)VALUES(N'Hệ thống PCCC',1)
+INSERT INTO dbo.LoaiHang(TenLoai,TrangThai)VALUES(N'Khác',1)
+--DELETE FROM dbo.LoaiHang
 --SELECT * FROM dbo.LoaiHang
 
 CREATE TABLE ChieuDay

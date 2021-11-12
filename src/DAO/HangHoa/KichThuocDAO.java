@@ -21,8 +21,8 @@ import java.util.logging.Logger;
  * @author sangt
  */
 public class KichThuocDAO extends StiaDAO<KichThuoc, Integer>{
-    final String INSERT_SQL = "INSERT INTO dbo.KichThuoc(TenKichThuoc)VALUES(?)";
-    final String UPDATE_SQL = "UPDATE dbo.KichThuoc SET TenKichThuoc = ? WHERE Id = ?";
+    final String INSERT_SQL = "INSERT INTO dbo.KichThuoc(TenKichThuoc, TrangThai)VALUES(?,?)";
+    final String UPDATE_SQL = "UPDATE dbo.KichThuoc SET TenKichThuoc=?, TrangThai=? WHERE Id = ?";
     final String DELETE_SQL = "";
     final String SELECT_ALL_SQL = "SELECT * FROM KichThuoc";
     final String SELECT_BY_ID_SQL = "SELECT * FROM KichThuoc WHERE Id = ?";
@@ -30,7 +30,7 @@ public class KichThuocDAO extends StiaDAO<KichThuoc, Integer>{
     @Override
     public void insert(KichThuoc entity) {
         try {
-            jdbcHelper.Update(INSERT_SQL, entity.getTenKichThuoc());
+            jdbcHelper.Update(INSERT_SQL, entity.getTenKichThuoc(), entity.isTrangThai());
         } catch (SQLException ex) {
             Logger.getLogger(KichThuocDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -39,7 +39,7 @@ public class KichThuocDAO extends StiaDAO<KichThuoc, Integer>{
     @Override
     public void update(KichThuoc entity) {
         try {
-            jdbcHelper.Update(UPDATE_SQL, entity.getTenKichThuoc());
+            jdbcHelper.Update(UPDATE_SQL, entity.getTenKichThuoc(), entity.isTrangThai(), entity.getId());
         } catch (SQLException ex) {
             Logger.getLogger(KichThuocDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -73,6 +73,7 @@ public class KichThuocDAO extends StiaDAO<KichThuoc, Integer>{
                 KichThuoc entity = new KichThuoc();
                 entity.setId(rs.getInt("Id"));
                 entity.setTenKichThuoc(rs.getString("TenKichThuoc"));
+                entity.setTrangThai(rs.getBoolean("TrangThai"));
                 list.add(entity);
             }
         } catch (Exception e) {

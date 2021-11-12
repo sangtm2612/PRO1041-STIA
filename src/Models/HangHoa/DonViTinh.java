@@ -52,7 +52,9 @@ public class DonViTinh {
         this.TrangThai = TrangThai;
     }
 
-    
-    
+    @Override
+    public String toString() {
+        return TenDonVi; //To change body of generated methods, choose Tools | Templates.
+    }  
     
 }

@@ -96,6 +96,11 @@ public class NhaCungCap {
         this.TrangThai = TrangThai;
     }
 
+    @Override
+    public String toString() {
+        return TenNCC;
+    }
+
     
     
 }
