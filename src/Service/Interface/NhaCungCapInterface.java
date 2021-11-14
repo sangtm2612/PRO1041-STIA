@@ -20,6 +20,6 @@ public interface NhaCungCapInterface {
     
     List<NhaCungCap> findAllNhaCungCap();
     
-    int findIdNhaCungCap(String NhaCungCap);
+    NhaCungCap findNhaCungCapBySDT(String SDT);
     
 }

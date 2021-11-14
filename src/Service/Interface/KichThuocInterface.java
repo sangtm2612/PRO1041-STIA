@@ -20,6 +20,6 @@ public interface KichThuocInterface {
     
     List<KichThuoc> findAllKichThuoc();
     
-    int findIdKichThuoc(String KichThuoc);
+    KichThuoc findIdKichThuoc(String name);
     
 }

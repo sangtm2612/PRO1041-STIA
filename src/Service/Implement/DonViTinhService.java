@@ -33,8 +33,8 @@ public class DonViTinhService implements DonViTinhInterface{
     }
 
     @Override
-    public int findIdDonViTinh(String DonViTinh) {
-        return -1;
+    public DonViTinh findIdDonViTinh(String name) {
+        return dDAO.selectByName(name);
     }
     
     

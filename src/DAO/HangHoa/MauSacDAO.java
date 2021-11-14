@@ -25,8 +25,9 @@ public class MauSacDAO extends StiaDAO<MauSac, Integer>{
     final String INSERT_SQL = "INSERT INTO dbo.MauSac(TenMau, TrangThai)VALUES(?,?)";
     final String UPDATE_SQL = "UPDATE dbo.MauSac SET TenMau = ?, TrangThai=? WHERE Id = ?";
     final String DELETE_SQL = "";
-    final String SELECT_ALL_SQL = "SELECT * FROM MauSac";
-    final String SELECT_BY_ID_SQL = "SELECT * FROM MauSac WHERE Id = ?";
+    final String SELECT_ALL_SQL = "SELECT * FROM MauSac Where TrangThai = 1";
+    final String SELECT_BY_ID_SQL = "SELECT * FROM MauSac WHERE Id = ? And TrangThai = 1";
+    final String SELECT_BY_Name_SQL = "SELECT * FROM MauSac WHERE TenMau = ? And TrangThai = 1";
 
     @Override
     public void insert(MauSac entity) {
@@ -59,6 +60,14 @@ public class MauSacDAO extends StiaDAO<MauSac, Integer>{
     @Override
     public MauSac selectById(Integer Id) {
         List<MauSac> list = selectBySql(SELECT_BY_ID_SQL, Id);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
+    }
+    
+    public MauSac selectByName(String name) {
+        List<MauSac> list = selectBySql(SELECT_BY_Name_SQL, name);
         if (list.isEmpty()) {
             return null;
         }

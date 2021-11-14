@@ -15,9 +15,10 @@ import javax.swing.table.DefaultTableModel;
  * @author sangt
  */
 public class LoaiHangJFrame extends javax.swing.JFrame {
-    LoaiHangService l = new LoaiHangService();
+    LoaiHangService lhService = new LoaiHangService();
     List<LoaiHang> lAL;
     DefaultTableModel dtm;
+    LoaiHang lhClick;
     /**
      * Creates new form NewJFrame
      */
@@ -34,7 +35,7 @@ public class LoaiHangJFrame extends javax.swing.JFrame {
     }
     
     public void loadTable() {
-        lAL = l.findAllLoaiHang();
+        loadList();
         dtm = (DefaultTableModel) tb_loaihang.getModel();
         dtm.setRowCount(0);
         for (LoaiHang l : lAL) {
@@ -42,14 +43,47 @@ public class LoaiHangJFrame extends javax.swing.JFrame {
         }
     }
     
+    public void loadList() {
+        lAL = lhService.findAllLoaiHang();
+    }
+    
     public void add() {
-        l.themLoaiHang(new LoaiHang(tf_loaihang.getText(),true));
+        lhService.themLoaiHang(getLoaiHang());
         loadTable();
     }
     
     public void edit() {
-        l.suaLoaiHang(new LoaiHang(tf_loaihang.getText(),true));
+        LoaiHang lh = getLoaiHang();
+        lh.setId(lhClick.getId());
+        lhService.suaLoaiHang(lh);
+        loadTable();
     }
+    
+    public void remove() {
+        LoaiHang lh = getLoaiHang();
+        lh.setId(lhClick.getId());
+        lh.setTrangThai(false);
+        lhService.suaLoaiHang(lh);
+        loadTable();
+        NhaCungCapJFrame.clearTextFiel(tf_loaihang);
+    }
+
+    public void fillForm() {
+        int i = tb_loaihang.getSelectedRow();
+        String tenKichThuoc = tb_loaihang.getValueAt(i, 0).toString();
+        lhClick = lhService.findIdLoaiHang(tenKichThuoc);
+        tf_loaihang.setText(tenKichThuoc);
+        System.out.println("id: " + lhClick.getId());
+
+    }
+
+    public LoaiHang getLoaiHang() {
+        LoaiHang lh = new LoaiHang();
+        lh.setTenLoai(tf_loaihang.getText());
+        lh.setTrangThai(true);
+        return lh;
+    }
+    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -88,6 +122,11 @@ public class LoaiHangJFrame extends javax.swing.JFrame {
         btn_xoa.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btn_xoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/remove.png"))); // NOI18N
         btn_xoa.setText("Xóa  ");
+        btn_xoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_xoaActionPerformed(evt);
+            }
+        });
 
         btn_luu.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btn_luu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/luu.png"))); // NOI18N
@@ -112,6 +151,11 @@ public class LoaiHangJFrame extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tb_loaihang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tb_loaihangMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tb_loaihang);
@@ -164,6 +208,16 @@ public class LoaiHangJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         edit();
     }//GEN-LAST:event_btn_luuActionPerformed
+
+    private void btn_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoaActionPerformed
+        // TODO add your handling code here:
+        remove();
+    }//GEN-LAST:event_btn_xoaActionPerformed
+
+    private void tb_loaihangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_loaihangMouseClicked
+        // TODO add your handling code here:
+        fillForm();
+    }//GEN-LAST:event_tb_loaihangMouseClicked
 
     /**
      * @param args the command line arguments

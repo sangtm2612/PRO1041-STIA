@@ -17,9 +17,11 @@ import javax.swing.table.DefaultTableModel;
  * @author sangt
  */
 public class DanhMucJFrame extends javax.swing.JFrame {
-    DanhMucService d = new DanhMucService();
+    DanhMucService dmService = new DanhMucService();
     List<DanhMuc> dAL;
     DefaultTableModel dtm;
+    DanhMuc dmClick;
+    DanhMuc getForm = new DanhMuc();
     /**
      * Creates new form NewJFrame
      */
@@ -36,7 +38,7 @@ public class DanhMucJFrame extends javax.swing.JFrame {
     }
     
     public void loadTable() {
-        dAL = d.findAllDanhMuc();
+        loadList();
         dtm = (DefaultTableModel) tb_danhmuc.getModel();
         dtm.setRowCount(0);
         for (DanhMuc d : dAL) {
@@ -44,14 +46,48 @@ public class DanhMucJFrame extends javax.swing.JFrame {
         }
     }
     
+    public void loadList() {
+        dAL = dmService.findAllDanhMuc();
+    }
+    
     public void add() {
-        d.themDanhMuc(new DanhMuc(tf_danhmuc.getText(),true));
+        dmService.themDanhMuc(new DanhMuc(tf_danhmuc.getText(),true));
         loadTable();
     }
     
     public void edit() {
-        d.suaDanhMuc(new DanhMuc(tf_danhmuc.getText(),true));
+        DanhMuc dm = getDanhMuc();
+        dm.setId(dmClick.getId());
+        dmService.suaDanhMuc(dm);
+        loadTable();
     }
+    
+    public void remove() {
+        DanhMuc dm = getDanhMuc();
+        dm.setId(dmClick.getId());
+        dm.setTrangThai(false);
+        dmService.suaDanhMuc(dm);
+        loadTable();
+        NhaCungCapJFrame.clearTextFiel(tf_danhmuc);
+    }
+
+    public void fillForm() {
+        int i = tb_danhmuc.getSelectedRow();
+        String tenApSuat = tb_danhmuc.getValueAt(i, 0).toString();
+        dmClick = dmService.findDanhMucByName(tenApSuat);
+        tf_danhmuc.setText(tenApSuat);
+        System.out.println("id: " + dmClick.getId());
+
+    }
+
+    public DanhMuc getDanhMuc() {
+        DanhMuc dm = new DanhMuc();
+        dm.setTenDanhMuc(tf_danhmuc.getText());
+        dm.setTrangThai(true);
+        return dm;
+    }
+    
+    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -90,10 +126,20 @@ public class DanhMucJFrame extends javax.swing.JFrame {
         btn_xoa.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btn_xoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/remove.png"))); // NOI18N
         btn_xoa.setText("Xóa  ");
+        btn_xoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_xoaActionPerformed(evt);
+            }
+        });
 
         btn_luu.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btn_luu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/luu.png"))); // NOI18N
         btn_luu.setText("Lưu  ");
+        btn_luu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_luuActionPerformed(evt);
+            }
+        });
 
         tb_danhmuc.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -109,6 +155,11 @@ public class DanhMucJFrame extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tb_danhmuc.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tb_danhmucMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tb_danhmuc);
@@ -156,6 +207,21 @@ public class DanhMucJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         add();
     }//GEN-LAST:event_btn_themActionPerformed
+
+    private void tb_danhmucMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_danhmucMouseClicked
+        // TODO add your handling code here:
+        fillForm();
+    }//GEN-LAST:event_tb_danhmucMouseClicked
+
+    private void btn_luuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_luuActionPerformed
+        // TODO add your handling code here:
+        edit();
+    }//GEN-LAST:event_btn_luuActionPerformed
+
+    private void btn_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoaActionPerformed
+        // TODO add your handling code here:
+        remove();
+    }//GEN-LAST:event_btn_xoaActionPerformed
 
     /**
      * @param args the command line arguments

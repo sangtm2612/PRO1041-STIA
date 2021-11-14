@@ -24,8 +24,9 @@ public class NhaCungCapDAO extends StiaDAO<NhaCungCap, String> {
     final String INSERT_SQL = "INSERT INTO dbo.NhaCungCap(TenNCC,DiaChi,SDT,Email,GhiChu,TrangThai)VALUES(?,?,?,?,?,?)";
     final String UPDATE_SQL = "UPDATE dbo.NhaCungCap SET TenNCC = ?, DiaChi = ?, SDT = ?, Email = ?, GhiChu = ?, TrangThai = ? WHERE Id = ?";
     final String DELETE_SQL = "UPDATE dbo.NhaCungCap SET TrangThai = 0 WHERE Id = ?";
-    final String SELECT_ALL_SQL = "SELECT * FROM NhaCungCap";
-    final String SELECT_BY_ID_SQL = "SELECT * FROM NhaCungCap WHERE Id = ?";
+    final String SELECT_ALL_SQL = "SELECT * FROM NhaCungCap WHERE TrangThai = 1";
+    final String SELECT_BY_ID_SQL = "SELECT * FROM NhaCungCap WHERE Id = ? AND TrangThai = 1";
+    final String SELECT_BY_SDT_SQL = "SELECT * FROM NhaCungCap WHERE SDT = ? And TrangThai = 1";
 
     @Override
     public void insert(NhaCungCap entity) {
@@ -75,6 +76,7 @@ public class NhaCungCapDAO extends StiaDAO<NhaCungCap, String> {
             ResultSet rs = jdbcHelper.query(sql, args);
             while(rs.next()) {
                 NhaCungCap entity = new NhaCungCap();
+                entity.setId(rs.getInt("Id"));
                 entity.setTenNCC(rs.getString("TenNCC"));
                 entity.setDiaChi(rs.getString("DiaChi"));
                 entity.setSDT(rs.getString("SDT"));
@@ -88,5 +90,15 @@ public class NhaCungCapDAO extends StiaDAO<NhaCungCap, String> {
         }
         return list;
     }
+    
+    public NhaCungCap selectBySDT(String SDT) {
+        List<NhaCungCap> list = selectBySql(SELECT_BY_SDT_SQL, SDT);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
+    }
+    
+    
 
 }

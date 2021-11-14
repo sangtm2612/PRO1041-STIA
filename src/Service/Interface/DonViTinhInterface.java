@@ -20,6 +20,6 @@ public interface DonViTinhInterface {
     
     List<DonViTinh> findAllDonViTinh();
     
-    int findIdDonViTinh(String DonViTinh);
+    DonViTinh findIdDonViTinh(String name);
     
 }

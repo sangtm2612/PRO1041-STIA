@@ -35,8 +35,8 @@ public class MauSacService implements MauSacInterface{
     }
 
     @Override
-    public int findIdMauSac(String MauSac) {
-        return -1;
+    public MauSac findIdMauSac(String name) {
+        return mDAO.selectByName(name);
     }
     
     

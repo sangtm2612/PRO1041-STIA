@@ -24,8 +24,9 @@ public class KichThuocDAO extends StiaDAO<KichThuoc, Integer>{
     final String INSERT_SQL = "INSERT INTO dbo.KichThuoc(TenKichThuoc, TrangThai)VALUES(?,?)";
     final String UPDATE_SQL = "UPDATE dbo.KichThuoc SET TenKichThuoc=?, TrangThai=? WHERE Id = ?";
     final String DELETE_SQL = "";
-    final String SELECT_ALL_SQL = "SELECT * FROM KichThuoc";
-    final String SELECT_BY_ID_SQL = "SELECT * FROM KichThuoc WHERE Id = ?";
+    final String SELECT_ALL_SQL = "SELECT * FROM KichThuoc WHERE TrangThai = 1";
+    final String SELECT_BY_ID_SQL = "SELECT * FROM KichThuoc WHERE Id = ? AND TrangThai = 1";
+    final String SELECT_BY_Name_SQL = "SELECT * FROM KichThuoc WHERE TenKichThuoc = ? AND TrangThai = 1";
     
     @Override
     public void insert(KichThuoc entity) {
@@ -58,6 +59,14 @@ public class KichThuocDAO extends StiaDAO<KichThuoc, Integer>{
     @Override
     public KichThuoc selectById(Integer Id) {
         List<KichThuoc> list = selectBySql(SELECT_BY_ID_SQL, Id);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
+    }
+    
+    public KichThuoc selectByName(String name) {
+        List<KichThuoc> list = selectBySql(SELECT_BY_Name_SQL, name);
         if (list.isEmpty()) {
             return null;
         }

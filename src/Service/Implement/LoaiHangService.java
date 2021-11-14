@@ -34,8 +34,8 @@ public class LoaiHangService implements LoaiHangInterface{
     }
 
     @Override
-    public int findIdLoaiHang(String LoaiHang) {
-        return -1;
+    public LoaiHang findIdLoaiHang(String name) {
+        return lDAO.selectByName(name);
     }
     
     

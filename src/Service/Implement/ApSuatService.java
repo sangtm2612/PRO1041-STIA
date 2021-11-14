@@ -33,8 +33,8 @@ public class ApSuatService implements ApSuatInterface{
     }
 
     @Override
-    public int findIdApSuat(String ApSuat) {
-        return -1;
+    public ApSuat findIdApSuat(String name) {
+        return aDAO.selectByName(name);
     }
 
   

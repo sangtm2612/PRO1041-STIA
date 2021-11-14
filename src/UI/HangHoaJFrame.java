@@ -41,14 +41,14 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
     LoaiHangJFrame lh;
     MauSacJFrame ms;
     KichThuocJFrame kt;
-    DanhMucService dmService = new DanhMucService();
-    LoaiHangService lhService = new LoaiHangService();
-    MauSacService msService = new MauSacService();
-    KichThuocService ktService = new KichThuocService();
-    ApSuatService asService = new ApSuatService();
-    DonViTinhService dvtService = new DonViTinhService();
-    NhaCungCapService nccService = new NhaCungCapService();
-    DefaultComboBoxModel dcm;
+    static DanhMucService dmService = new DanhMucService();
+    static LoaiHangService lhService = new LoaiHangService();
+    static MauSacService msService = new MauSacService();
+    static KichThuocService ktService = new KichThuocService();
+    static ApSuatService asService = new ApSuatService();
+    static DonViTinhService dvtService = new DonViTinhService();
+    static NhaCungCapService nccService = new NhaCungCapService();
+    static DefaultComboBoxModel dcm;
 
     /**
      * Creates new form HangHoaJFrame
@@ -59,6 +59,10 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
     }
     
     public void init() {
+        loadCbbForm();
+    }
+    
+    public static void loadCbbForm() {
         loadCbbNhaCungCap();
         loadCbbDanhMuc();
         loadCbbLoaiHang();
@@ -75,7 +79,7 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
     }
     
     //load object lên combobox
-    public void loadCbbDanhMuc() {
+    public static void loadCbbDanhMuc() {
         dcm = (DefaultComboBoxModel) cbb_danhmuc.getModel();
         List<DanhMuc> dmList = dmService.findAllDanhMuc();
         for (DanhMuc d : dmList) {
@@ -83,7 +87,7 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
         }
     }
     
-    public void loadCbbLoaiHang() {
+    public static void loadCbbLoaiHang() {
         dcm = (DefaultComboBoxModel) cbb_loaihang.getModel();
         List<LoaiHang> lhList = lhService.findAllLoaiHang();
         for (LoaiHang l : lhList) {
@@ -91,7 +95,7 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
         }
     }
     
-    public void loadCbbMauSac() {
+    public static void loadCbbMauSac() {
         dcm = (DefaultComboBoxModel) cbb_mausac.getModel();
         List<MauSac> msList = msService.findAllMauSac();
         for (MauSac m : msList) {
@@ -99,7 +103,7 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
         }
     }
     
-    public void loadCbbKichThuoc() {
+    public static void loadCbbKichThuoc() {
         dcm = (DefaultComboBoxModel) cbb_kichthuoc.getModel();
         List<KichThuoc> ktList = ktService.findAllKichThuoc();
         for (KichThuoc k : ktList) {
@@ -107,7 +111,7 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
         }
     }
     
-    public void loadCbbApSuat() {
+    public static void loadCbbApSuat() {
         dcm = (DefaultComboBoxModel) cbb_apsuat.getModel();
         List<ApSuat> asList = asService.findAllApSuat();
         for (ApSuat a : asList) {
@@ -115,7 +119,7 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
         }
     }
     
-    public void loadCbbDonViTinh() {
+    public static void loadCbbDonViTinh() {
         dcm = (DefaultComboBoxModel) cbb_donvitinh.getModel();
         List<DonViTinh> dvtList = dvtService.findAllDonViTinh();
         for (DonViTinh d : dvtList) {
@@ -123,7 +127,7 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
         }
     }
     
-    public void loadCbbNhaCungCap() {
+    public static void loadCbbNhaCungCap() {
         dcm = (DefaultComboBoxModel) cbb_nhacungcap.getModel();
         List<NhaCungCap> nccList = nccService.findAllNhaCungCap();
         for (NhaCungCap ncc : nccList) {
@@ -642,13 +646,13 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
     private javax.swing.JButton btn_them;
     private javax.swing.JLabel btn_themLoaiHang;
     private javax.swing.JButton btn_xoa;
-    private javax.swing.JComboBox<String> cbb_apsuat;
-    private javax.swing.JComboBox<String> cbb_danhmuc;
-    private javax.swing.JComboBox<String> cbb_donvitinh;
-    private javax.swing.JComboBox<String> cbb_kichthuoc;
-    private javax.swing.JComboBox<String> cbb_loaihang;
-    private javax.swing.JComboBox<String> cbb_mausac;
-    private javax.swing.JComboBox<String> cbb_nhacungcap;
+    public static javax.swing.JComboBox<String> cbb_apsuat;
+    public static javax.swing.JComboBox<String> cbb_danhmuc;
+    public static javax.swing.JComboBox<String> cbb_donvitinh;
+    public static javax.swing.JComboBox<String> cbb_kichthuoc;
+    public static javax.swing.JComboBox<String> cbb_loaihang;
+    public static javax.swing.JComboBox<String> cbb_mausac;
+    public static javax.swing.JComboBox<String> cbb_nhacungcap;
     private javax.swing.JTextField cbb_soluong;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

@@ -20,6 +20,6 @@ public interface LoaiHangInterface {
     
     List<LoaiHang> findAllLoaiHang();
     
-    int findIdLoaiHang(String LoaiHang);
+    LoaiHang findIdLoaiHang(String name);
     
 }
