@@ -7,8 +7,10 @@ package UI.HangHoa;
 
 import Models.HangHoa.ApSuat;
 import Models.HangHoa.DanhMuc;
+import Models.HangHoa.NhaCungCap;
 import Service.Implement.ApSuatService;
 import Service.Implement.DanhMucService;
+import UI.HangHoaJFrame;
 import java.awt.Container;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,9 +21,12 @@ import javax.swing.table.DefaultTableModel;
  * @author sangt
  */
 public class ApSuatJFrame extends javax.swing.JFrame {
-    ApSuatService a = new ApSuatService();
+
+    ApSuatService aService = new ApSuatService();
     List<ApSuat> aAL;
+    ApSuat asClick;
     DefaultTableModel dtm;
+
     /**
      * Creates new form NewJFrame
      */
@@ -29,32 +34,64 @@ public class ApSuatJFrame extends javax.swing.JFrame {
         initComponents();
         init();
     }
-    
-    public void init(){
+
+    public void init() {
         setResizable(false);
         setLocationRelativeTo(null);
         setVisible(true);
         loadTable();
     }
-    
+
     public void loadTable() {
-        aAL = a.findAllApSuat();
         dtm = (DefaultTableModel) tb_apsuat.getModel();
+        loadList();
         dtm.setRowCount(0);
         for (ApSuat a : aAL) {
             dtm.addRow(new Object[]{a.getTenApSuat()});
         }
     }
-    
+
+    public void loadList() {
+        aAL = aService.findAllApSuat();;
+    }
+
     public void add() {
-        a.themApSuat(new ApSuat(tf_apsuat.getText(),true));
+        aService.themApSuat(getApSuat());
+        loadTable();
+    }
+
+    public void edit() {
+        ApSuat as = getApSuat();
+        as.setId(asClick.getId());
+        aService.suaApSuat(as);
         loadTable();
     }
     
-    public void edit() {
-        a.suaApSuat(new ApSuat(tf_apsuat.getText(),true));
+    public void remove() {
+        ApSuat as = getApSuat();
+        as.setId(asClick.getId());
+        as.setTrangThai(false);
+        aService.suaApSuat(as);
+        loadTable();
+        NhaCungCapJFrame.clearTextFiel(tf_apsuat);
     }
-    
+
+    public void fillForm() {
+        int i = tb_apsuat.getSelectedRow();
+        String tenApSuat = tb_apsuat.getValueAt(i, 0).toString();
+        asClick = aService.findIdApSuat(tenApSuat);
+        tf_apsuat.setText(tenApSuat);
+        System.out.println("id: " + asClick.getId());
+
+    }
+
+    public ApSuat getApSuat() {
+        ApSuat as = new ApSuat();
+        as.setTenApSuat(tf_apsuat.getText());
+        as.setTrangThai(true);
+        return as;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -92,6 +129,11 @@ public class ApSuatJFrame extends javax.swing.JFrame {
         btn_xoa.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btn_xoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/remove.png"))); // NOI18N
         btn_xoa.setText("Xóa  ");
+        btn_xoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_xoaActionPerformed(evt);
+            }
+        });
 
         btn_luu.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btn_luu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/luu.png"))); // NOI18N
@@ -116,6 +158,11 @@ public class ApSuatJFrame extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tb_apsuat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tb_apsuatMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tb_apsuat);
@@ -162,12 +209,25 @@ public class ApSuatJFrame extends javax.swing.JFrame {
     private void btn_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themActionPerformed
         // TODO add your handling code here:
         add();
+        HangHoaJFrame.loadCbbApSuat();
     }//GEN-LAST:event_btn_themActionPerformed
 
     private void btn_luuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_luuActionPerformed
         // TODO add your handling code here:
         edit();
+        HangHoaJFrame.loadCbbApSuat();
     }//GEN-LAST:event_btn_luuActionPerformed
+
+    private void tb_apsuatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_apsuatMouseClicked
+        // TODO add your handling code here:
+        fillForm();
+    }//GEN-LAST:event_tb_apsuatMouseClicked
+
+    private void btn_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoaActionPerformed
+        // TODO add your handling code here:
+        remove();
+        HangHoaJFrame.loadCbbApSuat();
+    }//GEN-LAST:event_btn_xoaActionPerformed
 
     /**
      * @param args the command line arguments

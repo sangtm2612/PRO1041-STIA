@@ -16,9 +16,10 @@ import javax.swing.table.DefaultTableModel;
  * @author sangt
  */
 public class DonViTinhJFrame extends javax.swing.JFrame {
-    DonViTinhService d = new DonViTinhService();
+    DonViTinhService dvtService = new DonViTinhService();
     List<DonViTinh> dAL;
     DefaultTableModel dtm;
+    DonViTinh dvtClick;
     /**
      * Creates new form NewJFrame
      */
@@ -35,7 +36,7 @@ public class DonViTinhJFrame extends javax.swing.JFrame {
     }
     
     public void loadTable() {
-        dAL = d.findAllDonViTinh();
+        loadList();
         dtm = (DefaultTableModel) tb_donvitinh.getModel();
         dtm.setRowCount(0);
         for (DonViTinh d : dAL) {
@@ -43,13 +44,45 @@ public class DonViTinhJFrame extends javax.swing.JFrame {
         }
     }
     
+    public void loadList() {
+        dAL = dvtService.findAllDonViTinh();
+    }
+    
     public void add() {
-        d.themDonViTinh(new DonViTinh(tf_donvitinh.getText(), true));
+        dvtService.themDonViTinh(new DonViTinh(tf_donvitinh.getText(),true));
         loadTable();
     }
     
     public void edit() {
-        //d.suaApSuat(new ApSuat(tf_donvitinh.getText(),true));
+        DonViTinh dvt = getDonViTinh();
+        dvt.setId(dvtClick.getId());
+        dvtService.suaDonViTinh(dvt);
+        loadTable();
+    }
+    
+    public void remove() {
+        DonViTinh dvt = getDonViTinh();
+        dvt.setId(dvtClick.getId());
+        dvt.setTrangThai(false);
+        dvtService.suaDonViTinh(dvt);
+        loadTable();
+        NhaCungCapJFrame.clearTextFiel(tf_donvitinh);
+    }
+
+    public void fillForm() {
+        int i = tb_donvitinh.getSelectedRow();
+        String tenApSuat = tb_donvitinh.getValueAt(i, 0).toString();
+        dvtClick = dvtService.findIdDonViTinh(tenApSuat);
+        tf_donvitinh.setText(tenApSuat);
+        System.out.println("id: " + dvtClick.getId());
+
+    }
+
+    public DonViTinh getDonViTinh() {
+        DonViTinh dvt = new DonViTinh();
+        dvt.setTenDonVi(tf_donvitinh.getText());
+        dvt.setTrangThai(true);
+        return dvt;
     }
     
     /**
@@ -89,6 +122,11 @@ public class DonViTinhJFrame extends javax.swing.JFrame {
         btn_xoa.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btn_xoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/remove.png"))); // NOI18N
         btn_xoa.setText("Xóa  ");
+        btn_xoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_xoaActionPerformed(evt);
+            }
+        });
 
         btn_luu.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btn_luu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/luu.png"))); // NOI18N
@@ -113,6 +151,11 @@ public class DonViTinhJFrame extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tb_donvitinh.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tb_donvitinhMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tb_donvitinh);
@@ -165,6 +208,16 @@ public class DonViTinhJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         edit();
     }//GEN-LAST:event_btn_luuActionPerformed
+
+    private void tb_donvitinhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_donvitinhMouseClicked
+        // TODO add your handling code here:
+        fillForm();
+    }//GEN-LAST:event_tb_donvitinhMouseClicked
+
+    private void btn_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoaActionPerformed
+        // TODO add your handling code here:
+        remove();
+    }//GEN-LAST:event_btn_xoaActionPerformed
 
     /**
      * @param args the command line arguments

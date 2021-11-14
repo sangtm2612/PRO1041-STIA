@@ -103,6 +103,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Xo&#x301;a  "/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_xoaActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btn_luu">
       <Properties>
@@ -145,6 +148,9 @@
               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tb_loaihangMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

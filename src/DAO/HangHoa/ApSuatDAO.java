@@ -26,6 +26,7 @@ public class ApSuatDAO extends StiaDAO<ApSuat, Integer>{
     final String DELETE_SQL = "";
     final String SELECT_ALL_SQL = "SELECT * FROM ApSuat Where TrangThai = 1";
     final String SELECT_BY_ID_SQL = "SELECT * FROM ApSuat WHERE Id = ?";
+    final String SELECT_BY_Name_SQL = "SELECT * FROM ApSuat WHERE TenApSuat = ?";
 
     @Override
     public void insert(ApSuat entity) {
@@ -80,6 +81,14 @@ public class ApSuatDAO extends StiaDAO<ApSuat, Integer>{
             throw new RuntimeException(e);
         }
         return list;
+    }
+    
+    public ApSuat selectByName(String name) {
+        List<ApSuat> list = selectBySql(SELECT_BY_Name_SQL, name);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
     }
     
     

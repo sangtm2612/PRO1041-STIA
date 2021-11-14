@@ -27,6 +27,7 @@ public class DanhMucDAO extends StiaDAO<DanhMuc, String>{
     final String DELETE_SQL = "";
     final String SELECT_ALL_SQL = "SELECT * FROM DanhMuc WHERE TrangThai = 1";
     final String SELECT_BY_ID_SQL = "SELECT * FROM DanhMuc WHERE Id = ?";
+    final String SELECT_BY_NAME_SQL = "SELECT * FROM DanhMuc WHERE TenDanhMuc = ?";
 
     @Override
     public void insert(DanhMuc entity) {
@@ -83,7 +84,13 @@ public class DanhMucDAO extends StiaDAO<DanhMuc, String>{
         }
         return list;
     }
-    public static void main(String[] args) {
-        //new DanhMucDAO().update(new DanhMuc(1,"byebye"));
+    
+    
+    public DanhMuc selectByName(String name) {
+        List<DanhMuc> list = selectBySql(SELECT_BY_NAME_SQL, name);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
     }
 }

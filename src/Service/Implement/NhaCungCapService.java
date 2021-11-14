@@ -33,8 +33,8 @@ public class NhaCungCapService implements NhaCungCapInterface{
     }
 
     @Override
-    public int findIdNhaCungCap(String NhaCungCap) {
-        return -1;
+    public NhaCungCap findNhaCungCapBySDT(String SDT) {
+        return nccDAO.selectBySDT(SDT);
     }
 
   

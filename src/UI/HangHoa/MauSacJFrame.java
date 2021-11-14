@@ -5,11 +5,8 @@
  */
 package UI.HangHoa;
 
-import Models.HangHoa.ApSuat;
-import Models.HangHoa.DanhMuc;
+
 import Models.HangHoa.MauSac;
-import Service.Implement.ApSuatService;
-import Service.Implement.DanhMucService;
 import Service.Implement.MauSacService;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -19,9 +16,11 @@ import javax.swing.table.DefaultTableModel;
  * @author sangt
  */
 public class MauSacJFrame extends javax.swing.JFrame {
-    MauSacService m = new MauSacService();
+    MauSacService msService = new MauSacService();
     List<MauSac> mAL;
     DefaultTableModel dtm;
+    MauSac msClick;
+    
     /**
      * Creates new form NewJFrame
      */
@@ -38,21 +37,53 @@ public class MauSacJFrame extends javax.swing.JFrame {
     }
     
     public void loadTable() {
-        mAL = m.findAllMauSac();
-        dtm = (DefaultTableModel) tb_apsuat.getModel();
+        loadList();
+        dtm = (DefaultTableModel) tb_mausac.getModel();
         dtm.setRowCount(0);
         for (MauSac m : mAL) {
             dtm.addRow(new Object[]{m.getTenMau()});
         }
     }
     
+    public void loadList() {
+        mAL = msService.findAllMauSac();
+    }
+    
     public void add() {
-        m.themMauSac(new MauSac(tf_mausac.getText(),true));
+        msService.themMauSac(getMauSac());
         loadTable();
     }
     
     public void edit() {
-       // m.suaMauSac(new ApSuat(tf_apsuat.getText(),true));
+        MauSac ms = getMauSac();
+        ms.setId(msClick.getId());
+        msService.suaMauSac(ms);
+        loadTable();
+    }
+    
+    public void remove() {
+        MauSac ms = getMauSac();
+        ms.setId(msClick.getId());
+        ms.setTrangThai(false);
+        msService.suaMauSac(ms);
+        loadTable();
+        NhaCungCapJFrame.clearTextFiel(tf_mausac);
+    }
+
+    public void fillForm() {
+        int i = tb_mausac.getSelectedRow();
+        String tenMauSac = tb_mausac.getValueAt(i, 0).toString();
+        msClick = msService.findIdMauSac(tenMauSac);
+        tf_mausac.setText(tenMauSac);
+        System.out.println("id: " + msClick.getId());
+
+    }
+
+    public MauSac getMauSac() {
+        MauSac ms = new MauSac();
+        ms.setTenMau(tf_mausac.getText());
+        ms.setTrangThai(true);
+        return ms;
     }
     
     /**
@@ -70,7 +101,7 @@ public class MauSacJFrame extends javax.swing.JFrame {
         btn_xoa = new javax.swing.JButton();
         btn_luu = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tb_apsuat = new javax.swing.JTable();
+        tb_mausac = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Màu Sắc");
@@ -92,6 +123,11 @@ public class MauSacJFrame extends javax.swing.JFrame {
         btn_xoa.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btn_xoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/remove.png"))); // NOI18N
         btn_xoa.setText("Xóa  ");
+        btn_xoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_xoaActionPerformed(evt);
+            }
+        });
 
         btn_luu.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btn_luu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/luu.png"))); // NOI18N
@@ -102,7 +138,7 @@ public class MauSacJFrame extends javax.swing.JFrame {
             }
         });
 
-        tb_apsuat.setModel(new javax.swing.table.DefaultTableModel(
+        tb_mausac.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -118,7 +154,12 @@ public class MauSacJFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tb_apsuat);
+        tb_mausac.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tb_mausacMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tb_mausac);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -169,6 +210,16 @@ public class MauSacJFrame extends javax.swing.JFrame {
         edit();
     }//GEN-LAST:event_btn_luuActionPerformed
 
+    private void tb_mausacMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_mausacMouseClicked
+        // TODO add your handling code here:
+        fillForm();
+    }//GEN-LAST:event_tb_mausacMouseClicked
+
+    private void btn_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoaActionPerformed
+        // TODO add your handling code here:
+        remove();
+    }//GEN-LAST:event_btn_xoaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -217,7 +268,7 @@ public class MauSacJFrame extends javax.swing.JFrame {
     private javax.swing.JButton btn_xoa;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tb_apsuat;
+    private javax.swing.JTable tb_mausac;
     private javax.swing.JTextField tf_mausac;
     // End of variables declaration//GEN-END:variables
 }

@@ -20,5 +20,5 @@ public interface DanhMucInterface {
     
     List<DanhMuc> findAllDanhMuc();
     
-    void findDanhMucByName(DanhMuc d);
+    DanhMuc findDanhMucByName(String name);
 }

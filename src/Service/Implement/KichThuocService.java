@@ -33,8 +33,8 @@ public class KichThuocService implements KichThuocInterface{
     }
 
     @Override
-    public int findIdKichThuoc(String KichThuoc) {
-        return -1;
+    public KichThuoc findIdKichThuoc(String name) {
+        return kDAO.selectByName(name);
     }
     
     

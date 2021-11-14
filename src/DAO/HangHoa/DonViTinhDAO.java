@@ -6,7 +6,6 @@
 package DAO.HangHoa;
 
 import DAO.StiaDAO;
-import Models.HangHoa.ApSuat;
 import Models.HangHoa.DonViTinh;
 import Utils.jdbcHelper;
 import java.sql.ResultSet;
@@ -20,18 +19,19 @@ import java.util.logging.Logger;
  *
  * @author sangt
  */
-public class DonViTinhDAO extends StiaDAO<DonViTinh, Integer>{
-    
+public class DonViTinhDAO extends StiaDAO<DonViTinh, Integer> {
+
     final String INSERT_SQL = "INSERT INTO dbo.DonViTinh(TenDonVi,TrangThai)VALUES(?,?)";
     final String UPDATE_SQL = "UPDATE dbo.DonViTinh SET TenDonVi = ?, TrangThai=? WHERE Id = ?";
     final String DELETE_SQL = "";
-    final String SELECT_ALL_SQL = "SELECT * FROM DonViTinh";
+    final String SELECT_ALL_SQL = "SELECT * FROM DonViTinh WHERE TrangThai = 1";
     final String SELECT_BY_ID_SQL = "SELECT * FROM DonViTinh WHERE Id = ?";
+    final String SELECT_BY_NAME_SQL = "SELECT * FROM DonViTinh WHERE TenDonVi = ? AND TrangThai = 1";
 
     @Override
     public void insert(DonViTinh entity) {
         try {
-            jdbcHelper.Update(INSERT_SQL, entity.getTenDonVi(),entity.isTrangThai());
+            jdbcHelper.Update(INSERT_SQL, entity.getTenDonVi(), entity.isTrangThai());
         } catch (SQLException ex) {
             Logger.getLogger(DonViTinhDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -40,7 +40,7 @@ public class DonViTinhDAO extends StiaDAO<DonViTinh, Integer>{
     @Override
     public void update(DonViTinh entity) {
         try {
-            jdbcHelper.Update(UPDATE_SQL, entity.getTenDonVi(),entity.isTrangThai(),entity.getId());
+            jdbcHelper.Update(UPDATE_SQL, entity.getTenDonVi(), entity.isTrangThai(), entity.getId());
         } catch (SQLException ex) {
             Logger.getLogger(DonViTinhDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -65,12 +65,20 @@ public class DonViTinhDAO extends StiaDAO<DonViTinh, Integer>{
         return list.get(0);
     }
 
+    public DonViTinh selectByName(String name) {
+        List<DonViTinh> list = selectBySql(SELECT_BY_NAME_SQL, name);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
+    }
+
     @Override
     protected List<DonViTinh> selectBySql(String sql, Object... args) {
         List<DonViTinh> list = new ArrayList<>();
         try {
             ResultSet rs = jdbcHelper.query(sql, args);
-            while(rs.next()) {
+            while (rs.next()) {
                 DonViTinh entity = new DonViTinh();
                 entity.setId(rs.getInt("Id"));
                 entity.setTenDonVi(rs.getString("TenDonVi"));
@@ -82,7 +90,5 @@ public class DonViTinhDAO extends StiaDAO<DonViTinh, Integer>{
         }
         return list;
     }
-    
-    
-    
+
 }

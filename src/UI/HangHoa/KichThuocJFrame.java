@@ -5,7 +5,6 @@
  */
 package UI.HangHoa;
 
-import Models.HangHoa.ApSuat;
 import Models.HangHoa.KichThuoc;
 import Service.Implement.KichThuocService;
 import java.util.List;
@@ -16,9 +15,10 @@ import javax.swing.table.DefaultTableModel;
  * @author sangt
  */
 public class KichThuocJFrame extends javax.swing.JFrame {
-    KichThuocService k = new KichThuocService();
+    KichThuocService ktService = new KichThuocService();
     List<KichThuoc> kAL;
     DefaultTableModel dtm;
+    KichThuoc ktClick;
     /**
      * Creates new form NewJFrame
      */
@@ -35,7 +35,7 @@ public class KichThuocJFrame extends javax.swing.JFrame {
     }
     
     public void loadTable() {
-        kAL = k.findAllKichThuoc();
+        loadList();
         dtm = (DefaultTableModel) tb_kichthuoc.getModel();
         dtm.setRowCount(0);
         for (KichThuoc k : kAL) {
@@ -43,13 +43,45 @@ public class KichThuocJFrame extends javax.swing.JFrame {
         }
     }
     
+    public void loadList() {
+        kAL = ktService.findAllKichThuoc();
+    }
+    
     public void add() {
-        k.themKichThuoc(new KichThuoc(tf_KichThuoc.getText(),true));
+        ktService.themKichThuoc(getKichThuoc());
         loadTable();
     }
     
     public void edit() {
-        k.suaKichThuoc(new KichThuoc(tf_KichThuoc.getText(),true));
+        KichThuoc kt = getKichThuoc();
+        kt.setId(ktClick.getId());
+        ktService.suaKichThuoc(kt);
+        loadTable();
+    }
+    
+    public void remove() {
+        KichThuoc kt = getKichThuoc();
+        kt.setId(ktClick.getId());
+        kt.setTrangThai(false);
+        ktService.suaKichThuoc(kt);
+        loadTable();
+        NhaCungCapJFrame.clearTextFiel(tf_KichThuoc);
+    }
+
+    public void fillForm() {
+        int i = tb_kichthuoc.getSelectedRow();
+        String tenKichThuoc = tb_kichthuoc.getValueAt(i, 0).toString();
+        ktClick = ktService.findIdKichThuoc(tenKichThuoc);
+        tf_KichThuoc.setText(tenKichThuoc);
+        System.out.println("id: " + ktClick.getId());
+
+    }
+
+    public KichThuoc getKichThuoc() {
+        KichThuoc kt = new KichThuoc();
+        kt.setTenKichThuoc(tf_KichThuoc.getText());
+        kt.setTrangThai(true);
+        return kt;
     }
     
     /**
@@ -89,6 +121,11 @@ public class KichThuocJFrame extends javax.swing.JFrame {
         btn_xoa.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btn_xoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/remove.png"))); // NOI18N
         btn_xoa.setText("Xóa  ");
+        btn_xoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_xoaActionPerformed(evt);
+            }
+        });
 
         btn_luu.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btn_luu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/luu.png"))); // NOI18N
@@ -113,6 +150,11 @@ public class KichThuocJFrame extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tb_kichthuoc.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tb_kichthuocMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tb_kichthuoc);
@@ -165,6 +207,16 @@ public class KichThuocJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         edit();
     }//GEN-LAST:event_btn_luuActionPerformed
+
+    private void btn_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoaActionPerformed
+        // TODO add your handling code here:
+        remove();
+    }//GEN-LAST:event_btn_xoaActionPerformed
+
+    private void tb_kichthuocMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_kichthuocMouseClicked
+        // TODO add your handling code here:
+        fillForm();
+    }//GEN-LAST:event_tb_kichthuocMouseClicked
 
     /**
      * @param args the command line arguments

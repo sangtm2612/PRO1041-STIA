@@ -20,6 +20,6 @@ public interface MauSacInterface {
     
     List<MauSac> findAllMauSac();
     
-    int findIdMauSac(String MauSac);
+    MauSac findIdMauSac(String name);
     
 }

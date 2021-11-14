@@ -35,8 +35,8 @@ public class DanhMucService implements DanhMucInterface{
     }
 
     @Override
-    public void findDanhMucByName(DanhMuc d) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public DanhMuc findDanhMucByName(String name) {
+        return dDAO.selectByName(name);
     }
     
     
