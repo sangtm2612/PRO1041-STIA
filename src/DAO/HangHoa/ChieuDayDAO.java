@@ -7,7 +7,6 @@ package DAO.HangHoa;
 
 import DAO.StiaDAO;
 import Models.HangHoa.ChieuDay;
-import Models.HangHoa.MauSac;
 import Utils.jdbcHelper;
 import java.sql.ResultSet;
 import java.sql.SQLException;

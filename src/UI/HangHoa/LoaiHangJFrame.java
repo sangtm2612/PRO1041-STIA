@@ -7,6 +7,7 @@ package UI.HangHoa;
 
 import Models.HangHoa.LoaiHang;
 import Service.Implement.LoaiHangService;
+import UI.HangHoaJFrame;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -30,7 +31,6 @@ public class LoaiHangJFrame extends javax.swing.JFrame {
     public void init(){
         setResizable(false);
         setLocationRelativeTo(null);
-        setVisible(true);
         loadTable();
     }
     
@@ -50,6 +50,7 @@ public class LoaiHangJFrame extends javax.swing.JFrame {
     public void add() {
         lhService.themLoaiHang(getLoaiHang());
         loadTable();
+        HangHoaJFrame.loadCbbLoaiHang();
     }
     
     public void edit() {
@@ -57,6 +58,7 @@ public class LoaiHangJFrame extends javax.swing.JFrame {
         lh.setId(lhClick.getId());
         lhService.suaLoaiHang(lh);
         loadTable();
+        HangHoaJFrame.loadCbbLoaiHang();
     }
     
     public void remove() {
@@ -65,6 +67,7 @@ public class LoaiHangJFrame extends javax.swing.JFrame {
         lh.setTrangThai(false);
         lhService.suaLoaiHang(lh);
         loadTable();
+        HangHoaJFrame.loadCbbLoaiHang();
         NhaCungCapJFrame.clearTextFiel(tf_loaihang);
     }
 

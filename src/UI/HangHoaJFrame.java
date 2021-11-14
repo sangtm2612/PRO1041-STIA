@@ -34,13 +34,13 @@ import javax.swing.DefaultComboBoxModel;
  * @author sangt
  */
 public class HangHoaJFrame extends javax.swing.JInternalFrame {
-    NhaCungCapJFrame ncc;
-    ApSuatJFrame as;
-    DanhMucJFrame dm;
-    DonViTinhJFrame dvt;
-    LoaiHangJFrame lh;
-    MauSacJFrame ms;
-    KichThuocJFrame kt;
+    NhaCungCapJFrame ncc = new NhaCungCapJFrame();;
+    ApSuatJFrame as = new ApSuatJFrame();
+    DanhMucJFrame dm = new DanhMucJFrame();
+    DonViTinhJFrame dvt = new DonViTinhJFrame();
+    LoaiHangJFrame lh = new LoaiHangJFrame();
+    MauSacJFrame ms = new MauSacJFrame();
+    KichThuocJFrame kt = new KichThuocJFrame();
     static DanhMucService dmService = new DanhMucService();
     static LoaiHangService lhService = new LoaiHangService();
     static MauSacService msService = new MauSacService();
@@ -60,6 +60,7 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
     
     public void init() {
         loadCbbForm();
+        this.dispose();
     }
     
     public static void loadCbbForm() {
@@ -72,15 +73,10 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
         loadCbbDonViTinh();
     }
     
-    public void Open() {
-        if (ncc==null) {
-            ncc = new NhaCungCapJFrame();
-        }
-    }
-    
     //load object lên combobox
     public static void loadCbbDanhMuc() {
         dcm = (DefaultComboBoxModel) cbb_danhmuc.getModel();
+        dcm.removeAllElements();
         List<DanhMuc> dmList = dmService.findAllDanhMuc();
         for (DanhMuc d : dmList) {
             dcm.addElement(d);
@@ -89,6 +85,7 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
     
     public static void loadCbbLoaiHang() {
         dcm = (DefaultComboBoxModel) cbb_loaihang.getModel();
+        dcm.removeAllElements();
         List<LoaiHang> lhList = lhService.findAllLoaiHang();
         for (LoaiHang l : lhList) {
             dcm.addElement(l);
@@ -97,6 +94,7 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
     
     public static void loadCbbMauSac() {
         dcm = (DefaultComboBoxModel) cbb_mausac.getModel();
+        dcm.removeAllElements();
         List<MauSac> msList = msService.findAllMauSac();
         for (MauSac m : msList) {
             dcm.addElement(m);
@@ -105,6 +103,7 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
     
     public static void loadCbbKichThuoc() {
         dcm = (DefaultComboBoxModel) cbb_kichthuoc.getModel();
+        dcm.removeAllElements();
         List<KichThuoc> ktList = ktService.findAllKichThuoc();
         for (KichThuoc k : ktList) {
             dcm.addElement(k);
@@ -113,6 +112,7 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
     
     public static void loadCbbApSuat() {
         dcm = (DefaultComboBoxModel) cbb_apsuat.getModel();
+        dcm.removeAllElements();
         List<ApSuat> asList = asService.findAllApSuat();
         for (ApSuat a : asList) {
             dcm.addElement(a);
@@ -121,6 +121,7 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
     
     public static void loadCbbDonViTinh() {
         dcm = (DefaultComboBoxModel) cbb_donvitinh.getModel();
+        dcm.removeAllElements();
         List<DonViTinh> dvtList = dvtService.findAllDonViTinh();
         for (DonViTinh d : dvtList) {
             dcm.addElement(d);
@@ -129,6 +130,7 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
     
     public static void loadCbbNhaCungCap() {
         dcm = (DefaultComboBoxModel) cbb_nhacungcap.getModel();
+        dcm.removeAllElements();
         List<NhaCungCap> nccList = nccService.findAllNhaCungCap();
         for (NhaCungCap ncc : nccList) {
             dcm.addElement(ncc);
@@ -293,6 +295,9 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
         btn_QLNhaCungCap.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_QLNhaCungCapMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_QLNhaCungCapMouseEntered(evt);
             }
         });
 
@@ -517,6 +522,7 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
         btn_lammoi.setText("Làm mới");
         jPanel1.add(btn_lammoi);
 
+        tb_hanghoa.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         tb_hanghoa.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
@@ -549,10 +555,6 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(349, 349, 349))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -560,6 +562,10 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane2))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(412, 412, 412))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -570,9 +576,9 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
                 .addComponent(pn_iinput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pack();
@@ -588,50 +594,42 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
 
     private void btn_QLNhaCungCapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_QLNhaCungCapMouseClicked
         // TODO add your handling code here:
-        Open();
+        ncc.setVisible(true);
     }//GEN-LAST:event_btn_QLNhaCungCapMouseClicked
 
     private void btn_themLoaiHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_themLoaiHangMouseClicked
         // TODO add your handling code here:
-        if (lh==null) {
-            lh = new LoaiHangJFrame();
-        }
+        lh.setVisible(true);
     }//GEN-LAST:event_btn_themLoaiHangMouseClicked
 
     private void btn_QLMauSacMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_QLMauSacMouseClicked
         // TODO add your handling code here:
-        if (ms==null) {
-            ms = new MauSacJFrame();
-        }
+        ms.setVisible(true);
     }//GEN-LAST:event_btn_QLMauSacMouseClicked
 
     private void btn_QLApSuatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_QLApSuatMouseClicked
         // TODO add your handling code here:
-        if (as==null) {
-            as = new ApSuatJFrame();
-        }
+        as.setVisible(true);
     }//GEN-LAST:event_btn_QLApSuatMouseClicked
 
     private void btn_QLDonViTinhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_QLDonViTinhMouseClicked
         // TODO add your handling code here:
-        if (dvt==null) {
-            dvt = new DonViTinhJFrame();
-        }
+        dvt.setVisible(true);
     }//GEN-LAST:event_btn_QLDonViTinhMouseClicked
 
     private void btn_QLKichThuocMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_QLKichThuocMouseClicked
         // TODO add your handling code here:
-        if (kt==null) {
-            kt = new KichThuocJFrame();
-        }
+        kt.setVisible(true);
     }//GEN-LAST:event_btn_QLKichThuocMouseClicked
 
     private void btn_QLDanhMucMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_QLDanhMucMouseClicked
         // TODO add your handling code here:
-        if (dm==null) {
-            dm = new DanhMucJFrame();
-        }
+        dm.setVisible(true);
     }//GEN-LAST:event_btn_QLDanhMucMouseClicked
+
+    private void btn_QLNhaCungCapMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_QLNhaCungCapMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_QLNhaCungCapMouseEntered
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

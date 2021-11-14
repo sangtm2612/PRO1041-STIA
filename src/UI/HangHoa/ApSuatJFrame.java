@@ -38,7 +38,6 @@ public class ApSuatJFrame extends javax.swing.JFrame {
     public void init() {
         setResizable(false);
         setLocationRelativeTo(null);
-        setVisible(true);
         loadTable();
     }
 

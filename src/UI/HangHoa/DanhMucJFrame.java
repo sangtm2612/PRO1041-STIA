@@ -7,6 +7,7 @@ package UI.HangHoa;
 
 import Models.HangHoa.DanhMuc;
 import Service.Implement.DanhMucService;
+import UI.HangHoaJFrame;
 import java.awt.Container;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +29,6 @@ public class DanhMucJFrame extends javax.swing.JFrame {
     public DanhMucJFrame() {
         initComponents();
         init();
-        setVisible(true);
     }
     
     public void init(){
@@ -51,8 +51,9 @@ public class DanhMucJFrame extends javax.swing.JFrame {
     }
     
     public void add() {
-        dmService.themDanhMuc(new DanhMuc(tf_danhmuc.getText(),true));
+        dmService.themDanhMuc(getDanhMuc());
         loadTable();
+        HangHoaJFrame.loadCbbDanhMuc();
     }
     
     public void edit() {
@@ -60,6 +61,7 @@ public class DanhMucJFrame extends javax.swing.JFrame {
         dm.setId(dmClick.getId());
         dmService.suaDanhMuc(dm);
         loadTable();
+        HangHoaJFrame.loadCbbDanhMuc();
     }
     
     public void remove() {
@@ -68,6 +70,7 @@ public class DanhMucJFrame extends javax.swing.JFrame {
         dm.setTrangThai(false);
         dmService.suaDanhMuc(dm);
         loadTable();
+        HangHoaJFrame.loadCbbDanhMuc();
         NhaCungCapJFrame.clearTextFiel(tf_danhmuc);
     }
 
