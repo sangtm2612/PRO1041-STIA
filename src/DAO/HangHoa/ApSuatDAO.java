@@ -26,7 +26,7 @@ public class ApSuatDAO extends StiaDAO<ApSuat, Integer>{
     final String DELETE_SQL = "";
     final String SELECT_ALL_SQL = "SELECT * FROM ApSuat Where TrangThai = 1";
     final String SELECT_BY_ID_SQL = "SELECT * FROM ApSuat WHERE Id = ?";
-    final String SELECT_BY_Name_SQL = "SELECT * FROM ApSuat WHERE TenApSuat = ?";
+    final String SELECT_BY_Name_SQL = "SELECT * FROM ApSuat WHERE TenApSuat = ? And TrangThai = 1";
 
     @Override
     public void insert(ApSuat entity) {

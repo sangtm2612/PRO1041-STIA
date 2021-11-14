@@ -5,9 +5,9 @@
  */
 package UI.HangHoa;
 
-import Models.HangHoa.ApSuat;
 import Models.HangHoa.DonViTinh;
 import Service.Implement.DonViTinhService;
+import UI.HangHoaJFrame;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -31,7 +31,6 @@ public class DonViTinhJFrame extends javax.swing.JFrame {
     public void init(){
         setResizable(false);
         setLocationRelativeTo(null);
-        setVisible(true);
         loadTable();
     }
     
@@ -49,8 +48,9 @@ public class DonViTinhJFrame extends javax.swing.JFrame {
     }
     
     public void add() {
-        dvtService.themDonViTinh(new DonViTinh(tf_donvitinh.getText(),true));
+        dvtService.themDonViTinh(getDonViTinh());
         loadTable();
+        HangHoaJFrame.loadCbbDonViTinh();
     }
     
     public void edit() {
@@ -58,6 +58,7 @@ public class DonViTinhJFrame extends javax.swing.JFrame {
         dvt.setId(dvtClick.getId());
         dvtService.suaDonViTinh(dvt);
         loadTable();
+        HangHoaJFrame.loadCbbDonViTinh();
     }
     
     public void remove() {
@@ -66,6 +67,7 @@ public class DonViTinhJFrame extends javax.swing.JFrame {
         dvt.setTrangThai(false);
         dvtService.suaDonViTinh(dvt);
         loadTable();
+        HangHoaJFrame.loadCbbDonViTinh();
         NhaCungCapJFrame.clearTextFiel(tf_donvitinh);
     }
 

@@ -12,6 +12,10 @@ package Models.HangHoa;
 public class ChiTietHangHoa {
     private int Id;
     private int SoLuong;
+    private int GiaNhap;
+    private int GiaBan;
+    private String GhiChu;
+    private boolean TrangThai;
     private int Id_KichThuoc;
     private int Id_MauSac;
     private int Id_HangHoa;
@@ -21,12 +25,13 @@ public class ChiTietHangHoa {
     private int Id_LoaiHang;
     private int Id_ChieuDay;
 
-    public ChiTietHangHoa() {
-    }
-
-    public ChiTietHangHoa(int Id, int SoLuong, int Id_KichThuoc, int Id_MauSac, int Id_HangHoa, int Id_ApSuat, int Id_DonViTinh, int Id_GiaTien, int Id_LoaiHang, int Id_ChieuDay) {
+    public ChiTietHangHoa(int Id, int SoLuong, int GiaNhap, int GiaBan, String GhiChu, boolean TrangThai, int Id_KichThuoc, int Id_MauSac, int Id_HangHoa, int Id_ApSuat, int Id_DonViTinh, int Id_GiaTien, int Id_LoaiHang, int Id_ChieuDay) {
         this.Id = Id;
         this.SoLuong = SoLuong;
+        this.GiaNhap = GiaNhap;
+        this.GiaBan = GiaBan;
+        this.GhiChu = GhiChu;
+        this.TrangThai = TrangThai;
         this.Id_KichThuoc = Id_KichThuoc;
         this.Id_MauSac = Id_MauSac;
         this.Id_HangHoa = Id_HangHoa;
@@ -35,6 +40,9 @@ public class ChiTietHangHoa {
         this.Id_GiaTien = Id_GiaTien;
         this.Id_LoaiHang = Id_LoaiHang;
         this.Id_ChieuDay = Id_ChieuDay;
+    }
+
+    public ChiTietHangHoa() {
     }
 
     public int getId() {
@@ -51,6 +59,38 @@ public class ChiTietHangHoa {
 
     public void setSoLuong(int SoLuong) {
         this.SoLuong = SoLuong;
+    }
+
+    public int getGiaNhap() {
+        return GiaNhap;
+    }
+
+    public void setGiaNhap(int GiaNhap) {
+        this.GiaNhap = GiaNhap;
+    }
+
+    public int getGiaBan() {
+        return GiaBan;
+    }
+
+    public void setGiaBan(int GiaBan) {
+        this.GiaBan = GiaBan;
+    }
+
+    public String getGhiChu() {
+        return GhiChu;
+    }
+
+    public void setGhiChu(String GhiChu) {
+        this.GhiChu = GhiChu;
+    }
+
+    public boolean isTrangThai() {
+        return TrangThai;
+    }
+
+    public void setTrangThai(boolean TrangThai) {
+        this.TrangThai = TrangThai;
     }
 
     public int getId_KichThuoc() {
@@ -116,9 +156,7 @@ public class ChiTietHangHoa {
     public void setId_ChieuDay(int Id_ChieuDay) {
         this.Id_ChieuDay = Id_ChieuDay;
     }
+    
+    
 
-    
-    
-    
-    
 }

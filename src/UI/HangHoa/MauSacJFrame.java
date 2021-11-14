@@ -8,6 +8,7 @@ package UI.HangHoa;
 
 import Models.HangHoa.MauSac;
 import Service.Implement.MauSacService;
+import UI.HangHoaJFrame;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -32,7 +33,6 @@ public class MauSacJFrame extends javax.swing.JFrame {
     public void init(){
         setResizable(false);
         setLocationRelativeTo(null);
-        setVisible(true);
         loadTable();
     }
     
@@ -52,6 +52,7 @@ public class MauSacJFrame extends javax.swing.JFrame {
     public void add() {
         msService.themMauSac(getMauSac());
         loadTable();
+        HangHoaJFrame.loadCbbMauSac();
     }
     
     public void edit() {
@@ -59,6 +60,7 @@ public class MauSacJFrame extends javax.swing.JFrame {
         ms.setId(msClick.getId());
         msService.suaMauSac(ms);
         loadTable();
+        HangHoaJFrame.loadCbbMauSac();
     }
     
     public void remove() {
@@ -67,6 +69,7 @@ public class MauSacJFrame extends javax.swing.JFrame {
         ms.setTrangThai(false);
         msService.suaMauSac(ms);
         loadTable();
+        HangHoaJFrame.loadCbbMauSac();
         NhaCungCapJFrame.clearTextFiel(tf_mausac);
     }
 

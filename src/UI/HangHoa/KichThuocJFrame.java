@@ -7,6 +7,7 @@ package UI.HangHoa;
 
 import Models.HangHoa.KichThuoc;
 import Service.Implement.KichThuocService;
+import UI.HangHoaJFrame;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -30,7 +31,6 @@ public class KichThuocJFrame extends javax.swing.JFrame {
     public void init(){
         setResizable(false);
         setLocationRelativeTo(null);
-        setVisible(true);
         loadTable();
     }
     
@@ -50,6 +50,7 @@ public class KichThuocJFrame extends javax.swing.JFrame {
     public void add() {
         ktService.themKichThuoc(getKichThuoc());
         loadTable();
+        HangHoaJFrame.loadCbbKichThuoc();
     }
     
     public void edit() {
@@ -57,6 +58,7 @@ public class KichThuocJFrame extends javax.swing.JFrame {
         kt.setId(ktClick.getId());
         ktService.suaKichThuoc(kt);
         loadTable();
+        HangHoaJFrame.loadCbbKichThuoc();
     }
     
     public void remove() {
@@ -65,6 +67,7 @@ public class KichThuocJFrame extends javax.swing.JFrame {
         kt.setTrangThai(false);
         ktService.suaKichThuoc(kt);
         loadTable();
+        HangHoaJFrame.loadCbbKichThuoc();
         NhaCungCapJFrame.clearTextFiel(tf_KichThuoc);
     }
 

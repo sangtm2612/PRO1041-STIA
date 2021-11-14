@@ -7,6 +7,7 @@ package UI;
 
 import Thread.ClockThread;
 import UI.HangHoa.NhaCungCapJFrame;
+import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 
@@ -15,7 +16,7 @@ import javax.swing.JInternalFrame;
  * @author sangt
  */
 public class MainJFrame extends javax.swing.JFrame {
-    NhaCungCapJFrame ncc;
+    NhaCungCapJFrame ncc = new NhaCungCapJFrame(); ;
     /**
      * Creates new form MainJFrame
      */
@@ -28,6 +29,7 @@ public class MainJFrame extends javax.swing.JFrame {
         setResizable(false);
         setLocationRelativeTo(null);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/com.myPro.Icon/STIA.png")));
         initClock();
     }
     
@@ -51,8 +53,6 @@ public class MainJFrame extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jSeparator4 = new javax.swing.JToolBar.Separator();
         jButton6 = new javax.swing.JButton();
-        jSeparator7 = new javax.swing.JToolBar.Separator();
-        jButton5 = new javax.swing.JButton();
         jSeparator6 = new javax.swing.JToolBar.Separator();
         jButton3 = new javax.swing.JButton();
         jSeparator5 = new javax.swing.JToolBar.Separator();
@@ -69,11 +69,12 @@ public class MainJFrame extends javax.swing.JFrame {
         dp_content = new javax.swing.JDesktopPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("PHẦN MỀM QUẢN LÝ BÁN HÀNG STIA");
 
         jToolBar1.setRollover(true);
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/nhaCungCap.png"))); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/nhacungcap.png"))); // NOI18N
         jButton1.setText("Nhà cung cấp");
         jButton1.setFocusable(false);
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -88,6 +89,7 @@ public class MainJFrame extends javax.swing.JFrame {
         jToolBar1.add(jSeparator3);
 
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/hanghoa (2).png"))); // NOI18N
         jButton2.setText("Hàng hóa");
         jButton2.setFocusable(false);
         jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -103,6 +105,7 @@ public class MainJFrame extends javax.swing.JFrame {
         jToolBar1.add(jSeparator4);
 
         jButton6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/banhang (2).png"))); // NOI18N
         jButton6.setText("Bán hàng");
         jButton6.setFocusable(false);
         jButton6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -115,29 +118,26 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
         jToolBar1.add(jButton6);
-        jToolBar1.add(jSeparator7);
-
-        jButton5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton5.setText("Mượn hàng");
-        jButton5.setFocusable(false);
-        jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton5.setMargin(new java.awt.Insets(40, 24, 40, 24));
-        jButton5.setPreferredSize(new java.awt.Dimension(139, 101));
-        jButton5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton5);
         jToolBar1.add(jSeparator6);
 
         jButton3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/nhanvien (2).png"))); // NOI18N
         jButton3.setText("Nhân viên");
         jButton3.setFocusable(false);
         jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton3.setMargin(new java.awt.Insets(40, 24, 40, 24));
         jButton3.setPreferredSize(new java.awt.Dimension(139, 101));
         jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         jToolBar1.add(jButton3);
         jToolBar1.add(jSeparator5);
 
         jButton4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/khachhahng.png"))); // NOI18N
         jButton4.setText("Khách hàng");
         jButton4.setFocusable(false);
         jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -148,6 +148,7 @@ public class MainJFrame extends javax.swing.JFrame {
         jToolBar1.add(jSeparator2);
 
         jButton8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/thongke (2).png"))); // NOI18N
         jButton8.setText("Thống kê");
         jButton8.setFocusable(false);
         jButton8.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -158,6 +159,7 @@ public class MainJFrame extends javax.swing.JFrame {
         jToolBar1.add(jSeparator1);
 
         jButton7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/taikhoan (2).png"))); // NOI18N
         jButton7.setText("Tài khoản");
         jButton7.setFocusable(false);
         jButton7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -168,6 +170,7 @@ public class MainJFrame extends javax.swing.JFrame {
         jToolBar1.add(jSeparator8);
 
         jButton9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/log-out.png"))); // NOI18N
         jButton9.setText("Đăng xuất");
         jButton9.setFocusable(false);
         jButton9.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -215,7 +218,7 @@ public class MainJFrame extends javax.swing.JFrame {
         );
         dp_contentLayout.setVerticalGroup(
             dp_contentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 473, Short.MAX_VALUE)
+            .addGap(0, 218, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -257,8 +260,14 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        ncc = new NhaCungCapJFrame(); 
+        ncc.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        NhanVienJFrame nv = new NhanVienJFrame();
+        openX(nv);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     public void openX(JInternalFrame x) {
         for (JInternalFrame frmChild : dp_content.getAllFrames()) {
@@ -312,7 +321,6 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
@@ -325,7 +333,6 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JToolBar.Separator jSeparator4;
     private javax.swing.JToolBar.Separator jSeparator5;
     private javax.swing.JToolBar.Separator jSeparator6;
-    private javax.swing.JToolBar.Separator jSeparator7;
     private javax.swing.JToolBar.Separator jSeparator8;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JLabel lb_dongho;
