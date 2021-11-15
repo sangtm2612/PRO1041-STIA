@@ -5,13 +5,13 @@
  */
 package UI;
 
-import Models.HangHoa.ApSuat;
-import Models.HangHoa.DanhMuc;
-import Models.HangHoa.DonViTinh;
-import Models.HangHoa.KichThuoc;
-import Models.HangHoa.LoaiHang;
-import Models.HangHoa.MauSac;
-import Models.HangHoa.NhaCungCap;
+import DAO.Models.ApSuat;
+import DAO.Models.DanhMuc;
+import DAO.Models.DonViTinh;
+import DAO.Models.KichThuoc;
+import DAO.Models.LoaiHang;
+import DAO.Models.MauSac;
+import DAO.Models.NhaCungCap;
 import Service.Implement.ApSuatService;
 import Service.Implement.DanhMucService;
 import Service.Implement.DonViTinhService;

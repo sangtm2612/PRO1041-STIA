@@ -5,10 +5,11 @@
  */
 package UI.HangHoa;
 
-import Models.HangHoa.NhaCungCap;
+import DAO.Models.NhaCungCap;
 import Service.Implement.NhaCungCapService;
 import UI.HangHoaJFrame;
 import java.util.List;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
@@ -17,6 +18,10 @@ import javax.swing.table.DefaultTableModel;
  * @author sangt
  */
 public class NhaCungCapJFrame extends javax.swing.JFrame {
+
+    public static void clearTextFiel(JTextField tf_diachi, JTextField tf_email, JTextField tf_masothue, JTextField tf_sodienthoai, JTextField tf_ten, JTextField tf_timkiem, JTextArea tf_ghichu) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     NhaCungCapService nccService = new NhaCungCapService();
     DefaultTableModel dtm;
     List<NhaCungCap> list;

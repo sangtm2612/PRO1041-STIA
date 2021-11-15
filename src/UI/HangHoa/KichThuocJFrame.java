@@ -5,7 +5,7 @@
  */
 package UI.HangHoa;
 
-import Models.HangHoa.KichThuoc;
+import DAO.Models.KichThuoc;
 import Service.Implement.KichThuocService;
 import UI.HangHoaJFrame;
 import java.util.List;

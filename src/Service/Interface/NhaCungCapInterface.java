@@ -5,7 +5,7 @@
  */
 package Service.Interface;
 
-import Models.HangHoa.NhaCungCap;
+import DAO.Models.NhaCungCap;
 import java.util.List;
 
 /**

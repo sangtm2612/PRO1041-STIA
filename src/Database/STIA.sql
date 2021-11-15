@@ -4,6 +4,22 @@ GO
 USE STIA
 GO 
 
+CREATE TABLE KhachHang
+(
+	Id INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+	MaSoThue NVARCHAR(100) NULL,
+	Ten NVARCHAR(100) NOT NULL,
+	DiaChi NVARCHAR(150) NOT NULL,
+	Email NVARCHAR(50) NOT NULL,
+	SoDienThoai NVARCHAR(11) NOT NULL,
+	GhiChu NVARCHAR(100) NULL,
+	TrangThai BIT NOT NULL,
+)
+GO
+
+--INSERT INTO dbo.KhachHang(MaSoThue,Ten,DiaChi,Email,SoDienThoai,GhiChu,TrangThai) VALUES ('a','b','c','d','e','f',1)
+
+
 CREATE TABLE PhongBan
 (
 	Id INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
@@ -11,6 +27,7 @@ CREATE TABLE PhongBan
 	TrangThai BIT NOT NULL,
 )
 GO
+
 
 SELECT * FROM dbo.PhongBan
 
@@ -43,6 +60,8 @@ CREATE TABLE NhanVien
 	FOREIGN KEY(Id_TaiKhoan) REFERENCES TAIKHOAN(Id)
 )
 GO
+
+
 
 --INSERT dbo.NHANVIEN(HoTen,GioiTinh,NgaySinh,DiaChi,Email,SoDienThoai,CCCD,ChucVu,GhiChu,TrangThai,Id_PhongBan,Id_TaiKhoan) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
 --UPDATE dbo.NHANVIEN SET HoTen = '', GioiTinh = '', NgaySinh = '', DiaChi = '', Email = '', SoDienThoai = '', CCCD = '', ChucVu = '', GhiChu = '', TrangThai = ''
@@ -173,7 +192,7 @@ CREATE TABLE ChiTietHangHoa
 )
 GO
 
-INSERT INTO dbo.ChiTietHangHoa(SoLuong,GiaNhap,GiaBan,GhiChu,TrangThai,Id_KichThuoc,Id_MauSac,Id_HangHoa,Id_ApSuat,Id_DonViTinh,Id_LoaiHang,Id_ChieuDay) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)
+--INSERT INTO dbo.ChiTietHangHoa(SoLuong,GiaNhap,GiaBan,GhiChu,TrangThai,Id_KichThuoc,Id_MauSac,Id_HangHoa,Id_ApSuat,Id_DonViTinh,Id_LoaiHang,Id_ChieuDay) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)
 
 /*
 --Thêm dữ liệu loại hàng

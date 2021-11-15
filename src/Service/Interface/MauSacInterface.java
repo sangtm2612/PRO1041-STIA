@@ -5,7 +5,7 @@
  */
 package Service.Interface;
 
-import Models.HangHoa.MauSac;
+import DAO.Models.MauSac;
 import java.util.List;
 
 /**

@@ -5,7 +5,7 @@
  */
 package UI;
 
-import Models.PhongBan;
+import DAO.Models.PhongBan;
 import Service.Implement.PhongBanService;
 import UI.HangHoa.NhaCungCapJFrame;
 import java.util.List;

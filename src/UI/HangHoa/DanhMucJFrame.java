@@ -5,7 +5,7 @@
  */
 package UI.HangHoa;
 
-import Models.HangHoa.DanhMuc;
+import DAO.Models.DanhMuc;
 import Service.Implement.DanhMucService;
 import UI.HangHoaJFrame;
 import java.awt.Container;

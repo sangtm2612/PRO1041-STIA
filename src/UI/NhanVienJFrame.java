@@ -4,7 +4,7 @@
  */
 package UI;
 
-import Models.PhongBan;
+import DAO.Models.PhongBan;
 import Service.Implement.PhongBanService;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;

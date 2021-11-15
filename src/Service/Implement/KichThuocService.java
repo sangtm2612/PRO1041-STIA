@@ -5,8 +5,8 @@
  */
 package Service.Implement;
 
-import DAO.HangHoa.KichThuocDAO;
-import Models.HangHoa.KichThuoc;
+import DAO.KichThuocDAO;
+import DAO.Models.KichThuoc;
 import Service.Interface.KichThuocInterface;
 import java.util.List;
 
