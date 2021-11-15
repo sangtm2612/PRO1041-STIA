@@ -5,7 +5,7 @@
  */
 package UI.HangHoa;
 
-import Models.HangHoa.LoaiHang;
+import DAO.Models.LoaiHang;
 import Service.Implement.LoaiHangService;
 import UI.HangHoaJFrame;
 import java.util.List;

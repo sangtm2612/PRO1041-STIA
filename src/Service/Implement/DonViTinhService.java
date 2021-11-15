@@ -5,8 +5,8 @@
  */
 package Service.Implement;
 
-import DAO.HangHoa.DonViTinhDAO;
-import Models.HangHoa.DonViTinh;
+import DAO.DonViTinhDAO;
+import DAO.Models.DonViTinh;
 import Service.Interface.DonViTinhInterface;
 import java.util.List;
 

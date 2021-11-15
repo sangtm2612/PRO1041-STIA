@@ -5,8 +5,8 @@
  */
 package DAO;
 
-import Models.HangHoa.ChiTietHangHoa;
-import Models.PhongBan;
+import DAO.Models.ChiTietHangHoa;
+import DAO.Models.PhongBan;
 import Utils.jdbcHelper;
 import java.sql.SQLException;
 import java.sql.ResultSet;

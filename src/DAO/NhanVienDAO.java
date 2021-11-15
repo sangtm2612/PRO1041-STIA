@@ -5,7 +5,7 @@
  */
 package DAO;
 
-import Models.NhanVien;
+import DAO.Models.NhanVien;
 import Utils.jdbcHelper;
 import java.util.ArrayList;
 import java.util.List;

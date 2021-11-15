@@ -5,7 +5,7 @@
  */
 package Service.Interface;
 
-import Models.HangHoa.DanhMuc;
+import DAO.Models.DanhMuc;
 import java.util.List;
 
 /**

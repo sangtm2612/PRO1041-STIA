@@ -5,7 +5,7 @@
  */
 package UI.HangHoa;
 
-import Models.HangHoa.DonViTinh;
+import DAO.Models.DonViTinh;
 import Service.Implement.DonViTinhService;
 import UI.HangHoaJFrame;
 import java.util.List;

@@ -6,7 +6,7 @@
 package Service.Implement;
 
 import DAO.PhongBanDAO;
-import Models.PhongBan;
+import DAO.Models.PhongBan;
 import Service.Interface.PhongBanInterface;
 import java.util.List;
 

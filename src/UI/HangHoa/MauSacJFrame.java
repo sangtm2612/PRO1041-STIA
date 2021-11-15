@@ -6,7 +6,7 @@
 package UI.HangHoa;
 
 
-import Models.HangHoa.MauSac;
+import DAO.Models.MauSac;
 import Service.Implement.MauSacService;
 import UI.HangHoaJFrame;
 import java.util.List;

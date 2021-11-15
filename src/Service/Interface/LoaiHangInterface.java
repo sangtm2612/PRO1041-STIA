@@ -5,7 +5,7 @@
  */
 package Service.Interface;
 
-import Models.HangHoa.LoaiHang;
+import DAO.Models.LoaiHang;
 import java.util.List;
 
 /**

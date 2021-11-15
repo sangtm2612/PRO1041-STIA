@@ -5,8 +5,8 @@
  */
 package Service.Implement;
 
-import DAO.HangHoa.ApSuatDAO;
-import Models.HangHoa.ApSuat;
+import DAO.ApSuatDAO;
+import DAO.Models.ApSuat;
 import Service.Interface.ApSuatInterface;
 import java.util.List;
 

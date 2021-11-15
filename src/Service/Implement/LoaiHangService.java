@@ -5,9 +5,9 @@
  */
 package Service.Implement;
 
-import DAO.HangHoa.LoaiHangDAO;
-import Models.HangHoa.ApSuat;
-import Models.HangHoa.LoaiHang;
+import DAO.LoaiHangDAO;
+import DAO.Models.ApSuat;
+import DAO.Models.LoaiHang;
 import Service.Interface.LoaiHangInterface;
 import java.util.List;
 

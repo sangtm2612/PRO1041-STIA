@@ -5,10 +5,10 @@
  */
 package Service.Implement;
 
-import DAO.HangHoa.ApSuatDAO;
-import DAO.HangHoa.MauSacDAO;
-import Models.HangHoa.ApSuat;
-import Models.HangHoa.MauSac;
+import DAO.ApSuatDAO;
+import DAO.MauSacDAO;
+import DAO.Models.ApSuat;
+import DAO.Models.MauSac;
 import Service.Interface.MauSacInterface;
 import java.util.List;
 

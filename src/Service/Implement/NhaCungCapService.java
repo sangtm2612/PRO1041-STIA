@@ -5,8 +5,8 @@
  */
 package Service.Implement;
 
-import DAO.HangHoa.NhaCungCapDAO;
-import Models.HangHoa.NhaCungCap;
+import DAO.NhaCungCapDAO;
+import DAO.Models.NhaCungCap;
 import Service.Interface.NhaCungCapInterface;
 import java.util.List;
 

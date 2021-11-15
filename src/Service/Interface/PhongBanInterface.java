@@ -5,7 +5,7 @@
  */
 package Service.Interface;
 
-import Models.PhongBan;
+import DAO.Models.PhongBan;
 import java.util.List;
 
 /**

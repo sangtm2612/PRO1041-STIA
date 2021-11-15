@@ -5,9 +5,9 @@
  */
 package UI.HangHoa;
 
-import Models.HangHoa.ApSuat;
-import Models.HangHoa.DanhMuc;
-import Models.HangHoa.NhaCungCap;
+import DAO.Models.ApSuat;
+import DAO.Models.DanhMuc;
+import DAO.Models.NhaCungCap;
 import Service.Implement.ApSuatService;
 import Service.Implement.DanhMucService;
 import UI.HangHoaJFrame;

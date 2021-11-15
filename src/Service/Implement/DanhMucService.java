@@ -5,8 +5,8 @@
  */
 package Service.Implement;
 
-import DAO.HangHoa.DanhMucDAO;
-import Models.HangHoa.DanhMuc;
+import DAO.DanhMucDAO;
+import DAO.Models.DanhMuc;
 import Service.Interface.DanhMucInterface;
 import java.util.List;
 
