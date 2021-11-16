@@ -29,6 +29,13 @@ public class NhanVienService implements NhanVienInterface{
     }
 
     @Override
+    public void xoaNhanVien(int id) {
+        nvDAO.delete(id);
+    }
+    
+    
+
+    @Override
     public List<NhanVien> findAllNhanVien() {
         return nvDAO.selectAll();
     }

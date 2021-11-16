@@ -37,9 +37,8 @@ public class PhongBanService implements PhongBanInterface{
         return pbDAO.selectByName(name);
     }
 
-  
-    
-    
-    
+    public PhongBan findPhongBanById(int id) {
+        return pbDAO.selectById(id);
+    } 
     
 }
