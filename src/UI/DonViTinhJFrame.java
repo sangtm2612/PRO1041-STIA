@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package UI.HangHoa;
+package UI;
 
-import DAO.Models.KichThuoc;
-import Service.Implement.KichThuocService;
+import DAO.Models.DonViTinh;
+import Service.Implement.DonViTinhService;
 import UI.HangHoaJFrame;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -15,15 +15,15 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author sangt
  */
-public class KichThuocJFrame extends javax.swing.JFrame {
-    KichThuocService ktService = new KichThuocService();
-    List<KichThuoc> kAL;
+public class DonViTinhJFrame extends javax.swing.JFrame {
+    DonViTinhService dvtService = new DonViTinhService();
+    List<DonViTinh> dAL;
     DefaultTableModel dtm;
-    KichThuoc ktClick;
+    DonViTinh dvtClick;
     /**
      * Creates new form NewJFrame
      */
-    public KichThuocJFrame() {
+    public DonViTinhJFrame() {
         initComponents();
         init();
     }
@@ -36,55 +36,55 @@ public class KichThuocJFrame extends javax.swing.JFrame {
     
     public void loadTable() {
         loadList();
-        dtm = (DefaultTableModel) tb_kichthuoc.getModel();
+        dtm = (DefaultTableModel) tb_donvitinh.getModel();
         dtm.setRowCount(0);
-        for (KichThuoc k : kAL) {
-            dtm.addRow(new Object[]{k.getTenKichThuoc()});
+        for (DonViTinh d : dAL) {
+            dtm.addRow(new Object[]{d.getTenDonVi()});
         }
     }
     
     public void loadList() {
-        kAL = ktService.findAllKichThuoc();
+        dAL = dvtService.findAllDonViTinh();
     }
     
     public void add() {
-        ktService.themKichThuoc(getKichThuoc());
+        dvtService.themDonViTinh(getDonViTinh());
         loadTable();
-        HangHoaJFrame.loadCbbKichThuoc();
+        HangHoaJFrame.loadCbbDonViTinh();
     }
     
     public void edit() {
-        KichThuoc kt = getKichThuoc();
-        kt.setId(ktClick.getId());
-        ktService.suaKichThuoc(kt);
+        DonViTinh dvt = getDonViTinh();
+        dvt.setId(dvtClick.getId());
+        dvtService.suaDonViTinh(dvt);
         loadTable();
-        HangHoaJFrame.loadCbbKichThuoc();
+        HangHoaJFrame.loadCbbDonViTinh();
     }
     
     public void remove() {
-        KichThuoc kt = getKichThuoc();
-        kt.setId(ktClick.getId());
-        kt.setTrangThai(false);
-        ktService.suaKichThuoc(kt);
+        DonViTinh dvt = getDonViTinh();
+        dvt.setId(dvtClick.getId());
+        dvt.setTrangThai(false);
+        dvtService.suaDonViTinh(dvt);
         loadTable();
-        HangHoaJFrame.loadCbbKichThuoc();
-        NhaCungCapJFrame.clearTextFiel(tf_KichThuoc);
+        HangHoaJFrame.loadCbbDonViTinh();
+        NhaCungCapJFrame.clearTextFiel(tf_donvitinh);
     }
 
     public void fillForm() {
-        int i = tb_kichthuoc.getSelectedRow();
-        String tenKichThuoc = tb_kichthuoc.getValueAt(i, 0).toString();
-        ktClick = ktService.findIdKichThuoc(tenKichThuoc);
-        tf_KichThuoc.setText(tenKichThuoc);
-        System.out.println("id: " + ktClick.getId());
+        int i = tb_donvitinh.getSelectedRow();
+        String tenApSuat = tb_donvitinh.getValueAt(i, 0).toString();
+        dvtClick = dvtService.findIdDonViTinh(tenApSuat);
+        tf_donvitinh.setText(tenApSuat);
+        System.out.println("id: " + dvtClick.getId());
 
     }
 
-    public KichThuoc getKichThuoc() {
-        KichThuoc kt = new KichThuoc();
-        kt.setTenKichThuoc(tf_KichThuoc.getText());
-        kt.setTrangThai(true);
-        return kt;
+    public DonViTinh getDonViTinh() {
+        DonViTinh dvt = new DonViTinh();
+        dvt.setTenDonVi(tf_donvitinh.getText());
+        dvt.setTrangThai(true);
+        return dvt;
     }
     
     /**
@@ -97,20 +97,20 @@ public class KichThuocJFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        tf_KichThuoc = new javax.swing.JTextField();
+        tf_donvitinh = new javax.swing.JTextField();
         btn_them = new javax.swing.JButton();
         btn_xoa = new javax.swing.JButton();
         btn_luu = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tb_kichthuoc = new javax.swing.JTable();
+        tb_donvitinh = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Kích thước");
+        setTitle("Đơn VỊ Tính");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel1.setText("Kích thước:");
+        jLabel1.setText("Đơn vị tính:");
 
-        tf_KichThuoc.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        tf_donvitinh.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
         btn_them.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btn_them.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/them.png"))); // NOI18N
@@ -139,12 +139,12 @@ public class KichThuocJFrame extends javax.swing.JFrame {
             }
         });
 
-        tb_kichthuoc.setModel(new javax.swing.table.DefaultTableModel(
+        tb_donvitinh.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Kích thước"
+                "Đơn vị tính"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -155,12 +155,12 @@ public class KichThuocJFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tb_kichthuoc.addMouseListener(new java.awt.event.MouseAdapter() {
+        tb_donvitinh.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tb_kichthuocMouseClicked(evt);
+                tb_donvitinhMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tb_kichthuoc);
+        jScrollPane1.setViewportView(tb_donvitinh);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -171,7 +171,7 @@ public class KichThuocJFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(btn_them, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tf_KichThuoc)
+                    .addComponent(tf_donvitinh)
                     .addComponent(btn_luu, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_xoa, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(35, 35, 35)
@@ -186,7 +186,7 @@ public class KichThuocJFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(tf_KichThuoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tf_donvitinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn_them, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -211,15 +211,15 @@ public class KichThuocJFrame extends javax.swing.JFrame {
         edit();
     }//GEN-LAST:event_btn_luuActionPerformed
 
+    private void tb_donvitinhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_donvitinhMouseClicked
+        // TODO add your handling code here:
+        fillForm();
+    }//GEN-LAST:event_tb_donvitinhMouseClicked
+
     private void btn_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoaActionPerformed
         // TODO add your handling code here:
         remove();
     }//GEN-LAST:event_btn_xoaActionPerformed
-
-    private void tb_kichthuocMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_kichthuocMouseClicked
-        // TODO add your handling code here:
-        fillForm();
-    }//GEN-LAST:event_tb_kichthuocMouseClicked
 
     /**
      * @param args the command line arguments
@@ -238,13 +238,13 @@ public class KichThuocJFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(KichThuocJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DonViTinhJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(KichThuocJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DonViTinhJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(KichThuocJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DonViTinhJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(KichThuocJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DonViTinhJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -258,7 +258,7 @@ public class KichThuocJFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new KichThuocJFrame().setVisible(true);
+                new DonViTinhJFrame().setVisible(true);
             }
         });
     }
@@ -269,7 +269,7 @@ public class KichThuocJFrame extends javax.swing.JFrame {
     private javax.swing.JButton btn_xoa;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tb_kichthuoc;
-    private javax.swing.JTextField tf_KichThuoc;
+    private javax.swing.JTable tb_donvitinh;
+    private javax.swing.JTextField tf_donvitinh;
     // End of variables declaration//GEN-END:variables
 }

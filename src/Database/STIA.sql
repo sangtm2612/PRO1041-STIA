@@ -17,7 +17,7 @@ CREATE TABLE KhachHang
 )
 GO
 
---INSERT INTO dbo.KhachHang(MaSoThue,Ten,DiaChi,Email,SoDienThoai,GhiChu,TrangThai) VALUES ('a','b','c','d','e','f',1)
+INSERT INTO dbo.KhachHang(MaSoThue,Ten,DiaChi,Email,SoDienThoai,GhiChu,TrangThai) VALUES ('a','b','c','d','e','f',1)
 
 
 CREATE TABLE PhongBan
@@ -27,7 +27,7 @@ CREATE TABLE PhongBan
 	TrangThai BIT NOT NULL,
 )
 GO
-
+--INSERT INTO dbo.PhongBan(TenPhongBan,TrangThai)VALUES(N'Kho',1)
 
 SELECT * FROM dbo.PhongBan
 
@@ -56,14 +56,16 @@ CREATE TABLE NhanVien
 	TrangThai BIT NOT NULL,
 	Id_PhongBan INT NOT NULL,
 	Id_TaiKhoan INT NULL,
+	Id_TruongPhong INT NULL,
 	FOREIGN KEY(Id_PhongBan) REFERENCES PHONGBAN(Id),
-	FOREIGN KEY(Id_TaiKhoan) REFERENCES TAIKHOAN(Id)
+	FOREIGN KEY(Id_TaiKhoan) REFERENCES TAIKHOAN(Id),
+	FOREIGN KEY(Id_TruongPhong) REFERENCES dbo.NhanVien(Id)
 )
 GO
 
 
-
---INSERT dbo.NHANVIEN(HoTen,GioiTinh,NgaySinh,DiaChi,Email,SoDienThoai,CCCD,ChucVu,GhiChu,TrangThai,Id_PhongBan,Id_TaiKhoan) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+SELECT * FROM dbo.NhanVien
+--INSERT dbo.NHANVIEN(HoTen,GioiTinh,NgaySinh,DiaChi,Email,SoDienThoai,CCCD,ChucVu,GhiChu,TrangThai,Id_PhongBan,Id_TaiKhoan, Id_TruongPhong) VALUES ('Tran Sang', 1, '20021226', 'NINHBINH', 'sangtm@gmail.com', '0988615111', '0987654321', 1, 'hihi', 1,1, NULL, NULL);
 --UPDATE dbo.NHANVIEN SET HoTen = '', GioiTinh = '', NgaySinh = '', DiaChi = '', Email = '', SoDienThoai = '', CCCD = '', ChucVu = '', GhiChu = '', TrangThai = ''
 
 CREATE TABLE NhaCungCap

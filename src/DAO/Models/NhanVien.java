@@ -23,13 +23,14 @@ public class NhanVien {
     private boolean ChucVu;
     private String GhiChu;
     private boolean TrangThai;
-    private int IdPhongBan;
-    private int IdTaiKhoan;
+    private int Id_PhongBan;
+    private Integer Id_TaiKhoan;
+    private Integer Id_TruongPhong;
 
     public NhanVien() {
     }
 
-    public NhanVien(int Id, String HoTen, boolean GioiTinh, Date NgaySinh, String DiaChi, String SDT, String Email, String CCCD, boolean ChucVu, String GhiChu, boolean TrangThai, int IdPhongBan, int IdTaiKhoan) {
+    public NhanVien(int Id, String HoTen, boolean GioiTinh, Date NgaySinh, String DiaChi, String SDT, String Email, String CCCD, boolean ChucVu, String GhiChu, boolean TrangThai, int Id_PhongBan, Integer Id_TaiKhoan, Integer Id_TruongPhong) {
         this.Id = Id;
         this.HoTen = HoTen;
         this.GioiTinh = GioiTinh;
@@ -41,8 +42,25 @@ public class NhanVien {
         this.ChucVu = ChucVu;
         this.GhiChu = GhiChu;
         this.TrangThai = TrangThai;
-        this.IdPhongBan = IdPhongBan;
-        this.IdTaiKhoan = IdTaiKhoan;
+        this.Id_PhongBan = Id_PhongBan;
+        this.Id_TaiKhoan = Id_TaiKhoan;
+        this.Id_TruongPhong = Id_TruongPhong;
+    }
+
+    public NhanVien(String HoTen, boolean GioiTinh, Date NgaySinh, String DiaChi, String SDT, String Email, String CCCD, boolean ChucVu, String GhiChu, boolean TrangThai, int Id_PhongBan, Integer Id_TaiKhoan, Integer Id_TruongPhong) {
+        this.HoTen = HoTen;
+        this.GioiTinh = GioiTinh;
+        this.NgaySinh = NgaySinh;
+        this.DiaChi = DiaChi;
+        this.SDT = SDT;
+        this.Email = Email;
+        this.CCCD = CCCD;
+        this.ChucVu = ChucVu;
+        this.GhiChu = GhiChu;
+        this.TrangThai = TrangThai;
+        this.Id_PhongBan = Id_PhongBan;
+        this.Id_TaiKhoan = Id_TaiKhoan;
+        this.Id_TruongPhong = Id_TruongPhong;
     }
 
     public int getId() {
@@ -133,22 +151,29 @@ public class NhanVien {
         this.TrangThai = TrangThai;
     }
 
-    public int getIdPhongBan() {
-        return IdPhongBan;
+    public int getId_PhongBan() {
+        return Id_PhongBan;
     }
 
-    public void setIdPhongBan(int IdPhongBan) {
-        this.IdPhongBan = IdPhongBan;
+    public void setId_PhongBan(int Id_PhongBan) {
+        this.Id_PhongBan = Id_PhongBan;
     }
 
-    public int getIdTaiKhoan() {
-        return IdTaiKhoan;
+    public Integer getId_TaiKhoan() {
+        return Id_TaiKhoan;
     }
 
-    public void setIdTaiKhoan(int IdTaiKhoan) {
-        this.IdTaiKhoan = IdTaiKhoan;
+    public void setId_TaiKhoan(Integer Id_TaiKhoan) {
+        this.Id_TaiKhoan = Id_TaiKhoan;
     }
 
-    
+    public Integer getId_TruongPhong() {
+        return Id_TruongPhong;
+    }
+
+    public void setId_TruongPhong(Integer Id_TruongPhong) {
+        this.Id_TruongPhong = Id_TruongPhong;
+    }
+
     
 }

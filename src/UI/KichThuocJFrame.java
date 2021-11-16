@@ -3,11 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package UI.HangHoa;
+package UI;
 
-
-import DAO.Models.MauSac;
-import Service.Implement.MauSacService;
+import DAO.Models.KichThuoc;
+import Service.Implement.KichThuocService;
 import UI.HangHoaJFrame;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -16,16 +15,15 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author sangt
  */
-public class MauSacJFrame extends javax.swing.JFrame {
-    MauSacService msService = new MauSacService();
-    List<MauSac> mAL;
+public class KichThuocJFrame extends javax.swing.JFrame {
+    KichThuocService ktService = new KichThuocService();
+    List<KichThuoc> kAL;
     DefaultTableModel dtm;
-    MauSac msClick;
-    
+    KichThuoc ktClick;
     /**
      * Creates new form NewJFrame
      */
-    public MauSacJFrame() {
+    public KichThuocJFrame() {
         initComponents();
         init();
     }
@@ -38,55 +36,55 @@ public class MauSacJFrame extends javax.swing.JFrame {
     
     public void loadTable() {
         loadList();
-        dtm = (DefaultTableModel) tb_mausac.getModel();
+        dtm = (DefaultTableModel) tb_kichthuoc.getModel();
         dtm.setRowCount(0);
-        for (MauSac m : mAL) {
-            dtm.addRow(new Object[]{m.getTenMau()});
+        for (KichThuoc k : kAL) {
+            dtm.addRow(new Object[]{k.getTenKichThuoc()});
         }
     }
     
     public void loadList() {
-        mAL = msService.findAllMauSac();
+        kAL = ktService.findAllKichThuoc();
     }
     
     public void add() {
-        msService.themMauSac(getMauSac());
+        ktService.themKichThuoc(getKichThuoc());
         loadTable();
-        HangHoaJFrame.loadCbbMauSac();
+        HangHoaJFrame.loadCbbKichThuoc();
     }
     
     public void edit() {
-        MauSac ms = getMauSac();
-        ms.setId(msClick.getId());
-        msService.suaMauSac(ms);
+        KichThuoc kt = getKichThuoc();
+        kt.setId(ktClick.getId());
+        ktService.suaKichThuoc(kt);
         loadTable();
-        HangHoaJFrame.loadCbbMauSac();
+        HangHoaJFrame.loadCbbKichThuoc();
     }
     
     public void remove() {
-        MauSac ms = getMauSac();
-        ms.setId(msClick.getId());
-        ms.setTrangThai(false);
-        msService.suaMauSac(ms);
+        KichThuoc kt = getKichThuoc();
+        kt.setId(ktClick.getId());
+        kt.setTrangThai(false);
+        ktService.suaKichThuoc(kt);
         loadTable();
-        HangHoaJFrame.loadCbbMauSac();
-        NhaCungCapJFrame.clearTextFiel(tf_mausac);
+        HangHoaJFrame.loadCbbKichThuoc();
+        NhaCungCapJFrame.clearTextFiel(tf_KichThuoc);
     }
 
     public void fillForm() {
-        int i = tb_mausac.getSelectedRow();
-        String tenMauSac = tb_mausac.getValueAt(i, 0).toString();
-        msClick = msService.findIdMauSac(tenMauSac);
-        tf_mausac.setText(tenMauSac);
-        System.out.println("id: " + msClick.getId());
+        int i = tb_kichthuoc.getSelectedRow();
+        String tenKichThuoc = tb_kichthuoc.getValueAt(i, 0).toString();
+        ktClick = ktService.findIdKichThuoc(tenKichThuoc);
+        tf_KichThuoc.setText(tenKichThuoc);
+        System.out.println("id: " + ktClick.getId());
 
     }
 
-    public MauSac getMauSac() {
-        MauSac ms = new MauSac();
-        ms.setTenMau(tf_mausac.getText());
-        ms.setTrangThai(true);
-        return ms;
+    public KichThuoc getKichThuoc() {
+        KichThuoc kt = new KichThuoc();
+        kt.setTenKichThuoc(tf_KichThuoc.getText());
+        kt.setTrangThai(true);
+        return kt;
     }
     
     /**
@@ -99,20 +97,20 @@ public class MauSacJFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        tf_mausac = new javax.swing.JTextField();
+        tf_KichThuoc = new javax.swing.JTextField();
         btn_them = new javax.swing.JButton();
         btn_xoa = new javax.swing.JButton();
         btn_luu = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tb_mausac = new javax.swing.JTable();
+        tb_kichthuoc = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Màu Sắc");
+        setTitle("Kích thước");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel1.setText("Màu sắc:");
+        jLabel1.setText("Kích thước:");
 
-        tf_mausac.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        tf_KichThuoc.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
         btn_them.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btn_them.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/them.png"))); // NOI18N
@@ -141,12 +139,12 @@ public class MauSacJFrame extends javax.swing.JFrame {
             }
         });
 
-        tb_mausac.setModel(new javax.swing.table.DefaultTableModel(
+        tb_kichthuoc.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Màu sắc"
+                "Kích thước"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -157,12 +155,12 @@ public class MauSacJFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tb_mausac.addMouseListener(new java.awt.event.MouseAdapter() {
+        tb_kichthuoc.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tb_mausacMouseClicked(evt);
+                tb_kichthuocMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tb_mausac);
+        jScrollPane1.setViewportView(tb_kichthuoc);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -173,7 +171,7 @@ public class MauSacJFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(btn_them, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tf_mausac)
+                    .addComponent(tf_KichThuoc)
                     .addComponent(btn_luu, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_xoa, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(35, 35, 35)
@@ -188,7 +186,7 @@ public class MauSacJFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(tf_mausac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tf_KichThuoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn_them, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -213,15 +211,15 @@ public class MauSacJFrame extends javax.swing.JFrame {
         edit();
     }//GEN-LAST:event_btn_luuActionPerformed
 
-    private void tb_mausacMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_mausacMouseClicked
-        // TODO add your handling code here:
-        fillForm();
-    }//GEN-LAST:event_tb_mausacMouseClicked
-
     private void btn_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoaActionPerformed
         // TODO add your handling code here:
         remove();
     }//GEN-LAST:event_btn_xoaActionPerformed
+
+    private void tb_kichthuocMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_kichthuocMouseClicked
+        // TODO add your handling code here:
+        fillForm();
+    }//GEN-LAST:event_tb_kichthuocMouseClicked
 
     /**
      * @param args the command line arguments
@@ -240,13 +238,13 @@ public class MauSacJFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MauSacJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(KichThuocJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MauSacJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(KichThuocJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MauSacJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(KichThuocJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MauSacJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(KichThuocJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -260,7 +258,7 @@ public class MauSacJFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MauSacJFrame().setVisible(true);
+                new KichThuocJFrame().setVisible(true);
             }
         });
     }
@@ -271,7 +269,7 @@ public class MauSacJFrame extends javax.swing.JFrame {
     private javax.swing.JButton btn_xoa;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tb_mausac;
-    private javax.swing.JTextField tf_mausac;
+    private javax.swing.JTable tb_kichthuoc;
+    private javax.swing.JTextField tf_KichThuoc;
     // End of variables declaration//GEN-END:variables
 }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package UI.HangHoa;
+package UI;
 
 import DAO.Models.ApSuat;
 import DAO.Models.DanhMuc;
