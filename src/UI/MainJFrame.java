@@ -38,6 +38,11 @@ public class MainJFrame extends javax.swing.JFrame {
         ClockThread c = new ClockThread(lb_dongho);
         c.start();
     }
+    
+    public void logOut() {
+        this.dispose();
+        new LoginJFrame().setVisible(true);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -63,7 +68,7 @@ public class MainJFrame extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JToolBar.Separator();
         jButton7 = new javax.swing.JButton();
         jSeparator8 = new javax.swing.JToolBar.Separator();
-        jButton9 = new javax.swing.JButton();
+        btn_dangXuat = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         lb_dongho = new javax.swing.JLabel();
@@ -175,15 +180,20 @@ public class MainJFrame extends javax.swing.JFrame {
         jToolBar1.add(jButton7);
         jToolBar1.add(jSeparator8);
 
-        jButton9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/log-out.png"))); // NOI18N
-        jButton9.setText("Đăng xuất");
-        jButton9.setFocusable(false);
-        jButton9.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton9.setMargin(new java.awt.Insets(40, 24, 40, 24));
-        jButton9.setPreferredSize(new java.awt.Dimension(139, 101));
-        jButton9.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton9);
+        btn_dangXuat.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btn_dangXuat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/log-out.png"))); // NOI18N
+        btn_dangXuat.setText("Đăng xuất");
+        btn_dangXuat.setFocusable(false);
+        btn_dangXuat.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_dangXuat.setMargin(new java.awt.Insets(40, 24, 40, 24));
+        btn_dangXuat.setPreferredSize(new java.awt.Dimension(139, 101));
+        btn_dangXuat.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btn_dangXuat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_dangXuatActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btn_dangXuat);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -280,6 +290,11 @@ public class MainJFrame extends javax.swing.JFrame {
         kh.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void btn_dangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_dangXuatActionPerformed
+        // TODO add your handling code here:
+        logOut();
+    }//GEN-LAST:event_btn_dangXuatActionPerformed
+
     public void openX(JInternalFrame x) {
         for (JInternalFrame frmChild : dp_content.getAllFrames()) {
             frmChild.dispose();
@@ -327,6 +342,7 @@ public class MainJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_dangXuat;
     private javax.swing.JDesktopPane dp_content;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -335,7 +351,6 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JToolBar.Separator jSeparator1;
