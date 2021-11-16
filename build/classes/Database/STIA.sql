@@ -40,6 +40,10 @@ CREATE TABLE TaiKhoan
 	TrangThai BIT NOT NULL,
 )
 GO
+DELETE FROM dbo.NhanVien
+DELETE FROM dbo.TaiKhoan
+SELECT * FROM dbo.TaiKhoan
+SELECT * FROM dbo.NhanVien
 
 CREATE TABLE NhanVien
 (

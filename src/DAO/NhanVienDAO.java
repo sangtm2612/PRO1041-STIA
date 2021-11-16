@@ -23,7 +23,7 @@ public class NhanVienDAO extends StiaDAO<NhanVien, Integer> {
 
     final String INSERT_SQL = "INSERT dbo.NHANVIEN(HoTen,GioiTinh,NgaySinh,DiaChi,Email,SoDienThoai,CCCD,ChucVu,GhiChu,TrangThai,Id_PhongBan,Id_TaiKhoan, Id_TruongPhong) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
     final String UPDATE_SQL = "UPDATE NHANVIEN SET HoTen = ?, GioiTinh = ?, NgaySinh = ?, DiaChi = ?, Email = ?, SoDienThoai = ?, CCCD = ?, ChucVu = ?, GhiChu = ?, TrangThai = ?, Id_PhongBan = ?, Id_TaiKhoan = ?, Id_TruongPhong = ? Where Id = ?";
-    final String DELETE_SQL = "";
+    final String DELETE_SQL = "UPDATE NHANVIEN SET TrangThai = 0 Where Id = ?";
     final String SELECT_ALL_SQL = "SELECT * FROM NHANVIEN";
     final String SELECT_BY_ID_SQL = "SELECT * FROM NHANVIEN WHERE Id = ?";
     final String SELECT_BY_SDT_SQL = "SELECT * FROM NHANVIEN WHERE SoDienThoai = ?";
@@ -31,7 +31,7 @@ public class NhanVienDAO extends StiaDAO<NhanVien, Integer> {
     @Override
     public void insert(NhanVien entity) {
         try {
-            jdbcHelper.Update(INSERT_SQL, entity.getHoTen(), entity.isGioiTinh(), entity.getNgaySinh(), entity.getDiaChi(), entity.getEmail(), entity.getSDT(), entity.getCCCD(), entity.isChucVu(), entity.getGhiChu(), entity.isTrangThai(), entity.getId_PhongBan(), entity.getId_TaiKhoan(), entity.getId_PhongBan());
+            jdbcHelper.Update(INSERT_SQL, entity.getHoTen(), entity.isGioiTinh(), entity.getNgaySinh(), entity.getDiaChi(), entity.getEmail(), entity.getSDT(), entity.getCCCD(), entity.isChucVu(), entity.getGhiChu(), entity.isTrangThai(), entity.getId_PhongBan(), entity.getId_TaiKhoan(), entity.getId_TruongPhong());
         } catch (SQLException ex) {
             Logger.getLogger(NhanVienDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -40,7 +40,7 @@ public class NhanVienDAO extends StiaDAO<NhanVien, Integer> {
     @Override
     public void update(NhanVien entity) {
        try {
-            jdbcHelper.Update(UPDATE_SQL, entity.getHoTen(), entity.isGioiTinh(), entity.getNgaySinh(), entity.getDiaChi(), entity.getEmail(), entity.getSDT(), entity.getCCCD(), entity.isChucVu(), entity.getGhiChu(), entity.isTrangThai(), entity.getId_PhongBan(), entity.getId_TaiKhoan(), entity.getId_PhongBan(), entity.getId());
+            jdbcHelper.Update(UPDATE_SQL, entity.getHoTen(), entity.isGioiTinh(), entity.getNgaySinh(), entity.getDiaChi(), entity.getEmail(), entity.getSDT(), entity.getCCCD(), entity.isChucVu(), entity.getGhiChu(), entity.isTrangThai(), entity.getId_PhongBan(), entity.getId_TaiKhoan(), entity.getId_TruongPhong(), entity.getId());
         } catch (SQLException ex) {
             Logger.getLogger(NhanVienDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -48,7 +48,11 @@ public class NhanVienDAO extends StiaDAO<NhanVien, Integer> {
 
     @Override
     public void delete(Integer Key) {
-       // jdbcHelper.Update(DELETE_SQL, args)
+        try {
+            jdbcHelper.Update(DELETE_SQL, Key);
+        } catch (SQLException ex) {
+            Logger.getLogger(NhanVienDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
@@ -93,7 +97,7 @@ public class NhanVienDAO extends StiaDAO<NhanVien, Integer> {
                 entity.setTrangThai(rs.getBoolean("TrangThai"));
                 entity.setId_PhongBan(rs.getInt("Id_PhongBan"));
                 entity.setId_TaiKhoan(rs.getInt("Id_TaiKhoan"));
-                entity.setId_TaiKhoan(rs.getInt("Id_TruongPhong"));
+                entity.setId_TruongPhong(rs.getInt("Id_TruongPhong"));
                 list.add(entity);
             }
         } catch (Exception e) {

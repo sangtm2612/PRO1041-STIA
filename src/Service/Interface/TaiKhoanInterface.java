@@ -5,21 +5,19 @@
  */
 package Service.Interface;
 
-import DAO.Models.NhanVien;
+import DAO.Models.TaiKhoan;
 import java.util.List;
 
 /**
  *
  * @author sangt
  */
-public interface NhanVienInterface {
-    void themNhanVien(NhanVien nv);
+public interface TaiKhoanInterface {
+    void themTaiKhoan(TaiKhoan tk);
     
-    void suaNhanVien(NhanVien nv);
+    void suaTaiKhoan(TaiKhoan tk);
     
-    void xoaNhanVien(int id);
+    List<TaiKhoan> findAllTaiKhoan();
     
-    List<NhanVien> findAllNhanVien();
-    
-    NhanVien findIdNhanVien(Integer Id);
+    TaiKhoan findTaiKhoanName(String name);
 }

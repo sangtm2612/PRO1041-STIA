@@ -10,6 +10,7 @@ package DAO.Models;
  * @author sangt
  */
 public class TaiKhoan {
+    private int Id;
     private String TenTK;
     private String MatKhau;
     private boolean VaiTro;
@@ -25,6 +26,22 @@ public class TaiKhoan {
         this.TrangThai = TrangThai;
     }
 
+    public TaiKhoan(int Id, String TenTK, String MatKhau, boolean VaiTro, boolean TrangThai) {
+        this.Id = Id;
+        this.TenTK = TenTK;
+        this.MatKhau = MatKhau;
+        this.VaiTro = VaiTro;
+        this.TrangThai = TrangThai;
+    }
+
+    public int getId() {
+        return Id;
+    }
+
+    public void setId(int Id) {
+        this.Id = Id;
+    }
+    
     public String getTenTK() {
         return TenTK;
     }

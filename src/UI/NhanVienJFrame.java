@@ -9,6 +9,7 @@ import DAO.Models.PhongBan;
 import DAO.Models.TaiKhoan;
 import Service.Implement.NhanVienService;
 import Service.Implement.PhongBanService;
+import Service.Implement.TaiKhoanService;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -23,9 +24,10 @@ public class NhanVienJFrame extends javax.swing.JInternalFrame {
 
     PhongBanJFrame pb = new PhongBanJFrame();
     NhanVienService nvService = new NhanVienService();
+    TaiKhoanService tkService = new TaiKhoanService();
     List<NhanVien> nvList;
     NhanVien nvClick;
-    PhongBan pbState = new PhongBan();
+    TaiKhoan tkClick;
     DefaultTableModel dtm;
     static DefaultComboBoxModel dcm;
     static PhongBanService pbService = new PhongBanService();
@@ -64,11 +66,15 @@ public class NhanVienJFrame extends javax.swing.JInternalFrame {
     public void loadTable() {
         loadList();
         dtm.setRowCount(0);
+        PhongBan pb;
+        TaiKhoan tk;
         for (NhanVien nv : nvList) {
             String gioiTinh = nv.isGioiTinh() == true ? "Nam" : "Nữ";
             String trangThai = nv.isTrangThai() == true ? "Làm việc" : "Nghỉ việc";
             String chucVu = nv.isChucVu() == true ? "Trưởng phòng" : "Nhân viên";
-            dtm.addRow(new Object[]{nv.getId_TaiKhoan(), nv.getHoTen(), nv.getId_PhongBan(), chucVu, gioiTinh, sdf.format(nv.getNgaySinh()), nv.getDiaChi(), nv.getSDT(), nv.getEmail(), nv.getCCCD(), nv.getGhiChu(), trangThai});
+            pb = pbService.findPhongBanById(nv.getId_PhongBan());
+            tk = tkService.findTaiKhoanId(nv.getId_TaiKhoan());
+            dtm.addRow(new Object[]{tk.getTenTK(), nv.getHoTen(), pb.getTenPhongBan(), chucVu, gioiTinh, sdf.format(nv.getNgaySinh()), nv.getDiaChi(), nv.getSDT(), nv.getEmail(), nv.getCCCD(), nv.getGhiChu(), trangThai});
         }
     }
 
@@ -89,10 +95,12 @@ public class NhanVienJFrame extends javax.swing.JInternalFrame {
         if (pf_matkhau.getText().equals(pf_xacnhanmk.getText())) {
             tk.setMatKhau(pf_matkhau.getText());
         }
+        tk.setVaiTro(rbtn_truongphong.isSelected());
+        tk.setTrangThai(true);
+        return tk;
     }
 
     public NhanVien getNhanVien() {
-//        SimpleDateFormat sdf = new SimpleDateFormat("dd")
         NhanVien nv = new NhanVien();
         nv.setHoTen(tf_hoten.getText());
         nv.setCCCD(tf_cccd.getText());
@@ -109,15 +117,55 @@ public class NhanVienJFrame extends javax.swing.JInternalFrame {
         } else {
             nv.setChucVu(false);
         }
-        nv.setNgaySinh(new Date());
+        nv.setNgaySinh(dc_ngaysinh.getDate());
         nv.setGhiChu(ta_ghichu.getText());
         nv.setTrangThai(true);
-//        if (!this.pbState.getTenPhongBan().equalsIgnoreCase("kho")) {
-//            nv.setId_TaiKhoan(null);
-//        } else {
-//            
-//        }
-        return null;
+        return nv;
+    }
+    
+    public Integer themTK() {
+        tkService.themTaiKhoan(getTaiKhoan());
+        TaiKhoan nv = tkService.findTaiKhoanName(tf_taikhoan.getText());
+        return nv.getId();
+    }
+    
+    public int getIdPhongBan() {
+        PhongBan pb = (PhongBan) dcm.getSelectedItem();
+        return pb.getId();
+    }
+    
+    public void themNV() {
+        Integer idTK = themTK();
+        int idPhongBan = getIdPhongBan();
+        NhanVien nv = getNhanVien();
+        nv.setId_TaiKhoan(idTK);
+        nv.setId_PhongBan(idPhongBan);
+        nv.setId_TruongPhong(null);
+        nvService.themNhanVien(nv);
+    }
+    
+    public void suaNV() {
+        NhanVien nv = getNhanVien();
+        nv.setId(nvClick.getId());
+        nv.setId_TaiKhoan(nvClick.getId_TaiKhoan());
+        nv.setId_PhongBan(getIdPhongBan());
+        nvService.suaNhanVien(nv);
+    }
+    
+    public void xoaTK() {
+        TaiKhoan tk = tkService.findTaiKhoanId(nvClick.getId_TaiKhoan());
+        tk.setTrangThai(false);
+        tkService.suaTaiKhoan(tk);
+    }
+    
+    public void xoaNV() {
+        nvService.xoaNhanVien(nvClick.getId());
+    }
+    
+    //xóa nhân viên kho theo nghiệp vụ chỉ có nhân viên kho mới có tài khoản
+    public void xoaNVK() {
+        xoaTK();
+        xoaNV();
     }
 
     public void fillForm() {
@@ -144,23 +192,6 @@ public class NhanVienJFrame extends javax.swing.JInternalFrame {
         ta_ghichu.setText(nvClick.getGhiChu());
     }
 
-    //set id phòng ban đang chọn
-    public void setPhongBanCbbState() {
-        PhongBan pbState = (PhongBan) dcm.getSelectedItem();
-        this.pbState.setId(pbState.getId());
-        this.pbState.setTenPhongBan(pbState.getTenPhongBan());
-        this.pbState.setTrangThai(true);
-        System.out.println(this.pbState.getId() + " " + this.pbState.getTenPhongBan());
-        if (this.pbState.getTenPhongBan().equalsIgnoreCase("kho")) {
-            tf_taikhoan.setEnabled(true);
-            pf_matkhau.setEnabled(true);
-            pf_xacnhanmk.setEnabled(true);
-        } else {
-            tf_taikhoan.setEnabled(false);
-            pf_matkhau.setEnabled(false);
-            pf_xacnhanmk.setEnabled(false);
-        }
-    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -201,9 +232,9 @@ public class NhanVienJFrame extends javax.swing.JInternalFrame {
         jLabel13 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btn_them = new javax.swing.JButton();
+        btn_sua = new javax.swing.JButton();
+        btn_xoa = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
         jTextField6 = new javax.swing.JTextField();
@@ -392,20 +423,35 @@ public class NhanVienJFrame extends javax.swing.JInternalFrame {
         });
         jPanel2.add(jButton1);
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/add-user.png"))); // NOI18N
-        jButton2.setText("Thêm");
-        jPanel2.add(jButton2);
+        btn_them.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btn_them.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/add-user.png"))); // NOI18N
+        btn_them.setText("Thêm");
+        btn_them.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_themActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btn_them);
 
-        jButton3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/edit.png"))); // NOI18N
-        jButton3.setText("Sửa");
-        jPanel2.add(jButton3);
+        btn_sua.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btn_sua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/edit.png"))); // NOI18N
+        btn_sua.setText("Sửa");
+        btn_sua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_suaActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btn_sua);
 
-        jButton4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/delete-user.png"))); // NOI18N
-        jButton4.setText("Xóa");
-        jPanel2.add(jButton4);
+        btn_xoa.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btn_xoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/delete-user.png"))); // NOI18N
+        btn_xoa.setText("Xóa");
+        btn_xoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_xoaActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btn_xoa);
 
         jPanel3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -633,19 +679,37 @@ public class NhanVienJFrame extends javax.swing.JInternalFrame {
 
     private void cbb_phongbanItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbb_phongbanItemStateChanged
         // TODO add your handling code here:
-        setPhongBanCbbState();
+
     }//GEN-LAST:event_cbb_phongbanItemStateChanged
+
+    private void btn_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themActionPerformed
+        // TODO add your handling code here:
+        themNV();
+        loadTable();
+    }//GEN-LAST:event_btn_themActionPerformed
+
+    private void btn_suaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suaActionPerformed
+        // TODO add your handling code here:
+        suaNV();
+        loadTable();
+    }//GEN-LAST:event_btn_suaActionPerformed
+
+    private void btn_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoaActionPerformed
+        // TODO add your handling code here:
+        xoaNVK();
+        loadTable();
+    }//GEN-LAST:event_btn_xoaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup btn_gioitinh;
+    private javax.swing.JButton btn_sua;
+    private javax.swing.JButton btn_them;
+    private javax.swing.JButton btn_xoa;
     public static javax.swing.JComboBox<String> cbb_phongban;
     private com.toedter.calendar.JDateChooser dc_ngaysinh;
     private javax.swing.ButtonGroup gbtn_chucvu;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
