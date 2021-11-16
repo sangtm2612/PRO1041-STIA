@@ -7,7 +7,6 @@ package UI;
 
 import DAO.Models.PhongBan;
 import Service.Implement.PhongBanService;
-import UI.HangHoa.NhaCungCapJFrame;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -33,7 +32,6 @@ public class PhongBanJFrame extends javax.swing.JFrame {
     public void init() {
         setResizable(false);
         setLocationRelativeTo(null);
-        setVisible(true);
         loadTable();
     }
 
@@ -105,7 +103,8 @@ public class PhongBanJFrame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         tf_phongban = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Quản lý phòng ban");
 
         btn_them.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btn_them.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/them.png"))); // NOI18N
@@ -210,16 +209,19 @@ public class PhongBanJFrame extends javax.swing.JFrame {
     private void btn_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themActionPerformed
         // TODO add your handling code here:
         add();
+        NhanVienJFrame.loadCbbPhongBan();
     }//GEN-LAST:event_btn_themActionPerformed
 
     private void btn_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoaActionPerformed
         // TODO add your handling code here:
         remove();
+        NhanVienJFrame.loadCbbPhongBan();
     }//GEN-LAST:event_btn_xoaActionPerformed
 
     private void btn_luuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_luuActionPerformed
         // TODO add your handling code here:
         edit();
+        NhanVienJFrame.loadCbbPhongBan();
     }//GEN-LAST:event_btn_luuActionPerformed
 
     private void tb_phongbanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_phongbanMouseClicked

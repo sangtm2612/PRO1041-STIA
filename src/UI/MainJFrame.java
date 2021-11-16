@@ -6,7 +6,6 @@
 package UI;
 
 import Thread.ClockThread;
-import UI.HangHoa.NhaCungCapJFrame;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
@@ -16,7 +15,9 @@ import javax.swing.JInternalFrame;
  * @author sangt
  */
 public class MainJFrame extends javax.swing.JFrame {
-    NhaCungCapJFrame ncc = new NhaCungCapJFrame(); ;
+    NhaCungCapJFrame ncc = new NhaCungCapJFrame();
+    KhachHangJFrame kh = new KhachHangJFrame();
+    
     /**
      * Creates new form MainJFrame
      */
@@ -144,6 +145,11 @@ public class MainJFrame extends javax.swing.JFrame {
         jButton4.setMargin(new java.awt.Insets(40, 24, 40, 24));
         jButton4.setPreferredSize(new java.awt.Dimension(139, 101));
         jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
         jToolBar1.add(jButton4);
         jToolBar1.add(jSeparator2);
 
@@ -268,6 +274,11 @@ public class MainJFrame extends javax.swing.JFrame {
         NhanVienJFrame nv = new NhanVienJFrame();
         openX(nv);
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        kh.setVisible(true);
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     public void openX(JInternalFrame x) {
         for (JInternalFrame frmChild : dp_content.getAllFrames()) {

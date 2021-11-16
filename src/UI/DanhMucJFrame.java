@@ -3,11 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package UI.HangHoa;
+package UI;
 
-import DAO.Models.LoaiHang;
-import Service.Implement.LoaiHangService;
+import DAO.Models.DanhMuc;
+import Service.Implement.DanhMucService;
 import UI.HangHoaJFrame;
+import java.awt.Container;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -15,15 +17,16 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author sangt
  */
-public class LoaiHangJFrame extends javax.swing.JFrame {
-    LoaiHangService lhService = new LoaiHangService();
-    List<LoaiHang> lAL;
+public class DanhMucJFrame extends javax.swing.JFrame {
+    DanhMucService dmService = new DanhMucService();
+    List<DanhMuc> dAL;
     DefaultTableModel dtm;
-    LoaiHang lhClick;
+    DanhMuc dmClick;
+    DanhMuc getForm = new DanhMuc();
     /**
      * Creates new form NewJFrame
      */
-    public LoaiHangJFrame() {
+    public DanhMucJFrame() {
         initComponents();
         init();
     }
@@ -36,56 +39,57 @@ public class LoaiHangJFrame extends javax.swing.JFrame {
     
     public void loadTable() {
         loadList();
-        dtm = (DefaultTableModel) tb_loaihang.getModel();
+        dtm = (DefaultTableModel) tb_danhmuc.getModel();
         dtm.setRowCount(0);
-        for (LoaiHang l : lAL) {
-            dtm.addRow(new Object[]{l.getTenLoai()});
+        for (DanhMuc d : dAL) {
+            dtm.addRow(new Object[]{d.getTenDanhMuc()});
         }
     }
     
     public void loadList() {
-        lAL = lhService.findAllLoaiHang();
+        dAL = dmService.findAllDanhMuc();
     }
     
     public void add() {
-        lhService.themLoaiHang(getLoaiHang());
+        dmService.themDanhMuc(getDanhMuc());
         loadTable();
-        HangHoaJFrame.loadCbbLoaiHang();
+        HangHoaJFrame.loadCbbDanhMuc();
     }
     
     public void edit() {
-        LoaiHang lh = getLoaiHang();
-        lh.setId(lhClick.getId());
-        lhService.suaLoaiHang(lh);
+        DanhMuc dm = getDanhMuc();
+        dm.setId(dmClick.getId());
+        dmService.suaDanhMuc(dm);
         loadTable();
-        HangHoaJFrame.loadCbbLoaiHang();
+        HangHoaJFrame.loadCbbDanhMuc();
     }
     
     public void remove() {
-        LoaiHang lh = getLoaiHang();
-        lh.setId(lhClick.getId());
-        lh.setTrangThai(false);
-        lhService.suaLoaiHang(lh);
+        DanhMuc dm = getDanhMuc();
+        dm.setId(dmClick.getId());
+        dm.setTrangThai(false);
+        dmService.suaDanhMuc(dm);
         loadTable();
-        HangHoaJFrame.loadCbbLoaiHang();
-        NhaCungCapJFrame.clearTextFiel(tf_loaihang);
+        HangHoaJFrame.loadCbbDanhMuc();
+        NhaCungCapJFrame.clearTextFiel(tf_danhmuc);
     }
 
     public void fillForm() {
-        int i = tb_loaihang.getSelectedRow();
-        String tenKichThuoc = tb_loaihang.getValueAt(i, 0).toString();
-        lhClick = lhService.findIdLoaiHang(tenKichThuoc);
-        tf_loaihang.setText(tenKichThuoc);
-        System.out.println("id: " + lhClick.getId());
+        int i = tb_danhmuc.getSelectedRow();
+        String tenApSuat = tb_danhmuc.getValueAt(i, 0).toString();
+        dmClick = dmService.findDanhMucByName(tenApSuat);
+        tf_danhmuc.setText(tenApSuat);
+        System.out.println("id: " + dmClick.getId());
 
     }
 
-    public LoaiHang getLoaiHang() {
-        LoaiHang lh = new LoaiHang();
-        lh.setTenLoai(tf_loaihang.getText());
-        lh.setTrangThai(true);
-        return lh;
+    public DanhMuc getDanhMuc() {
+        DanhMuc dm = new DanhMuc();
+        dm.setTenDanhMuc(tf_danhmuc.getText());
+        dm.setTrangThai(true);
+        return dm;
     }
+    
     
     
     /**
@@ -98,20 +102,20 @@ public class LoaiHangJFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        tf_loaihang = new javax.swing.JTextField();
+        tf_danhmuc = new javax.swing.JTextField();
         btn_them = new javax.swing.JButton();
         btn_xoa = new javax.swing.JButton();
         btn_luu = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tb_loaihang = new javax.swing.JTable();
+        tb_danhmuc = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Loại Hàng");
+        setTitle("Danh mục");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel1.setText("Loại hàng:");
+        jLabel1.setText("Tên danh mục:");
 
-        tf_loaihang.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        tf_danhmuc.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
         btn_them.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btn_them.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/them.png"))); // NOI18N
@@ -140,12 +144,12 @@ public class LoaiHangJFrame extends javax.swing.JFrame {
             }
         });
 
-        tb_loaihang.setModel(new javax.swing.table.DefaultTableModel(
+        tb_danhmuc.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Loại hàng"
+                "Tên danh mục"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -156,12 +160,12 @@ public class LoaiHangJFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tb_loaihang.addMouseListener(new java.awt.event.MouseAdapter() {
+        tb_danhmuc.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tb_loaihangMouseClicked(evt);
+                tb_danhmucMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tb_loaihang);
+        jScrollPane1.setViewportView(tb_danhmuc);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -172,7 +176,7 @@ public class LoaiHangJFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(btn_them, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tf_loaihang)
+                    .addComponent(tf_danhmuc)
                     .addComponent(btn_luu, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_xoa, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(35, 35, 35)
@@ -187,7 +191,7 @@ public class LoaiHangJFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(tf_loaihang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tf_danhmuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn_them, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -207,6 +211,11 @@ public class LoaiHangJFrame extends javax.swing.JFrame {
         add();
     }//GEN-LAST:event_btn_themActionPerformed
 
+    private void tb_danhmucMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_danhmucMouseClicked
+        // TODO add your handling code here:
+        fillForm();
+    }//GEN-LAST:event_tb_danhmucMouseClicked
+
     private void btn_luuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_luuActionPerformed
         // TODO add your handling code here:
         edit();
@@ -216,11 +225,6 @@ public class LoaiHangJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         remove();
     }//GEN-LAST:event_btn_xoaActionPerformed
-
-    private void tb_loaihangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_loaihangMouseClicked
-        // TODO add your handling code here:
-        fillForm();
-    }//GEN-LAST:event_tb_loaihangMouseClicked
 
     /**
      * @param args the command line arguments
@@ -239,27 +243,21 @@ public class LoaiHangJFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LoaiHangJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DanhMucJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LoaiHangJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DanhMucJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LoaiHangJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DanhMucJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LoaiHangJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DanhMucJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new LoaiHangJFrame().setVisible(true);
+                new DanhMucJFrame().setVisible(true);
             }
         });
     }
@@ -270,7 +268,7 @@ public class LoaiHangJFrame extends javax.swing.JFrame {
     private javax.swing.JButton btn_xoa;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tb_loaihang;
-    private javax.swing.JTextField tf_loaihang;
+    private javax.swing.JTable tb_danhmuc;
+    private javax.swing.JTextField tf_danhmuc;
     // End of variables declaration//GEN-END:variables
 }

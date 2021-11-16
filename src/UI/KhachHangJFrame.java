@@ -8,7 +8,6 @@ package UI;
 
 import DAO.Models.KhachHang;
 import Service.Implement.KhachHangService;
-import UI.HangHoa.NhaCungCapJFrame;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -130,7 +129,7 @@ public class KhachHangJFrame extends javax.swing.JFrame {
         tb_khachhang = new javax.swing.JTable();
         jLabel9 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("QUẢN LÝ NHÂN VIÊN");
 
         jPanel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));

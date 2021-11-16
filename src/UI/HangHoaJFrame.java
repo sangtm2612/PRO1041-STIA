@@ -19,13 +19,6 @@ import Service.Implement.KichThuocService;
 import Service.Implement.LoaiHangService;
 import Service.Implement.MauSacService;
 import Service.Implement.NhaCungCapService;
-import UI.HangHoa.ApSuatJFrame;
-import UI.HangHoa.DanhMucJFrame;
-import UI.HangHoa.DonViTinhJFrame;
-import UI.HangHoa.KichThuocJFrame;
-import UI.HangHoa.LoaiHangJFrame;
-import UI.HangHoa.MauSacJFrame;
-import UI.HangHoa.NhaCungCapJFrame;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 
