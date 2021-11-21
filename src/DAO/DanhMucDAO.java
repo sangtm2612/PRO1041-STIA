@@ -20,14 +20,14 @@ import java.util.logging.Logger;
  *
  * @author sangt
  */
-public class DanhMucDAO extends StiaDAO<DanhMuc, String>{
+public class DanhMucDAO extends StiaDAO<DanhMuc, Integer>{
     
     final String INSERT_SQL = "INSERT INTO dbo.DanhMuc(TenDanhMuc,TrangThai)VALUES(?,?)";
     final String UPDATE_SQL = "UPDATE dbo.DanhMuc SET TenDanhMuc=?, TrangThai=? WHERE Id = ?";
     final String DELETE_SQL = "";
     final String SELECT_ALL_SQL = "SELECT * FROM DanhMuc WHERE TrangThai = 1";
     final String SELECT_BY_ID_SQL = "SELECT * FROM DanhMuc WHERE Id = ?";
-    final String SELECT_BY_NAME_SQL = "SELECT * FROM DanhMuc WHERE TenDanhMuc = ?";
+    final String SELECT_BY_NAME_SQL = "SELECT * FROM DanhMuc WHERE TenDanhMuc = ? AND TrangThai = 1";
 
     @Override
     public void insert(DanhMuc entity) {
@@ -48,7 +48,7 @@ public class DanhMucDAO extends StiaDAO<DanhMuc, String>{
     }
 
     @Override
-    public void delete(String Key) {
+    public void delete(Integer Key) {
         
     }
 
@@ -58,9 +58,8 @@ public class DanhMucDAO extends StiaDAO<DanhMuc, String>{
     }
 
     @Override
-    public DanhMuc selectById(String Id) {
-        
-        List<DanhMuc> list = selectBySql(SELECT_BY_ID_SQL, Integer.parseInt(Id));
+    public DanhMuc selectById(Integer Id) {
+        List<DanhMuc> list = selectBySql(SELECT_BY_ID_SQL, Id);
         if (list.isEmpty()) {
             return null;
         }

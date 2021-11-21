@@ -50,7 +50,7 @@ public class LoaiHangJFrame extends javax.swing.JFrame {
     public void add() {
         lhService.themLoaiHang(getLoaiHang());
         loadTable();
-        HangHoaJFrame.loadCbbLoaiHang();
+        HangHoaJFrame.loadCbbLoaiHang(HangHoaJFrame.cbb_loaihang);
     }
     
     public void edit() {
@@ -58,7 +58,7 @@ public class LoaiHangJFrame extends javax.swing.JFrame {
         lh.setId(lhClick.getId());
         lhService.suaLoaiHang(lh);
         loadTable();
-        HangHoaJFrame.loadCbbLoaiHang();
+        HangHoaJFrame.loadCbbLoaiHang(HangHoaJFrame.cbb_loaihang);
     }
     
     public void remove() {
@@ -67,14 +67,14 @@ public class LoaiHangJFrame extends javax.swing.JFrame {
         lh.setTrangThai(false);
         lhService.suaLoaiHang(lh);
         loadTable();
-        HangHoaJFrame.loadCbbLoaiHang();
+        HangHoaJFrame.loadCbbLoaiHang(HangHoaJFrame.cbb_loaihang);
         NhaCungCapJFrame.clearTextFiel(tf_loaihang);
     }
 
     public void fillForm() {
         int i = tb_loaihang.getSelectedRow();
         String tenKichThuoc = tb_loaihang.getValueAt(i, 0).toString();
-        lhClick = lhService.findIdLoaiHang(tenKichThuoc);
+        lhClick = lhService.findNameLoaiHang(tenKichThuoc);
         tf_loaihang.setText(tenKichThuoc);
         System.out.println("id: " + lhClick.getId());
 

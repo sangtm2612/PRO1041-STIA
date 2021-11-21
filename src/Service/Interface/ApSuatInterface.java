@@ -20,6 +20,6 @@ public interface ApSuatInterface {
     
     List<ApSuat> findAllApSuat();
     
-    ApSuat findIdApSuat(String name);
+    ApSuat findApSuatName(String name);
     
 }

@@ -26,7 +26,7 @@ public class LoaiHangDAO extends StiaDAO<LoaiHang, Integer> {
     final String UPDATE_SQL = "UPDATE dbo.LoaiHang SET TenLoai = ?, TrangThai = ? WHERE Id = ?";
     final String DELETE_SQL = "";
     final String SELECT_ALL_SQL = "SELECT * FROM LoaiHang WHERE TrangThai = 1";
-    final String SELECT_BY_ID_SQL = "SELECT * FROM LoaiHang WHERE Id = ? AND TrangThai = 1";
+    final String SELECT_BY_ID_SQL = "SELECT * FROM LoaiHang WHERE Id = ?";
     final String SELECT_BY_Name_SQL = "SELECT * FROM LoaiHang WHERE TenLoai = ? AND TrangThai = 1";
     
     @Override

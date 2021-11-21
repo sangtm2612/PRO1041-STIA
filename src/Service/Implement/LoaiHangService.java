@@ -34,11 +34,13 @@ public class LoaiHangService implements LoaiHangInterface{
     }
 
     @Override
-    public LoaiHang findIdLoaiHang(String name) {
+    public LoaiHang findNameLoaiHang(String name) {
         return lDAO.selectByName(name);
     }
     
-    
+    public LoaiHang findIdLoaiHang(int id) {
+        return lDAO.selectById(id);
+    }
     
     
 }

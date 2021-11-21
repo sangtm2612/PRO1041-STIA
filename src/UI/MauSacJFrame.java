@@ -76,7 +76,7 @@ public class MauSacJFrame extends javax.swing.JFrame {
     public void fillForm() {
         int i = tb_mausac.getSelectedRow();
         String tenMauSac = tb_mausac.getValueAt(i, 0).toString();
-        msClick = msService.findIdMauSac(tenMauSac);
+        msClick = msService.findMauSacName(tenMauSac);
         tf_mausac.setText(tenMauSac);
         System.out.println("id: " + msClick.getId());
 

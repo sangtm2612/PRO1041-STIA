@@ -5,7 +5,6 @@
  */
 package DAO;
 
-import DAO.StiaDAO;
 import DAO.Models.ChiTietHangHoa;
 import Utils.jdbcHelper;
 import java.sql.ResultSet;

@@ -24,8 +24,12 @@ public class HangHoa {
         this.Id_NhaCungCap = Id_NhaCungCap;
         this.Id_DanhMuc = Id_DanhMuc;
     }
-    
-    
+
+    public HangHoa(String TenHang, int Id_NhaCungCap, int Id_DanhMuc) {
+        this.TenHang = TenHang;
+        this.Id_NhaCungCap = Id_NhaCungCap;
+        this.Id_DanhMuc = Id_DanhMuc;
+    }
 
     public int getId() {
         return Id;
@@ -57,6 +61,11 @@ public class HangHoa {
 
     public void setId_DanhMuc(int Id_DanhMuc) {
         this.Id_DanhMuc = Id_DanhMuc;
+    }
+
+    @Override
+    public String toString() {
+        return "HangHoa{" + "Id=" + Id + ", TenHang=" + TenHang + ", Id_NhaCungCap=" + Id_NhaCungCap + ", Id_DanhMuc=" + Id_DanhMuc + '}';
     }
 
     

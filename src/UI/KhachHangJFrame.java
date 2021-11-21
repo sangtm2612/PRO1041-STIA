@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package UI;
 
 import DAO.Models.KhachHang;
@@ -16,17 +15,20 @@ import javax.swing.table.DefaultTableModel;
  * @author sangt
  */
 public class KhachHangJFrame extends javax.swing.JFrame {
+
     KhachHangService khService = new KhachHangService();
     DefaultTableModel dtm;
     List<KhachHang> khList;
     KhachHang khClick;
 
-    /** Creates new form KhachHangJFrame */
+    /**
+     * Creates new form KhachHangJFrame
+     */
     public KhachHangJFrame() {
         initComponents();
         init();
     }
-    
+
     public void init() {
         setLocationRelativeTo(null);
         setResizable(false);
@@ -34,37 +36,40 @@ public class KhachHangJFrame extends javax.swing.JFrame {
         dtm.setRowCount(0);
         loadTable();
     }
-    
+
     public void loadList() {
         khList = khService.findAllKhachHang();
     }
-    
+
     public void loadTable() {
         loadList();
         dtm.setRowCount(0);
         for (KhachHang kh : khList) {
-            dtm.addRow(new Object[] {kh.getMaSoThue(), kh.getTen(), kh.getDiaChi(), kh.getEmail(), kh.getSoDienThoai(), kh.getGhiChu()});
+            dtm.addRow(new Object[]{kh.getMaSoThue(), kh.getTen(), kh.getDiaChi(), kh.getEmail(), kh.getSoDienThoai(), kh.getGhiChu()});
         }
     }
-    
+
     public void them() {
         khService.themKhachHang(getKhachHang());
         loadTable();
+        BanHangJFrame.loadCbbKhachHang();
     }
-    
+
     public void edit() {
         KhachHang kh = getKhachHang();
         kh.setID(khClick.getID());
         khService.suaKhachHang(kh);
         loadTable();
+        BanHangJFrame.loadCbbKhachHang();
     }
-    
+
     public void remove() {
         khClick.setTrangThai(false);
         khService.suaKhachHang(khClick);
         loadTable();
+        BanHangJFrame.loadCbbKhachHang();
     }
-    
+
     public KhachHang getKhachHang() {
         KhachHang kh = new KhachHang();
         kh.setMaSoThue(tf_masothue.getText());
@@ -76,7 +81,7 @@ public class KhachHangJFrame extends javax.swing.JFrame {
         kh.setTrangThai(true);
         return kh;
     }
-    
+
     public void fillForm() {
         int i = tb_khachhang.getSelectedRow();
         String sdt = tb_khachhang.getValueAt(i, 4).toString();
@@ -88,15 +93,14 @@ public class KhachHangJFrame extends javax.swing.JFrame {
         tf_sodienthoai.setText(khClick.getSoDienThoai());
         ta_ghichu.setText(khClick.getGhiChu());
         System.out.println("id: " + khClick.getID());
-        
+
     }
-    
+
     public void clear() {
-        NhaCungCapJFrame.clearTextFiel(tf_diachi,tf_email,tf_masothue,tf_sodienthoai,tf_ten,tf_timkiem);
+        NhaCungCapJFrame.clearTextFiel(tf_diachi, tf_email, tf_masothue, tf_sodienthoai, tf_ten, tf_timkiem);
         ta_ghichu.setText("");
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

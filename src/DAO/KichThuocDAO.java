@@ -25,7 +25,7 @@ public class KichThuocDAO extends StiaDAO<KichThuoc, Integer>{
     final String UPDATE_SQL = "UPDATE dbo.KichThuoc SET TenKichThuoc=?, TrangThai=? WHERE Id = ?";
     final String DELETE_SQL = "";
     final String SELECT_ALL_SQL = "SELECT * FROM KichThuoc WHERE TrangThai = 1";
-    final String SELECT_BY_ID_SQL = "SELECT * FROM KichThuoc WHERE Id = ? AND TrangThai = 1";
+    final String SELECT_BY_ID_SQL = "SELECT * FROM KichThuoc WHERE Id = ?";
     final String SELECT_BY_Name_SQL = "SELECT * FROM KichThuoc WHERE TenKichThuoc = ? AND TrangThai = 1";
     
     @Override

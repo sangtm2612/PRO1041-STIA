@@ -37,9 +37,13 @@ public class NhaCungCapService implements NhaCungCapInterface{
         return nccDAO.selectBySDT(SDT);
     }
 
-  
+    public NhaCungCap findNhaCungCapById(Integer Id) {
+        return nccDAO.selectById(Id);
+    }
     
-    
+    public NhaCungCap findNhaCungCapByName(String name) {
+        return nccDAO.selectByName(name);
+    }
     
     
 }

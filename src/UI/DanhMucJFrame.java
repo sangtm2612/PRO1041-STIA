@@ -53,7 +53,7 @@ public class DanhMucJFrame extends javax.swing.JFrame {
     public void add() {
         dmService.themDanhMuc(getDanhMuc());
         loadTable();
-        HangHoaJFrame.loadCbbDanhMuc();
+        HangHoaJFrame.loadCbbDanhMuc(HangHoaJFrame.cbb_danhmuc);
     }
     
     public void edit() {
@@ -61,7 +61,7 @@ public class DanhMucJFrame extends javax.swing.JFrame {
         dm.setId(dmClick.getId());
         dmService.suaDanhMuc(dm);
         loadTable();
-        HangHoaJFrame.loadCbbDanhMuc();
+        HangHoaJFrame.loadCbbDanhMuc(HangHoaJFrame.cbb_danhmuc);
     }
     
     public void remove() {
@@ -70,7 +70,7 @@ public class DanhMucJFrame extends javax.swing.JFrame {
         dm.setTrangThai(false);
         dmService.suaDanhMuc(dm);
         loadTable();
-        HangHoaJFrame.loadCbbDanhMuc();
+        HangHoaJFrame.loadCbbDanhMuc(HangHoaJFrame.cbb_danhmuc);
         NhaCungCapJFrame.clearTextFiel(tf_danhmuc);
     }
 

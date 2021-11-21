@@ -26,7 +26,7 @@ public class MauSacDAO extends StiaDAO<MauSac, Integer>{
     final String UPDATE_SQL = "UPDATE dbo.MauSac SET TenMau = ?, TrangThai=? WHERE Id = ?";
     final String DELETE_SQL = "";
     final String SELECT_ALL_SQL = "SELECT * FROM MauSac Where TrangThai = 1";
-    final String SELECT_BY_ID_SQL = "SELECT * FROM MauSac WHERE Id = ? And TrangThai = 1";
+    final String SELECT_BY_ID_SQL = "SELECT * FROM MauSac WHERE Id = ?";
     final String SELECT_BY_Name_SQL = "SELECT * FROM MauSac WHERE TenMau = ? And TrangThai = 1";
 
     @Override
