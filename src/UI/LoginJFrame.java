@@ -7,6 +7,7 @@ package UI;
 
 import DAO.Models.TaiKhoan;
 import Service.Implement.TaiKhoanService;
+import java.awt.Cursor;
 import java.util.List;
 
 /**
@@ -28,7 +29,10 @@ public class LoginJFrame extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         tkList = tkService.findAllTaiKhoan();
-
+    }
+    
+    public void openQuenMK() {
+        
     }
 
     public void checkLogin() {
@@ -36,7 +40,7 @@ public class LoginJFrame extends javax.swing.JFrame {
         String matKhau = pf_matkhau.getText();
         for (TaiKhoan tk : tkList) {
             if (tenTK.equals(tk.getTenTK()) && matKhau.equals(tk.getMatKhau())) {
-                new MainJFrame().setVisible(true);
+                new MainJFrame(tk).setVisible(true);
                 this.dispose();
             }
         }
@@ -86,6 +90,11 @@ public class LoginJFrame extends javax.swing.JFrame {
 
         lb_quenmk.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lb_quenmk.setText("Quên mật khẩu?");
+        lb_quenmk.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                lb_quenmkMouseMoved(evt);
+            }
+        });
 
         btn_ketthuc.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btn_ketthuc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/thoat.png"))); // NOI18N
@@ -162,6 +171,11 @@ public class LoginJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         checkLogin();
     }//GEN-LAST:event_btn_dangnhapActionPerformed
+
+    private void lb_quenmkMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_quenmkMouseMoved
+        // TODO add your handling code here:
+        lb_quenmk.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_lb_quenmkMouseMoved
 
     /**
      * @param args the command line arguments

@@ -40,7 +40,9 @@ public class DanhMucService implements DanhMucInterface{
     }
     
     
-    
+    public DanhMuc findDanhMucById(int id) {
+        return dDAO.selectById(id);
+    }
     
     
 }

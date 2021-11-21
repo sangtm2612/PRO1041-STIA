@@ -108,8 +108,9 @@ public class KhachHang {
         this.TrangThai = TrangThai;
     }
 
-    
-
-    
+    @Override
+    public String toString() {
+        return SoDienThoai + " " + Ten;
+    }
     
 }

@@ -16,16 +16,15 @@ public class ChiTietHangHoa {
     private int GiaBan;
     private String GhiChu;
     private boolean TrangThai;
-    private int Id_KichThuoc;
-    private int Id_MauSac;
+    private Integer Id_KichThuoc;
+    private Integer Id_MauSac;
     private int Id_HangHoa;
-    private int Id_ApSuat;
+    private Integer Id_ApSuat;
     private int Id_DonViTinh;
-    private int Id_GiaTien;
     private int Id_LoaiHang;
-    private int Id_ChieuDay;
+    private Integer Id_ChieuDay;
 
-    public ChiTietHangHoa(int Id, int SoLuong, int GiaNhap, int GiaBan, String GhiChu, boolean TrangThai, int Id_KichThuoc, int Id_MauSac, int Id_HangHoa, int Id_ApSuat, int Id_DonViTinh, int Id_GiaTien, int Id_LoaiHang, int Id_ChieuDay) {
+    public ChiTietHangHoa(int Id, int SoLuong, int GiaNhap, int GiaBan, String GhiChu, boolean TrangThai, Integer Id_KichThuoc, Integer Id_MauSac, int Id_HangHoa, Integer Id_ApSuat, int Id_DonViTinh, int Id_LoaiHang, Integer Id_ChieuDay) {
         this.Id = Id;
         this.SoLuong = SoLuong;
         this.GiaNhap = GiaNhap;
@@ -37,7 +36,21 @@ public class ChiTietHangHoa {
         this.Id_HangHoa = Id_HangHoa;
         this.Id_ApSuat = Id_ApSuat;
         this.Id_DonViTinh = Id_DonViTinh;
-        this.Id_GiaTien = Id_GiaTien;
+        this.Id_LoaiHang = Id_LoaiHang;
+        this.Id_ChieuDay = Id_ChieuDay;
+    }
+
+    public ChiTietHangHoa(int SoLuong, int GiaNhap, int GiaBan, String GhiChu, boolean TrangThai, Integer Id_KichThuoc, Integer Id_MauSac, int Id_HangHoa, Integer Id_ApSuat, int Id_DonViTinh, int Id_LoaiHang, Integer Id_ChieuDay) {
+        this.SoLuong = SoLuong;
+        this.GiaNhap = GiaNhap;
+        this.GiaBan = GiaBan;
+        this.GhiChu = GhiChu;
+        this.TrangThai = TrangThai;
+        this.Id_KichThuoc = Id_KichThuoc;
+        this.Id_MauSac = Id_MauSac;
+        this.Id_HangHoa = Id_HangHoa;
+        this.Id_ApSuat = Id_ApSuat;
+        this.Id_DonViTinh = Id_DonViTinh;
         this.Id_LoaiHang = Id_LoaiHang;
         this.Id_ChieuDay = Id_ChieuDay;
     }
@@ -131,14 +144,6 @@ public class ChiTietHangHoa {
 
     public void setId_DonViTinh(int Id_DonViTinh) {
         this.Id_DonViTinh = Id_DonViTinh;
-    }
-
-    public int getId_GiaTien() {
-        return Id_GiaTien;
-    }
-
-    public void setId_GiaTien(int Id_GiaTien) {
-        this.Id_GiaTien = Id_GiaTien;
     }
 
     public int getId_LoaiHang() {

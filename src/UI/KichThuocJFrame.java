@@ -74,7 +74,7 @@ public class KichThuocJFrame extends javax.swing.JFrame {
     public void fillForm() {
         int i = tb_kichthuoc.getSelectedRow();
         String tenKichThuoc = tb_kichthuoc.getValueAt(i, 0).toString();
-        ktClick = ktService.findIdKichThuoc(tenKichThuoc);
+        ktClick = ktService.findKichThuocName(tenKichThuoc);
         tf_KichThuoc.setText(tenKichThuoc);
         System.out.println("id: " + ktClick.getId());
 

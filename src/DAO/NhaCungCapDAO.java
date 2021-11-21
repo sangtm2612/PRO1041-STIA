@@ -19,14 +19,15 @@ import java.util.logging.Logger;
  *
  * @author sangt
  */
-public class NhaCungCapDAO extends StiaDAO<NhaCungCap, String> {
+public class NhaCungCapDAO extends StiaDAO<NhaCungCap, Integer> {
 
     final String INSERT_SQL = "INSERT INTO dbo.NhaCungCap(TenNCC,DiaChi,SDT,Email,GhiChu,TrangThai)VALUES(?,?,?,?,?,?)";
     final String UPDATE_SQL = "UPDATE dbo.NhaCungCap SET TenNCC = ?, DiaChi = ?, SDT = ?, Email = ?, GhiChu = ?, TrangThai = ? WHERE Id = ?";
     final String DELETE_SQL = "UPDATE dbo.NhaCungCap SET TrangThai = 0 WHERE Id = ?";
     final String SELECT_ALL_SQL = "SELECT * FROM NhaCungCap WHERE TrangThai = 1";
-    final String SELECT_BY_ID_SQL = "SELECT * FROM NhaCungCap WHERE Id = ? AND TrangThai = 1";
+    final String SELECT_BY_ID_SQL = "SELECT * FROM NhaCungCap WHERE Id = ?";
     final String SELECT_BY_SDT_SQL = "SELECT * FROM NhaCungCap WHERE SDT = ? And TrangThai = 1";
+    final String SELECT_BY_Name_SQL = "SELECT * FROM NhaCungCap WHERE TenNCC = ? And TrangThai = 1";
 
     @Override
     public void insert(NhaCungCap entity) {
@@ -47,7 +48,7 @@ public class NhaCungCapDAO extends StiaDAO<NhaCungCap, String> {
     }
 
     @Override
-    public void delete(String id) {
+    public void delete(Integer id) {
         try {
             jdbcHelper.Update(DELETE_SQL, id);
         } catch (SQLException ex) {
@@ -61,8 +62,16 @@ public class NhaCungCapDAO extends StiaDAO<NhaCungCap, String> {
     }
 
     @Override
-    public NhaCungCap selectById(String Id) {
+    public NhaCungCap selectById(Integer Id) {
         List<NhaCungCap> list = selectBySql(SELECT_BY_ID_SQL, Id);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
+    }
+    
+    public NhaCungCap selectByName(String name) {
+        List<NhaCungCap> list = selectBySql(SELECT_BY_Name_SQL, name);
         if (list.isEmpty()) {
             return null;
         }

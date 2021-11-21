@@ -17,8 +17,6 @@ CREATE TABLE KhachHang
 )
 GO
 
-INSERT INTO dbo.KhachHang(MaSoThue,Ten,DiaChi,Email,SoDienThoai,GhiChu,TrangThai) VALUES ('a','b','c','d','e','f',1)
-
 
 CREATE TABLE PhongBan
 (
@@ -27,9 +25,6 @@ CREATE TABLE PhongBan
 	TrangThai BIT NOT NULL,
 )
 GO
---INSERT INTO dbo.PhongBan(TenPhongBan,TrangThai)VALUES(N'Kho',1)
-
-SELECT * FROM dbo.PhongBan
 
 CREATE TABLE TaiKhoan
 (
@@ -40,10 +35,6 @@ CREATE TABLE TaiKhoan
 	TrangThai BIT NOT NULL,
 )
 GO
-DELETE FROM dbo.NhanVien
-DELETE FROM dbo.TaiKhoan
-SELECT * FROM dbo.TaiKhoan
-SELECT * FROM dbo.NhanVien
 
 CREATE TABLE NhanVien
 (
@@ -67,11 +58,6 @@ CREATE TABLE NhanVien
 )
 GO
 
-
-SELECT * FROM dbo.NhanVien
---INSERT dbo.NHANVIEN(HoTen,GioiTinh,NgaySinh,DiaChi,Email,SoDienThoai,CCCD,ChucVu,GhiChu,TrangThai,Id_PhongBan,Id_TaiKhoan, Id_TruongPhong) VALUES ('Tran Sang', 1, '20021226', 'NINHBINH', 'sangtm@gmail.com', '0988615111', '0987654321', 1, 'hihi', 1,1, NULL, NULL);
---UPDATE dbo.NHANVIEN SET HoTen = '', GioiTinh = '', NgaySinh = '', DiaChi = '', Email = '', SoDienThoai = '', CCCD = '', ChucVu = '', GhiChu = '', TrangThai = ''
-
 CREATE TABLE NhaCungCap
 (
 	Id INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
@@ -84,9 +70,6 @@ CREATE TABLE NhaCungCap
 )
 GO
 
---select * from nhacungcap
---UPDATE dbo.NHASANXUAT SET TenNCC = ?, DiaChi = ?, SDT = ?, Email = ?, GhiChu = ?, TrangThai = ? WHERE Id = ?
-
 CREATE TABLE DanhMuc
 (
 	Id INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
@@ -94,10 +77,6 @@ CREATE TABLE DanhMuc
 	TrangThai BIT NOT NULL
 )
 GO
-
---SELECT * FROM dbo.DANHMUC
---DELETE FROM DanhMuc
-
 
 
 CREATE TABLE HangHoa
@@ -119,7 +98,6 @@ CREATE TABLE KichThuoc
 	TrangThai BIT NOT NULL
 )
 GO
---select * from kichthuoc
 
 CREATE TABLE MauSac
 (
@@ -128,9 +106,6 @@ CREATE TABLE MauSac
 	TrangThai BIT NOT NULL
 )
 GO
-
---SELECT * FROM dbo.MauSac
---DELETE FROM dbo.MauSac
 
 
 CREATE TABLE ApSuat
@@ -141,9 +116,6 @@ CREATE TABLE ApSuat
 )
 GO
 
---DELETE FROM dbo.ApSuat
---SELECT * FROM dbo.ApSuat
-
 CREATE TABLE DonViTinh
 (
 	Id INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
@@ -152,8 +124,6 @@ CREATE TABLE DonViTinh
 )
 GO
 
---DELETE FROM dbo.DonViTinh
---SELECT * FROM dbo.DonViTinh
 
 CREATE TABLE LoaiHang
 (
@@ -162,9 +132,6 @@ CREATE TABLE LoaiHang
 	TrangThai BIT NOT NULL
 )
 GO
-
---DELETE FROM dbo.LoaiHang
---SELECT * FROM dbo.LoaiHang
 
 CREATE TABLE ChieuDay
 (
@@ -198,6 +165,32 @@ CREATE TABLE ChiTietHangHoa
 )
 GO
 
+CREATE TABLE HoaDon
+(
+	Id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+	ThanhTien INT NULL,
+	NgayTao DATETIME NOT NULL,
+	GhiChu NVARCHAR(100) NULL,
+	Id_NhanVien INT NOT NULL,
+	Id_KhachHang INT NULL,
+	FOREIGN KEY(Id_NhanVien) REFERENCES dbo.NhanVien(Id),
+	FOREIGN KEY(Id_KhachHang) REFERENCES dbo.KhachHang(Id)
+)
+
+CREATE TABLE HoaDonChiTiet
+(
+	Id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+	SoLuong INT NOT NULL,
+	TrangThai BIT NOT NULL,
+	Id_HoaDon INT NOT NULL,
+	Id_CTHangHoa INT NOT NULL,
+	FOREIGN KEY(Id_HoaDon) REFERENCES dbo.HoaDon(Id),
+	FOREIGN KEY(Id_CTHangHoa) REFERENCES dbo.ChiTietHangHoa(Id)
+)
+go
+
+select * from HoaDonChiTiet
+select * from HangHoa
 --INSERT INTO dbo.ChiTietHangHoa(SoLuong,GiaNhap,GiaBan,GhiChu,TrangThai,Id_KichThuoc,Id_MauSac,Id_HangHoa,Id_ApSuat,Id_DonViTinh,Id_LoaiHang,Id_ChieuDay) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)
 
 /*
@@ -237,4 +230,52 @@ INSERT INTO dbo.NhaCungCap(TenNCC,DiaChi,SDT,Email,GhiChu,TrangThai)VALUES(N'Sin
 INSERT INTO dbo.NhaCungCap(TenNCC,DiaChi,SDT,Email,GhiChu,TrangThai)VALUES(N'Sino/ Vanloock',N'Hà Nội','0984654321',N'randng@gmail.com',null,1)
 INSERT INTO dbo.NhaCungCap(TenNCC,DiaChi,SDT,Email,GhiChu,TrangThai)VALUES(N'Điện cơ',N'Hà Nội','0987655621',N'rngdong@gmail.com',null,1)
 INSERT INTO dbo.NhaCungCap(TenNCC,DiaChi,SDT,Email,GhiChu,TrangThai)VALUES(N'Tiền phong/ Deko',N'Hà Nội','0945654321',N'randong@gmail.com',null,1)
+--Thêm dữ liệu phòng ban
+INSERT INTO dbo.PhongBan(TenPhongBan,TrangThai)VALUES(N'Kho',1)
+INSERT INTO dbo.PhongBan(TenPhongBan,TrangThai)VALUES(N'Nhân sự',1)
+INSERT INTO dbo.PhongBan(TenPhongBan,TrangThai)VALUES(N'Tài chính',1)
+--Thêm dữ liệu kích thước
+INSERT INTO dbo.KichThuoc(TenKichThuoc,TrangThai)VALUES(N'S',1)
+INSERT INTO dbo.KichThuoc(TenKichThuoc,TrangThai)VALUES(N'M',1)
+INSERT INTO dbo.KichThuoc(TenKichThuoc,TrangThai)VALUES(N'L',1)
+INSERT INTO dbo.KichThuoc(TenKichThuoc,TrangThai)VALUES(N'XL',1)
+--Thêm dữ liệu tài khoản
+INSERT INTO dbo.TaiKhoan(TenTK,MatKhau,VaiTro,TrangThai)VALUES(N'admin','admin',1,1)
+--Thêm dữ liệu nhân viên
+INSERT dbo.NHANVIEN(HoTen,GioiTinh,NgaySinh,DiaChi,Email,SoDienThoai,CCCD,ChucVu,GhiChu,TrangThai,Id_PhongBan,Id_TaiKhoan,Id_TruongPhong) VALUES (N'Trần Minh Sáng', 1, '20020102', 'NINHBINH', 'sangtm@gmail.com', '0988615111', '037202000666', 1, NULL, 1,1,1, 1);
+--Thêm dữ liệu khách hàng
+INSERT INTO dbo.KhachHang(MaSoThue,Ten,DiaChi,Email,SoDienThoai,GhiChu,TrangThai)VALUES(Null,N'Nguyễn Anh Dũng',N'Hà Nội',N'dungna@gmail.com',N'0988765567',N'Giám đốc',1)
+--INSERT INTO dbo.KhachHang(MaSoThue,Ten,DiaChi,Email,SoDienThoai,GhiChu	,TrangThai)VALUES(N'',N'',N'',N'',N'',N'',NULL)
+--INSERT INTO dbo.KhachHang(MaSoThue,Ten,DiaChi,Email,SoDienThoai,GhiChu,TrangThai)VALUES(N'',N'',N'',N'',N'',N'',NULL)
+--INSERT INTO dbo.KhachHang(MaSoThue,Ten,DiaChi,Email,SoDienThoai,GhiChu,TrangThai)VALUES(N'',N'',N'',N'',N'',N'',NULL)
+--INSERT INTO dbo.KhachHang(MaSoThue,Ten,DiaChi,Email,SoDienThoai,GhiChu,TrangThai)VALUES(N'',N'',N'',N'',N'',N'',NULL)
 */
+
+
+
+CREATE PROCEDURE dbo.selectHangHoa
+AS
+BEGIN
+	SELECT TenHang, TenNCC, TenDanhMuc, TenLoai, TenMau, TenKichThuoc, TenApSuat, DoDay, TenDonVi, SoLuong, GiaNhap, GiaBan, ChiTietHangHoa.GhiChu FROM dbo.HangHoa 
+	JOIN dbo.NhaCungCap ON NhaCungCap.Id = HangHoa.Id_NhaCungCap
+	JOIN dbo.DanhMuc ON DanhMuc.Id = HangHoa.Id_DanhMuc 
+	JOIN dbo.ChiTietHangHoa ON ChiTietHangHoa.Id_HangHoa = HangHoa.Id
+	JOIN dbo.LoaiHang ON LoaiHang.Id = ChiTietHangHoa.Id_LoaiHang
+	JOIN dbo.MauSac ON MauSac.Id = ChiTietHangHoa.Id_MauSac
+	JOIN dbo.KichThuoc ON KichThuoc.Id = ChiTietHangHoa.Id_KichThuoc
+	JOIN dbo.ApSuat ON ApSuat.Id = ChiTietHangHoa.Id_ApSuat
+	JOIN dbo.ChieuDay ON ChieuDay.Id = ChiTietHangHoa.Id_ChieuDay
+	JOIN dbo.DonViTinh ON DonViTinh.Id = ChiTietHangHoa.Id_DonViTinh
+END;
+
+
+SELECT TenHang, TenKichThuoc, TenMau, DoDay, TenDonVi FROM dbo.HangHoa 
+	JOIN dbo.NhaCungCap ON NhaCungCap.Id = HangHoa.Id_NhaCungCap
+	JOIN dbo.DanhMuc ON DanhMuc.Id = HangHoa.Id_DanhMuc 
+	JOIN dbo.ChiTietHangHoa ON ChiTietHangHoa.Id_HangHoa = HangHoa.Id
+	JOIN dbo.LoaiHang ON LoaiHang.Id = ChiTietHangHoa.Id_LoaiHang
+	JOIN dbo.MauSac ON MauSac.Id = ChiTietHangHoa.Id_MauSac
+	JOIN dbo.KichThuoc ON KichThuoc.Id = ChiTietHangHoa.Id_KichThuoc
+	JOIN dbo.ApSuat ON ApSuat.Id = ChiTietHangHoa.Id_ApSuat
+	JOIN dbo.ChieuDay ON ChieuDay.Id = ChiTietHangHoa.Id_ChieuDay
+	JOIN dbo.DonViTinh ON DonViTinh.Id = ChiTietHangHoa.Id_DonViTinh

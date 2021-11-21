@@ -5,6 +5,7 @@
  */
 package UI;
 
+import DAO.Models.TaiKhoan;
 import Thread.ClockThread;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
@@ -17,12 +18,14 @@ import javax.swing.JInternalFrame;
 public class MainJFrame extends javax.swing.JFrame {
     NhaCungCapJFrame ncc = new NhaCungCapJFrame();
     KhachHangJFrame kh = new KhachHangJFrame();
+    TaiKhoan tk;
     
     /**
      * Creates new form MainJFrame
      */
-    public MainJFrame() {
+    public MainJFrame(TaiKhoan tk) {
         initComponents();
+        this.tk = tk;
         init();
     }
     
@@ -54,21 +57,21 @@ public class MainJFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jToolBar1 = new javax.swing.JToolBar();
-        jButton1 = new javax.swing.JButton();
+        btn_ncc = new javax.swing.JButton();
         jSeparator3 = new javax.swing.JToolBar.Separator();
-        jButton2 = new javax.swing.JButton();
+        btn_hanghoa = new javax.swing.JButton();
         jSeparator4 = new javax.swing.JToolBar.Separator();
-        jButton6 = new javax.swing.JButton();
+        btn_banhang = new javax.swing.JButton();
         jSeparator6 = new javax.swing.JToolBar.Separator();
-        jButton3 = new javax.swing.JButton();
+        btn_nhanvien = new javax.swing.JButton();
         jSeparator5 = new javax.swing.JToolBar.Separator();
-        jButton4 = new javax.swing.JButton();
+        btn_khachhang = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JToolBar.Separator();
-        jButton8 = new javax.swing.JButton();
+        btn_thongke = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
-        jButton7 = new javax.swing.JButton();
+        btn_doimk = new javax.swing.JButton();
         jSeparator8 = new javax.swing.JToolBar.Separator();
-        btn_dangXuat = new javax.swing.JButton();
+        btn_dangxuat = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         lb_dongho = new javax.swing.JLabel();
@@ -79,121 +82,138 @@ public class MainJFrame extends javax.swing.JFrame {
 
         jToolBar1.setRollover(true);
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/nhacungcap.png"))); // NOI18N
-        jButton1.setText("Nhà cung cấp");
-        jButton1.setFocusable(false);
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton1.setMargin(new java.awt.Insets(40, 24, 40, 24));
-        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btn_ncc.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btn_ncc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/nhacungcap.png"))); // NOI18N
+        btn_ncc.setText("Nhà cung cấp");
+        btn_ncc.setFocusable(false);
+        btn_ncc.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_ncc.setMargin(new java.awt.Insets(40, 24, 40, 24));
+        btn_ncc.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btn_ncc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btn_nccActionPerformed(evt);
             }
         });
-        jToolBar1.add(jButton1);
+        jToolBar1.add(btn_ncc);
         jToolBar1.add(jSeparator3);
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/hanghoa (2).png"))); // NOI18N
-        jButton2.setText("Hàng hóa");
-        jButton2.setFocusable(false);
-        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton2.setMargin(new java.awt.Insets(40, 24, 40, 24));
-        jButton2.setPreferredSize(new java.awt.Dimension(139, 101));
-        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btn_hanghoa.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btn_hanghoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/hanghoa (2).png"))); // NOI18N
+        btn_hanghoa.setText("Hàng hóa");
+        btn_hanghoa.setFocusable(false);
+        btn_hanghoa.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_hanghoa.setMargin(new java.awt.Insets(40, 24, 40, 24));
+        btn_hanghoa.setMaximumSize(new java.awt.Dimension(139, 137));
+        btn_hanghoa.setMinimumSize(new java.awt.Dimension(139, 137));
+        btn_hanghoa.setPreferredSize(new java.awt.Dimension(139, 101));
+        btn_hanghoa.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btn_hanghoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btn_hanghoaActionPerformed(evt);
             }
         });
-        jToolBar1.add(jButton2);
+        jToolBar1.add(btn_hanghoa);
         jToolBar1.add(jSeparator4);
 
-        jButton6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/banhang (2).png"))); // NOI18N
-        jButton6.setText("Bán hàng");
-        jButton6.setFocusable(false);
-        jButton6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton6.setMargin(new java.awt.Insets(40, 24, 40, 24));
-        jButton6.setPreferredSize(new java.awt.Dimension(139, 101));
-        jButton6.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        btn_banhang.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btn_banhang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/banhang (2).png"))); // NOI18N
+        btn_banhang.setText("Bán hàng");
+        btn_banhang.setFocusable(false);
+        btn_banhang.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_banhang.setMargin(new java.awt.Insets(40, 24, 40, 24));
+        btn_banhang.setMaximumSize(new java.awt.Dimension(139, 137));
+        btn_banhang.setMinimumSize(new java.awt.Dimension(139, 137));
+        btn_banhang.setPreferredSize(new java.awt.Dimension(139, 101));
+        btn_banhang.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btn_banhang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                btn_banhangActionPerformed(evt);
             }
         });
-        jToolBar1.add(jButton6);
+        jToolBar1.add(btn_banhang);
         jToolBar1.add(jSeparator6);
 
-        jButton3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/nhanvien (2).png"))); // NOI18N
-        jButton3.setText("Nhân viên");
-        jButton3.setFocusable(false);
-        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton3.setMargin(new java.awt.Insets(40, 24, 40, 24));
-        jButton3.setPreferredSize(new java.awt.Dimension(139, 101));
-        jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btn_nhanvien.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btn_nhanvien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/nhanvien (2).png"))); // NOI18N
+        btn_nhanvien.setText("Nhân viên");
+        btn_nhanvien.setFocusable(false);
+        btn_nhanvien.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_nhanvien.setMargin(new java.awt.Insets(40, 24, 40, 24));
+        btn_nhanvien.setMaximumSize(new java.awt.Dimension(139, 137));
+        btn_nhanvien.setMinimumSize(new java.awt.Dimension(139, 137));
+        btn_nhanvien.setPreferredSize(new java.awt.Dimension(139, 101));
+        btn_nhanvien.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btn_nhanvien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btn_nhanvienActionPerformed(evt);
             }
         });
-        jToolBar1.add(jButton3);
+        jToolBar1.add(btn_nhanvien);
         jToolBar1.add(jSeparator5);
 
-        jButton4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/khachhahng.png"))); // NOI18N
-        jButton4.setText("Khách hàng");
-        jButton4.setFocusable(false);
-        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton4.setMargin(new java.awt.Insets(40, 24, 40, 24));
-        jButton4.setPreferredSize(new java.awt.Dimension(139, 101));
-        jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btn_khachhang.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btn_khachhang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/khachhahng.png"))); // NOI18N
+        btn_khachhang.setText("Khách hàng");
+        btn_khachhang.setFocusable(false);
+        btn_khachhang.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_khachhang.setMargin(new java.awt.Insets(40, 24, 40, 24));
+        btn_khachhang.setMaximumSize(new java.awt.Dimension(139, 137));
+        btn_khachhang.setMinimumSize(new java.awt.Dimension(139, 137));
+        btn_khachhang.setPreferredSize(new java.awt.Dimension(139, 101));
+        btn_khachhang.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btn_khachhang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btn_khachhangActionPerformed(evt);
             }
         });
-        jToolBar1.add(jButton4);
+        jToolBar1.add(btn_khachhang);
         jToolBar1.add(jSeparator2);
 
-        jButton8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/thongke (2).png"))); // NOI18N
-        jButton8.setText("Thống kê");
-        jButton8.setFocusable(false);
-        jButton8.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton8.setMargin(new java.awt.Insets(40, 24, 40, 24));
-        jButton8.setPreferredSize(new java.awt.Dimension(139, 101));
-        jButton8.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton8);
+        btn_thongke.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btn_thongke.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/thongke (2).png"))); // NOI18N
+        btn_thongke.setText("Thống kê");
+        btn_thongke.setFocusable(false);
+        btn_thongke.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_thongke.setMargin(new java.awt.Insets(40, 24, 40, 24));
+        btn_thongke.setMaximumSize(new java.awt.Dimension(139, 137));
+        btn_thongke.setMinimumSize(new java.awt.Dimension(139, 137));
+        btn_thongke.setPreferredSize(new java.awt.Dimension(139, 101));
+        btn_thongke.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(btn_thongke);
         jToolBar1.add(jSeparator1);
 
-        jButton7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/taikhoan (2).png"))); // NOI18N
-        jButton7.setText("Tài khoản");
-        jButton7.setFocusable(false);
-        jButton7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton7.setMargin(new java.awt.Insets(40, 24, 40, 24));
-        jButton7.setPreferredSize(new java.awt.Dimension(139, 101));
-        jButton7.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton7);
-        jToolBar1.add(jSeparator8);
-
-        btn_dangXuat.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btn_dangXuat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/log-out.png"))); // NOI18N
-        btn_dangXuat.setText("Đăng xuất");
-        btn_dangXuat.setFocusable(false);
-        btn_dangXuat.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btn_dangXuat.setMargin(new java.awt.Insets(40, 24, 40, 24));
-        btn_dangXuat.setPreferredSize(new java.awt.Dimension(139, 101));
-        btn_dangXuat.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btn_dangXuat.addActionListener(new java.awt.event.ActionListener() {
+        btn_doimk.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btn_doimk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/doiMK.png"))); // NOI18N
+        btn_doimk.setText("Đổi mật khẩu");
+        btn_doimk.setFocusable(false);
+        btn_doimk.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_doimk.setMargin(new java.awt.Insets(40, 24, 40, 24));
+        btn_doimk.setPreferredSize(new java.awt.Dimension(139, 101));
+        btn_doimk.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btn_doimk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_dangXuatActionPerformed(evt);
+                btn_doimkActionPerformed(evt);
             }
         });
-        jToolBar1.add(btn_dangXuat);
+        jToolBar1.add(btn_doimk);
+        jToolBar1.add(jSeparator8);
+
+        btn_dangxuat.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btn_dangxuat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/log-out.png"))); // NOI18N
+        btn_dangxuat.setText("Đăng xuất");
+        btn_dangxuat.setFocusable(false);
+        btn_dangxuat.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_dangxuat.setMargin(new java.awt.Insets(40, 24, 40, 24));
+        btn_dangxuat.setMaximumSize(new java.awt.Dimension(139, 137));
+        btn_dangxuat.setMinimumSize(new java.awt.Dimension(139, 137));
+        btn_dangxuat.setPreferredSize(new java.awt.Dimension(139, 101));
+        btn_dangxuat.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btn_dangxuat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_dangxuatActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btn_dangxuat);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -241,7 +261,7 @@ public class MainJFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 1100, Short.MAX_VALUE)
+            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 1132, Short.MAX_VALUE)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(dp_content)
@@ -261,39 +281,45 @@ public class MainJFrame extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btn_hanghoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_hanghoaActionPerformed
         // TODO add your handling code here:
         HangHoaJFrame hanghoa = new HangHoaJFrame();
         openX(hanghoa);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btn_hanghoaActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void btn_banhangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_banhangActionPerformed
         // TODO add your handling code here:
-        BanHangJFrame banhang = new BanHangJFrame();
+        BanHangJFrame banhang = new BanHangJFrame(tk);
         openX(banhang);
         
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_btn_banhangActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btn_nccActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_nccActionPerformed
         // TODO add your handling code here:
         ncc.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btn_nccActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btn_nhanvienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_nhanvienActionPerformed
         // TODO add your handling code here:
         NhanVienJFrame nv = new NhanVienJFrame();
         openX(nv);
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btn_nhanvienActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void btn_khachhangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_khachhangActionPerformed
         // TODO add your handling code here:
         kh.setVisible(true);
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_btn_khachhangActionPerformed
 
-    private void btn_dangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_dangXuatActionPerformed
+    private void btn_dangxuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_dangxuatActionPerformed
         // TODO add your handling code here:
         logOut();
-    }//GEN-LAST:event_btn_dangXuatActionPerformed
+    }//GEN-LAST:event_btn_dangxuatActionPerformed
+
+    private void btn_doimkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_doimkActionPerformed
+        // TODO add your handling code here:
+        DoiMatKhauJInternal dmk = new DoiMatKhauJInternal(this.tk);
+        openX(dmk);
+    }//GEN-LAST:event_btn_doimkActionPerformed
 
     public void openX(JInternalFrame x) {
         for (JInternalFrame frmChild : dp_content.getAllFrames()) {
@@ -336,21 +362,21 @@ public class MainJFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainJFrame().setVisible(true);
+                new MainJFrame(new TaiKhoan()).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_dangXuat;
+    private javax.swing.JButton btn_banhang;
+    private javax.swing.JButton btn_dangxuat;
+    private javax.swing.JButton btn_doimk;
+    private javax.swing.JButton btn_hanghoa;
+    private javax.swing.JButton btn_khachhang;
+    private javax.swing.JButton btn_ncc;
+    private javax.swing.JButton btn_nhanvien;
+    private javax.swing.JButton btn_thongke;
     private javax.swing.JDesktopPane dp_content;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JToolBar.Separator jSeparator1;

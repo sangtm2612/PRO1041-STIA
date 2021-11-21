@@ -33,11 +33,13 @@ public class DonViTinhService implements DonViTinhInterface{
     }
 
     @Override
-    public DonViTinh findIdDonViTinh(String name) {
+    public DonViTinh findDonViTinhName(String name) {
         return dDAO.selectByName(name);
     }
     
-    
+    public DonViTinh findDonViTinhId(int id) {
+        return dDAO.selectById(id);
+    }
     
     
 }

@@ -153,6 +153,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Qu&#xea;n m&#xe2;&#x323;t kh&#xe2;&#x309;u?"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseMoved" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="lb_quenmkMouseMoved"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btn_ketthuc">
       <Properties>

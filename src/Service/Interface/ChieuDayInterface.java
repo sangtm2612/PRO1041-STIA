@@ -5,7 +5,7 @@
  */
 package Service.Interface;
 
-import DAO.Models.ApSuat;
+import DAO.Models.ChieuDay;
 import java.util.List;
 
 /**
@@ -14,12 +14,12 @@ import java.util.List;
  */
 public interface ChieuDayInterface {
     
-    void themApSuat(ApSuat a);
+    void themChieuDay(ChieuDay a);
     
-    void suaApSuat(ApSuat a);
+    void suaChieuDay(ChieuDay a);
     
-    List<ApSuat> findAllApSuat();
+    List<ChieuDay> findAllChieuDay();
     
-    int findIdApSuat(String ApSuat);
+    ChieuDay findChieuDayDouble(Double chieuDay);
     
 }

@@ -26,6 +26,7 @@ public class ChieuDayDAO extends StiaDAO<ChieuDay, Integer> {
     final String DELETE_SQL = "";
     final String SELECT_ALL_SQL = "SELECT * FROM ChieuDay";
     final String SELECT_BY_ID_SQL = "SELECT * FROM ChieuDay WHERE Id = ?";
+    final String SELECT_BY_DoDay_SQL = "SELECT * FROM ChieuDay WHERE DoDay = ?";
 
     @Override
     public void insert(ChieuDay entity) {
@@ -56,8 +57,16 @@ public class ChieuDayDAO extends StiaDAO<ChieuDay, Integer> {
     }
 
     @Override
-    public ChieuDay selectById(Integer Id) {
-        List<ChieuDay> list = selectBySql(SELECT_BY_ID_SQL, Id);
+    public ChieuDay selectById(Integer id) {
+        List<ChieuDay> list = selectBySql(SELECT_BY_ID_SQL, id);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
+    }
+
+    public ChieuDay selectByDoDay(Double doDay) {
+        List<ChieuDay> list = selectBySql(SELECT_BY_DoDay_SQL, doDay);
         if (list.isEmpty()) {
             return null;
         }

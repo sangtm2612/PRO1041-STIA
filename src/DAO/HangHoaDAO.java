@@ -5,7 +5,6 @@
  */
 package DAO;
 
-import DAO.StiaDAO;
 import DAO.Models.HangHoa;
 import Utils.jdbcHelper;
 import java.sql.ResultSet;
@@ -24,9 +23,9 @@ public class HangHoaDAO extends StiaDAO<HangHoa, Integer>{
     final String INSERT_SQL = "INSERT INTO dbo.HangHoa(TenHang,Id_NhaCungCap,Id_DanhMuc)VALUES(?,?,?)";
     final String UPDATE_SQL = "UPDATE dbo.HangHoa SET TenHang=?, Id_NhaCungCap=?, Id_DanhMuc=? WHERE Id = ?";
     final String DELETE_SQL = "";
-    final String SELECT_ALL_SQL = "SELECT * FROM HangHoa Where TrangThai = 1";
+    final String SELECT_ALL_SQL = "SELECT * FROM HangHoa";
     final String SELECT_BY_ID_SQL = "SELECT * FROM HangHoa WHERE Id = ?";
-    final String SELECT_BY_Name_SQL = "SELECT * FROM HangHoa WHERE TenApSuat = ? And TrangThai = 1";
+    final String SELECT_BY_Name_SQL = "SELECT * FROM HangHoa WHERE TenHang = ?";
 
     @Override
     public void insert(HangHoa entity) {
@@ -64,6 +63,14 @@ public class HangHoaDAO extends StiaDAO<HangHoa, Integer>{
         }
         return list.get(0);
     }
+    
+    public HangHoa selectByName(String name) {
+        List<HangHoa> list = selectBySql(SELECT_BY_Name_SQL, name);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
+    }
 
     @Override
     protected List<HangHoa> selectBySql(String sql, Object... args) {
@@ -74,8 +81,8 @@ public class HangHoaDAO extends StiaDAO<HangHoa, Integer>{
                 HangHoa entity = new HangHoa();
                 entity.setId(rs.getInt("Id"));
                 entity.setTenHang(rs.getString("TenHang"));
-                entity.setId_NhaCungCap(rs.getInt("Id_NhaCungCap("));
-                entity.setId_DanhMuc(rs.getInt("Id_DanhMuc(("));
+                entity.setId_NhaCungCap(rs.getInt("Id_NhaCungCap"));
+                entity.setId_DanhMuc(rs.getInt("Id_DanhMuc"));
                 list.add(entity);
             }
         } catch (Exception e) {

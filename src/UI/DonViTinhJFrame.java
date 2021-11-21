@@ -74,7 +74,7 @@ public class DonViTinhJFrame extends javax.swing.JFrame {
     public void fillForm() {
         int i = tb_donvitinh.getSelectedRow();
         String tenApSuat = tb_donvitinh.getValueAt(i, 0).toString();
-        dvtClick = dvtService.findIdDonViTinh(tenApSuat);
+        dvtClick = dvtService.findDonViTinhName(tenApSuat);
         tf_donvitinh.setText(tenApSuat);
         System.out.println("id: " + dvtClick.getId());
 

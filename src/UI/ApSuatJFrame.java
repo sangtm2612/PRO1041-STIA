@@ -78,7 +78,7 @@ public class ApSuatJFrame extends javax.swing.JFrame {
     public void fillForm() {
         int i = tb_apsuat.getSelectedRow();
         String tenApSuat = tb_apsuat.getValueAt(i, 0).toString();
-        asClick = aService.findIdApSuat(tenApSuat);
+        asClick = aService.findApSuatName(tenApSuat);
         tf_apsuat.setText(tenApSuat);
         System.out.println("id: " + asClick.getId());
 
