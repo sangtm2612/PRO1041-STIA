@@ -44,7 +44,7 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
     LoaiHangJFrame lh = new LoaiHangJFrame();
     MauSacJFrame ms = new MauSacJFrame();
     KichThuocJFrame kt = new KichThuocJFrame();
-     static HangHoaService hhService = new HangHoaService();
+    static HangHoaService hhService = new HangHoaService();
     ChiTietHangHoaService cthhService = new ChiTietHangHoaService();
     static ChieuDayService cdService = new ChieuDayService();
     List<ChiTietHangHoa> cthhList;
@@ -83,8 +83,15 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
             String ncc = nccService.findNhaCungCapById(hh.getId_NhaCungCap()).getTenNCC();
             String danhMuc = dmService.findDanhMucById(hh.getId_DanhMuc()).getTenDanhMuc();
             String loaiHang = lhService.findIdLoaiHang(cthh.getId_LoaiHang()).getTenLoai();
-            String mauSac = msService.findMauSacId(cthh.getId_MauSac()).getTenMau();
-            String kichThuoc = ktService.findKichThuocId(cthh.getId_KichThuoc()).getTenKichThuoc();
+            String mauSac = "";
+            System.out.println(cthh.getId_MauSac());
+            if (cthh.getId_MauSac() != 0) {
+                mauSac = msService.findMauSacId(cthh.getId_MauSac()).getTenMau();
+            }
+            String kichThuoc = "";
+            if (cthh.getId_KichThuoc()!= 0) {
+                kichThuoc = ktService.findKichThuocId(cthh.getId_KichThuoc()).getTenKichThuoc();
+            }
             String apSuat = asService.findApSuatId(cthh.getId_ApSuat()).getTenApSuat();
             Double chieuDay = cdService.findChieuDayId(cthh.getId_ChieuDay()).getDoDay();
             String donViTinh = dvtService.findDonViTinhId(cthh.getId_DonViTinh()).getTenDonVi();
@@ -145,12 +152,11 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
             dcm.addElement(k);
         }
     }
-    
+
     public static KichThuoc addKichThuocNull() {
         KichThuoc kt = new KichThuoc("", true);
         return kt;
     }
-    
 
     public static void loadCbbApSuat() {
         dcm = (DefaultComboBoxModel) cbb_apsuat.getModel();
@@ -161,7 +167,7 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
             dcm.addElement(a);
         }
     }
-    
+
     public static ApSuat addApSuatNull() {
         ApSuat as = new ApSuat("", true);
         return as;
@@ -262,7 +268,7 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
     public void themHangHoa() {
         hhService.themHangHoa(getHangHoa());
     }
-    
+
     public void fillForm() {
         int i = tb_hanghoa.getSelectedRow();
         fillCbbApSuat(i);
@@ -274,7 +280,7 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
         fillCbbLoaiHang(i);
         fillHangHoa(i);
     }
-    
+
     public void fillHangHoa(int i) {
         String hangHoa = tb_hanghoa.getValueAt(i, 0).toString();
         tf_tenhang.setText(hangHoa);
@@ -289,49 +295,49 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
         String ghiChu = tb_hanghoa.getValueAt(i, 12).toString();
         ta_ghichu.setText(ghiChu);
     }
-    
+
     public void fillCbbNCC(int i) {
         String tenNCC = tb_hanghoa.getValueAt(i, 1).toString();
         NhaCungCap ncc = nccService.findNhaCungCapByName(tenNCC);
         dcm = (DefaultComboBoxModel) cbb_nhacungcap.getModel();
         dcm.setSelectedItem(ncc);
     }
-    
+
     public void fillCbbDanhMuc(int i) {
         String tenDanhMuc = tb_hanghoa.getValueAt(i, 2).toString();
         DanhMuc dm = dmService.findDanhMucByName(tenDanhMuc);
         dcm = (DefaultComboBoxModel) cbb_danhmuc.getModel();
         dcm.setSelectedItem(dm);
     }
-    
+
     public void fillCbbMauSac(int i) {
         String tenMau = tb_hanghoa.getValueAt(i, 4).toString();
         MauSac ms = msService.findMauSacName(tenMau);
         dcm = (DefaultComboBoxModel) cbb_mausac.getModel();
         dcm.setSelectedItem(ms);
     }
-    
+
     public void fillCbbKichThuoc(int i) {
         String tenKichThuoc = tb_hanghoa.getValueAt(i, 5).toString();
         KichThuoc kt = ktService.findKichThuocName(tenKichThuoc);
         dcm = (DefaultComboBoxModel) cbb_kichthuoc.getModel();
         dcm.setSelectedItem(kt);
     }
-    
+
     public void fillCbbApSuat(int i) {
         String tenApSuat = tb_hanghoa.getValueAt(i, 6).toString();
         ApSuat as = asService.findApSuatName(tenApSuat);
         dcm = (DefaultComboBoxModel) cbb_apsuat.getModel();
         dcm.setSelectedItem(as);
     }
-    
+
     public void fillCbbDonViTinh(int i) {
         String tenDonVi = tb_hanghoa.getValueAt(i, 8).toString();
         DonViTinh dvt = dvtService.findDonViTinhName(tenDonVi);
         dcm = (DefaultComboBoxModel) cbb_donvitinh.getModel();
         dcm.setSelectedItem(dvt);
     }
-    
+
     public void fillCbbLoaiHang(int i) {
         String tenLoai = tb_hanghoa.getValueAt(i, 3).toString();
         LoaiHang lh = lhService.findNameLoaiHang(tenLoai);

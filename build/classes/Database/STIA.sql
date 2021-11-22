@@ -136,7 +136,7 @@ GO
 CREATE TABLE ChieuDay
 (
 	Id INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
-	DoDay FLOAT NOT NULL,
+	DoDay FLOAT NULL,
 )
 GO
 
@@ -169,8 +169,12 @@ CREATE TABLE HoaDon
 (
 	Id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
 	ThanhTien INT NULL,
+	DatCoc INT NULL,
 	NgayTao DATETIME NOT NULL,
 	GhiChu NVARCHAR(100) NULL,
+	DiaChi NVARCHAR(100) NOT NULL,
+	TrangThaiHD BIT,
+	TrangThaiTT BIT,
 	Id_NhanVien INT NOT NULL,
 	Id_KhachHang INT NULL,
 	FOREIGN KEY(Id_NhanVien) REFERENCES dbo.NhanVien(Id),
@@ -191,6 +195,8 @@ go
 
 select * from HoaDonChiTiet
 select * from HangHoa
+select * from NhanVien
+select * from KhachHang
 --INSERT INTO dbo.ChiTietHangHoa(SoLuong,GiaNhap,GiaBan,GhiChu,TrangThai,Id_KichThuoc,Id_MauSac,Id_HangHoa,Id_ApSuat,Id_DonViTinh,Id_LoaiHang,Id_ChieuDay) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)
 
 /*
@@ -212,8 +218,13 @@ INSERT INTO dbo.DonViTinh(TenDonVi,TrangThai)VALUES(N'Kg',1)
 INSERT INTO dbo.DonViTinh(TenDonVi,TrangThai)VALUES(N'Đôi',1)
 --Thêm dữ liệu áp suất
 INSERT INTO dbo.ApSuat(TenApSuat,TrangThai)VALUES(N'PN10',1)
-INSERT INTO dbo.ApSuat(TenApSuat,TrangThai)VALUES(N'class 2',1)
-INSERT INTO dbo.ApSuat(TenApSuat,TrangThai)VALUES(N'class 3',1)
+INSERT INTO dbo.ApSuat(TenApSuat,TrangThai)VALUES(N'Class 2',1)
+INSERT INTO dbo.ApSuat(TenApSuat,TrangThai)VALUES(N'Class 3',1)
+--Thêm dữ liệu chiều dày
+INSERT INTO dbo.ChieuDay(DoDay)VALUES(3.7)
+INSERT INTO dbo.ChieuDay(DoDay)VALUES(2.8)
+INSERT INTO dbo.ChieuDay(DoDay)VALUES(2.3)
+INSERT INTO dbo.ChieuDay(DoDay)VALUES(NULL)
 --Thêm dữ liệu màu sắc
 INSERT INTO dbo.MauSac(TenMau,TrangThai)VALUES(N'Vàng',1)
 INSERT INTO dbo.MauSac(TenMau,TrangThai)VALUES(N'Xanh',1)
@@ -239,6 +250,16 @@ INSERT INTO dbo.KichThuoc(TenKichThuoc,TrangThai)VALUES(N'S',1)
 INSERT INTO dbo.KichThuoc(TenKichThuoc,TrangThai)VALUES(N'M',1)
 INSERT INTO dbo.KichThuoc(TenKichThuoc,TrangThai)VALUES(N'L',1)
 INSERT INTO dbo.KichThuoc(TenKichThuoc,TrangThai)VALUES(N'XL',1)
+--Thêm dữ liệu HangHoa
+INSERT INTO dbo.HangHoa(TenHang,Id_NhaCungCap,Id_DanhMuc)VALUES(N'Ống HDPE- D32',4,2)
+INSERT INTO dbo.HangHoa(TenHang,Id_NhaCungCap,Id_DanhMuc)VALUES(N'Ống PPR- D40',4,2)
+INSERT INTO dbo.HangHoa(TenHang,Id_NhaCungCap,Id_DanhMuc)VALUES(N'Ống PPR- D20',4,2)
+INSERT INTO dbo.HangHoa(TenHang,Id_NhaCungCap,Id_DanhMuc)VALUES(N'MCB 3P-32A-10KA',1,1)
+INSERT INTO dbo.HangHoa(TenHang,Id_NhaCungCap,Id_DanhMuc)VALUES(N'MCB 1P-16A-6KA',1,1)
+INSERT INTO dbo.HangHoa(TenHang,Id_NhaCungCap,Id_DanhMuc)VALUES(N'Mặt công tắc đơn 10A',1,1)
+--Thêm dữ liệu ChiTietHangHoa
+INSERT INTO dbo.ChiTietHangHoa(SoLuong,GiaNhap,GiaBan,GhiChu,TrangThai,Id_KichThuoc,Id_MauSac,Id_HangHoa,Id_ApSuat,Id_DonViTinh,Id_LoaiHang,Id_ChieuDay) 
+VALUES (3,20000,30000,N'',1,Null,Null,2,1,1,1,1)
 --Thêm dữ liệu tài khoản
 INSERT INTO dbo.TaiKhoan(TenTK,MatKhau,VaiTro,TrangThai)VALUES(N'admin','admin',1,1)
 --Thêm dữ liệu nhân viên
@@ -249,9 +270,13 @@ INSERT INTO dbo.KhachHang(MaSoThue,Ten,DiaChi,Email,SoDienThoai,GhiChu,TrangThai
 --INSERT INTO dbo.KhachHang(MaSoThue,Ten,DiaChi,Email,SoDienThoai,GhiChu,TrangThai)VALUES(N'',N'',N'',N'',N'',N'',NULL)
 --INSERT INTO dbo.KhachHang(MaSoThue,Ten,DiaChi,Email,SoDienThoai,GhiChu,TrangThai)VALUES(N'',N'',N'',N'',N'',N'',NULL)
 --INSERT INTO dbo.KhachHang(MaSoThue,Ten,DiaChi,Email,SoDienThoai,GhiChu,TrangThai)VALUES(N'',N'',N'',N'',N'',N'',NULL)
+--Thêm dữ liệu hóa đơn
+INSERT INTO dbo.HOADON(ThanhTien,DatCoc,NgayTao,GhiChu,DiaChi,TrangThaiHD,TrangThaiTT,Id_NhanVien,Id_KhachHang) values (30000,10000, '20211111',N'',N'Nho Quan, Ninh Bình',1,1,1,1)
+--Thêm dữ liệu hóa đơn
 */
-
-
+select * from HoaDonChiTiet
+select * from ChiTietHangHoa
+select * from ChieuDay
 
 CREATE PROCEDURE dbo.selectHangHoa
 AS

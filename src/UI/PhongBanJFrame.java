@@ -20,6 +20,7 @@ public class PhongBanJFrame extends javax.swing.JFrame {
     List<PhongBan> aAL;
     PhongBan pbClick;
     DefaultTableModel dtm;
+    
 
     /**
      * Creates new form PhongBanJFrame

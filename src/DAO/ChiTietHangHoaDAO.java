@@ -24,7 +24,7 @@ public class ChiTietHangHoaDAO extends StiaDAO<ChiTietHangHoa, Integer> {
     final String UPDATE_SQL = "UPDATE dbo.ChiTietHangHoa SET SoLuong = ?, GiaNhap = ?, GiaBan = ?, GhiChu = ?, TrangThai = ?, Id_KichThuoc = ?, Id_MauSac = ?, Id_HangHoa = ?, Id_ApSuat = ?, Id_DonViTinh = ?, Id_LoaiHang = ?, Id_ChieuDay = ? WHERE Id = ?";
     final String DELETE_SQL = "";
     final String SELECT_ALL_SQL = "SELECT * FROM ChiTietHangHoa WHERE TrangThai = 1";
-    final String SELECT_BY_ID_SQL = "SELECT * FROM ChiTietHangHoa WHERE Id = ? And TrangThai = 1";
+    final String SELECT_BY_ID_SQL = "SELECT * FROM ChiTietHangHoa WHERE Id = ?";
 
     @Override
     public void insert(ChiTietHangHoa entity) {

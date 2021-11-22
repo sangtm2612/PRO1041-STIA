@@ -14,27 +14,39 @@ import java.util.Date;
 public class HoaDon {
     private int Id;
     private Integer ThanhTien;
+    private Integer DatCoc;
     private Date NgayTao;
     private String GhiChu;
+    private String DiaChi;
+    private boolean TrangThaiHD;
+    private boolean TrangThaiTT;
     private int Id_NhanVien;
     private int Id_KhachHang;
 
     public HoaDon() {
     }
 
-    public HoaDon(Integer ThanhTien, Date NgayTao, String GhiChu, int Id_NhanVien, int Id_KhachHang) {
+    public HoaDon(int Id, Integer ThanhTien, Integer DatCoc, Date NgayTao, String GhiChu, String DiaChi, boolean TrangThaiHD, boolean TrangThaiTT, int Id_NhanVien, int Id_KhachHang) {
+        this.Id = Id;
         this.ThanhTien = ThanhTien;
+        this.DatCoc = DatCoc;
         this.NgayTao = NgayTao;
         this.GhiChu = GhiChu;
+        this.DiaChi = DiaChi;
+        this.TrangThaiHD = TrangThaiHD;
+        this.TrangThaiTT = TrangThaiTT;
         this.Id_NhanVien = Id_NhanVien;
         this.Id_KhachHang = Id_KhachHang;
     }
 
-    public HoaDon(int Id, Integer ThanhTien, Date NgayTao, String GhiChu, int Id_NhanVien, int Id_KhachHang) {
-        this.Id = Id;
+    public HoaDon(Integer ThanhTien, Integer DatCoc, Date NgayTao, String GhiChu, String DiaChi, boolean TrangThaiHD, boolean TrangThaiTT, int Id_NhanVien, int Id_KhachHang) {
         this.ThanhTien = ThanhTien;
+        this.DatCoc = DatCoc;
         this.NgayTao = NgayTao;
         this.GhiChu = GhiChu;
+        this.DiaChi = DiaChi;
+        this.TrangThaiHD = TrangThaiHD;
+        this.TrangThaiTT = TrangThaiTT;
         this.Id_NhanVien = Id_NhanVien;
         this.Id_KhachHang = Id_KhachHang;
     }
@@ -55,6 +67,14 @@ public class HoaDon {
         this.ThanhTien = ThanhTien;
     }
 
+    public Integer getDatCoc() {
+        return DatCoc;
+    }
+
+    public void setDatCoc(Integer DatCoc) {
+        this.DatCoc = DatCoc;
+    }
+
     public Date getNgayTao() {
         return NgayTao;
     }
@@ -69,6 +89,30 @@ public class HoaDon {
 
     public void setGhiChu(String GhiChu) {
         this.GhiChu = GhiChu;
+    }
+
+    public String getDiaChi() {
+        return DiaChi;
+    }
+
+    public void setDiaChi(String DiaChi) {
+        this.DiaChi = DiaChi;
+    }
+
+    public boolean isTrangThaiHD() {
+        return TrangThaiHD;
+    }
+
+    public void setTrangThaiHD(boolean TrangThaiHD) {
+        this.TrangThaiHD = TrangThaiHD;
+    }
+
+    public boolean isTrangThaiTT() {
+        return TrangThaiTT;
+    }
+
+    public void setTrangThaiTT(boolean TrangThaiTT) {
+        this.TrangThaiTT = TrangThaiTT;
     }
 
     public int getId_NhanVien() {
@@ -86,6 +130,9 @@ public class HoaDon {
     public void setId_KhachHang(int Id_KhachHang) {
         this.Id_KhachHang = Id_KhachHang;
     }
+
+    
+    
     
     
 }
