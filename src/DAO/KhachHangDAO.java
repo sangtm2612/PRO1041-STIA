@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  *
  * @author sangt
  */
-public class KhachHangDAO extends StiaDAO<KhachHang, String>{
+public class KhachHangDAO extends StiaDAO<KhachHang, Integer>{
     
     final String INSERT_SQL = "INSERT INTO dbo.KhachHang(MaSoThue,Ten,DiaChi,Email,SoDienThoai,GhiChu,TrangThai) VALUES (?,?,?,?,?,?,?)";
     final String UPDATE_SQL = "UPDATE KhachHang set MaSoThue = ?, Ten = ?, DiaChi = ?, Email = ?, SoDienThoai = ?, GhiChu = ?, TrangThai = ? WHERE Id = ?";
@@ -45,7 +45,7 @@ public class KhachHangDAO extends StiaDAO<KhachHang, String>{
     }
 
     @Override
-    public void delete(String Key) {
+    public void delete(Integer Key) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -55,7 +55,7 @@ public class KhachHangDAO extends StiaDAO<KhachHang, String>{
     }
 
     @Override
-    public KhachHang selectById(String Id) {
+    public KhachHang selectById(Integer Id) {
         List<KhachHang> list = selectBySql(SELECT_BY_ID_SQL, Id);
         if (list.isEmpty()) {
             return null;

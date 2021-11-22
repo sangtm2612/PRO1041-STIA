@@ -114,13 +114,14 @@ public class ChiTietHangHoa {
         this.Id_KichThuoc = Id_KichThuoc;
     }
 
-    public int getId_MauSac() {
+    public Integer getId_MauSac() {
         return Id_MauSac;
     }
 
-    public void setId_MauSac(int Id_MauSac) {
+    public void setId_MauSac(Integer Id_MauSac) {
         this.Id_MauSac = Id_MauSac;
     }
+
 
     public int getId_HangHoa() {
         return Id_HangHoa;
@@ -160,8 +161,6 @@ public class ChiTietHangHoa {
 
     public void setId_ChieuDay(int Id_ChieuDay) {
         this.Id_ChieuDay = Id_ChieuDay;
-    }
-    
-    
+    }    
 
 }

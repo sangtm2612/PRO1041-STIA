@@ -37,4 +37,7 @@ public class KhachHangService implements KhachHangInterface{
         return khDAO.selectBySDT(name);
     }
  
+    public KhachHang findKhachHangId(int id) {
+        return khDAO.selectById(id);
+    }
 }
