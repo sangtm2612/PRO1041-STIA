@@ -53,6 +53,12 @@ public class KhachHangDAO extends StiaDAO<KhachHang, Integer>{
     public List<KhachHang> selectAll() {
         return selectBySql(SELECT_ALL_SQL);
     }
+    
+    public List<KhachHang> selectListKHBySDT(String sdt) {
+        String sql = "SELECT * FROM KhachHang WHERE TrangThai = 1 AND SoDienThoai like '%" + sdt +"%'";
+        System.out.println(sql);
+        return selectBySql(sql);
+    }
 
     @Override
     public KhachHang selectById(Integer Id) {

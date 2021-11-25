@@ -121,8 +121,12 @@ public class BanHangJFrame extends javax.swing.JInternalFrame {
             int soLuong = hdct.getSoLuong();
             int giaBan = cthh.getGiaBan();
             int thanhTien = soLuong * giaBan;
-            dtm.addRow(new Object[]{tenHangToString(hdct.getId_CTHangHoa()),soLuong, dvt.getTenDonVi(),giaBan,thanhTien,hdct.isTrangThai()});
+            dtm.addRow(new Object[]{hdct.getId(),tenHangToString(hdct.getId_CTHangHoa()),soLuong, dvt.getTenDonVi(),giaBan,thanhTien});
         }
+    }
+    
+    public void xoaHDCT() {
+        int i = tb_hoadonchitiet.getSelectedRow();
     }
 
     public static void loadCbbKhachHang() {
@@ -161,7 +165,10 @@ public class BanHangJFrame extends javax.swing.JInternalFrame {
         hd.setGhiChu(ta_ghichu.getText().trim());
         hdService.themHoaDon(hd);
         loadTableHD();
-       
+    }
+    
+    public void setThanhToanId() {
+        HoaDon hd = new HoaDon();
     }
     
     public void themHDCT() {
@@ -176,9 +183,6 @@ public class BanHangJFrame extends javax.swing.JInternalFrame {
         hdct.setId_CTHangHoa(idHH);
         hdct.setId_HoaDon(idHD);
         hdctService.themHoaDonChiTiet(hdct);
-        dtm = (DefaultTableModel) tb_hoadon.getModel();
-        int k = tb_hoadon.getSelectedRow();
-        dtm.setValueAt(getTongTien(), k, 6);
     }
 
     public void loadCBB() {
@@ -343,7 +347,7 @@ public class BanHangJFrame extends javax.swing.JInternalFrame {
         jPanel1.setLayout(new java.awt.GridLayout(1, 0, 10, 0));
 
         jButton5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton5.setText("Xuất hóa đơn");
+        jButton5.setText("Gửi QR code");
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel9.setText("Tổng tiền:");
@@ -494,14 +498,14 @@ public class BanHangJFrame extends javax.swing.JInternalFrame {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Tên hàng", "Số lượng", "Đơn vị tính", "Đơn giá", "Thành tiền", "Trạng thái"
+                "Id", "Tên hàng", "Số lượng", "Đơn vị tính", "Đơn giá", "Thành tiền"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Integer.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class
+                java.lang.Object.class, java.lang.String.class, java.lang.Integer.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, true, false, false, false
+                true, false, false, true, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -619,14 +623,14 @@ public class BanHangJFrame extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(30, 30, 30)
                         .addComponent(jLabel16)))
-                .addGap(36, 36, 36)
+                .addGap(37, 37, 37)
                 .addComponent(jButton5)
                 .addGap(39, 39, 39))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(28, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -665,7 +669,7 @@ public class BanHangJFrame extends javax.swing.JInternalFrame {
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel3)
                                         .addComponent(tf_diachigiao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(18, 18, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -682,7 +686,7 @@ public class BanHangJFrame extends javax.swing.JInternalFrame {
                             .addComponent(lb_tongtien)
                             .addComponent(lb_vat)))
                     .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(57, 57, 57))
+                .addGap(24, 24, 24))
         );
 
         pack();

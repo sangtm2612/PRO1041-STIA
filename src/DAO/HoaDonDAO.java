@@ -21,7 +21,7 @@ import java.util.logging.Logger;
 public class HoaDonDAO extends StiaDAO<HoaDon, Integer> {
 
     final String INSERT_SQL = "INSERT INTO dbo.HoaDon(ThanhTien,DatCoc,NgayTao,GhiChu,DiaChi,TrangThaiHD,TrangThaiTT,Id_NhanVien,Id_KhachHang)VALUES(?,?,?,?,?,?,?,?,?)";
-    final String UPDATE_SQL = "UPDATE dbo.HoaDon SET ThanhTien=?, DatCoc=?, NgayTao=?, GhiChu=?, TrangThaiHD=?, TrangThaiTT=? WHERE Id = ?";
+    final String UPDATE_SQL = "UPDATE dbo.HoaDon SET ThanhTien=?, DatCoc=?, TrangThaiHD=?, TrangThaiTT=? WHERE Id = ?";
     final String DELETE_SQL = "";
     final String SELECT_ALL_SQL = "SELECT * FROM HoaDon";
     final String SELECT_BY_ID_SQL = "SELECT * FROM HoaDon WHERE Id = ?";

@@ -45,5 +45,8 @@ public class NhaCungCapService implements NhaCungCapInterface{
         return nccDAO.selectByName(name);
     }
     
+    public List<NhaCungCap> findListNhaCungCapBySDT(String sdt) {
+        return nccDAO.findSDT(sdt);
+    }
     
 }

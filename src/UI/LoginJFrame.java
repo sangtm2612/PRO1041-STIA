@@ -7,6 +7,7 @@ package UI;
 
 import DAO.Models.TaiKhoan;
 import Service.Implement.TaiKhoanService;
+import Utils.validateHelper;
 import java.awt.Cursor;
 import java.util.List;
 
@@ -36,13 +37,20 @@ public class LoginJFrame extends javax.swing.JFrame {
     }
 
     public void checkLogin() {
+        validateHelper.showMessage(tf_tenTK, this, "Vui lòng nhập tên tài khoản!");
+        validateHelper.showMessage(pf_matkhau, this, "Vui lòng nhập mật khẩu!");
         String tenTK = tf_tenTK.getText();
         String matKhau = pf_matkhau.getText();
+        boolean check = false;
         for (TaiKhoan tk : tkList) {
             if (tenTK.equals(tk.getTenTK()) && matKhau.equals(tk.getMatKhau())) {
                 new MainJFrame(tk).setVisible(true);
+                check = true;
                 this.dispose();
             }
+        }
+        if (check == false) {
+            validateHelper.showMessage(this,"Tài khoản không tồn tại!");
         }
     }
 
