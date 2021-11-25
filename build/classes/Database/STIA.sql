@@ -197,6 +197,10 @@ select * from HoaDonChiTiet
 select * from HangHoa
 select * from NhanVien
 select * from KhachHang
+
+select * from NhaCungCap Where TrangThai = 1 and SDT like '%%'
+SELECT * FROM NhaCungCap WHERE TrangThai = 1 AND SDT like %'098'%
+SELECT * FROM NhaCungCap WHERE TrangThai = 1 AND SDT like '%0945%'
 --INSERT INTO dbo.ChiTietHangHoa(SoLuong,GiaNhap,GiaBan,GhiChu,TrangThai,Id_KichThuoc,Id_MauSac,Id_HangHoa,Id_ApSuat,Id_DonViTinh,Id_LoaiHang,Id_ChieuDay) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)
 
 /*

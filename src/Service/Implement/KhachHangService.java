@@ -40,4 +40,8 @@ public class KhachHangService implements KhachHangInterface{
     public KhachHang findKhachHangId(int id) {
         return khDAO.selectById(id);
     }
+    
+    public List<KhachHang> findListKH(String sdt) {
+        return khDAO.selectListKHBySDT(sdt);
+    }
 }

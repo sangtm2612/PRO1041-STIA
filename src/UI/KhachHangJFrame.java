@@ -34,6 +34,7 @@ public class KhachHangJFrame extends javax.swing.JFrame {
         setResizable(false);
         dtm = (DefaultTableModel) tb_khachhang.getModel();
         dtm.setRowCount(0);
+        loadList();
         loadTable();
     }
 
@@ -42,7 +43,6 @@ public class KhachHangJFrame extends javax.swing.JFrame {
     }
 
     public void loadTable() {
-        loadList();
         dtm.setRowCount(0);
         for (KhachHang kh : khList) {
             dtm.addRow(new Object[]{kh.getMaSoThue(), kh.getTen(), kh.getDiaChi(), kh.getEmail(), kh.getSoDienThoai(), kh.getGhiChu()});
@@ -59,6 +59,7 @@ public class KhachHangJFrame extends javax.swing.JFrame {
         KhachHang kh = getKhachHang();
         kh.setID(khClick.getID());
         khService.suaKhachHang(kh);
+        loadList();
         loadTable();
         BanHangJFrame.loadCbbKhachHang();
     }
@@ -66,6 +67,7 @@ public class KhachHangJFrame extends javax.swing.JFrame {
     public void remove() {
         khClick.setTrangThai(false);
         khService.suaKhachHang(khClick);
+        loadList();
         loadTable();
         BanHangJFrame.loadCbbKhachHang();
     }
@@ -279,6 +281,11 @@ public class KhachHangJFrame extends javax.swing.JFrame {
         jLabel7.setText("Tìm kiếm:");
 
         tf_timkiem.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        tf_timkiem.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                tf_timkiemCaretUpdate(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -411,6 +418,13 @@ public class KhachHangJFrame extends javax.swing.JFrame {
         remove();
         clear();
     }//GEN-LAST:event_btn_xoaActionPerformed
+
+    private void tf_timkiemCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_tf_timkiemCaretUpdate
+        // TODO add your handling code here:
+        String sdt = tf_timkiem.getText().trim();
+        khList = khService.findListKH(sdt);
+        loadTable();
+    }//GEN-LAST:event_tf_timkiemCaretUpdate
 
     /**
      * @param args the command line arguments

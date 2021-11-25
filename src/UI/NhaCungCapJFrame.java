@@ -26,7 +26,7 @@ public class NhaCungCapJFrame extends javax.swing.JFrame {
     DefaultTableModel dtm;
     List<NhaCungCap> list;
     NhaCungCap nccClick;
-    
+
     /**
      * Creates new form NhaCungCapJFrame
      */
@@ -34,56 +34,56 @@ public class NhaCungCapJFrame extends javax.swing.JFrame {
         initComponents();
         init();
     }
-    
+
     //Khởi đầu frame
     public void init() {
         setResizable(false);
         setLocationRelativeTo(null);
         dtm = (DefaultTableModel) tb_nhaCungCap.getModel();
+        loadList();
         loadTable();
     }
-    
-    
-    public static void clearTextFiel(JTextField...arg) {
+
+    public static void clearTextFiel(JTextField... arg) {
         for (JTextField tf : arg) {
             tf.setText("");
         }
     }
-    
+
     public void loadList() {
         list = nccService.findAllNhaCungCap();
     }
-    
+
     public void loadTable() {
-        loadList();
         dtm.setRowCount(0);
         for (NhaCungCap ncc : list) {
-            dtm.addRow(new Object[]{ncc.getTenNCC(),ncc.getSDT(),ncc.getEmail(),ncc.getDiaChi(),ncc.getGhiChu()});
+            dtm.addRow(new Object[]{ncc.getTenNCC(), ncc.getSDT(), ncc.getEmail(), ncc.getDiaChi(), ncc.getGhiChu()});
         }
     }
-    
+
     public void clear() {
-        clearTextFiel(tf_diachi,tf_email,tf_nhacungcap,tf_sodienthoai);
+        clearTextFiel(tf_diachi, tf_email, tf_nhacungcap, tf_sodienthoai);
         ta_ghichu.setText("");
     }
-    
-    
+
     public void sua() {
         NhaCungCap ncc = getNhaCungCap();
         ncc.setId(nccClick.getId());
         nccService.suaNhaCungCap(ncc);
+        loadList();
         loadTable();
         HangHoaJFrame.loadCbbNhaCungCap();
     }
-    
+
     public void xoa() {
         nccClick.setTrangThai(false);
         nccService.suaNhaCungCap(nccClick);
+        loadList();
         loadTable();
         HangHoaJFrame.loadCbbNhaCungCap();
         clear();
     }
-    
+
     public NhaCungCap getNhaCungCap() {
         NhaCungCap ncc = new NhaCungCap();
         ncc.setTenNCC(tf_nhacungcap.getText());
@@ -94,14 +94,14 @@ public class NhaCungCapJFrame extends javax.swing.JFrame {
         ncc.setTrangThai(true);
         return ncc;
     }
-    
+
     public void them() {
         nccService.themNhaCungCap(getNhaCungCap());
+        loadList();
         loadTable();
         HangHoaJFrame.loadCbbNhaCungCap();
     }
-   
-    
+
     public void fillForm() {
         int i = tb_nhaCungCap.getSelectedRow();
         String sdt = tb_nhaCungCap.getValueAt(i, 1).toString();
@@ -113,8 +113,6 @@ public class NhaCungCapJFrame extends javax.swing.JFrame {
         ta_ghichu.setText(nccClick.getGhiChu());
         System.out.println("id: " + nccClick.getId());
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -144,7 +142,10 @@ public class NhaCungCapJFrame extends javax.swing.JFrame {
         btn_them = new javax.swing.JButton();
         btn_sua = new javax.swing.JButton();
         btn_xoa = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
+        tf_timkiem = new javax.swing.JTextField();
+        jPanel5 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tb_nhaCungCap = new javax.swing.JTable();
 
@@ -211,7 +212,7 @@ public class NhaCungCapJFrame extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(tf_sodienthoai, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
                     .addComponent(tf_email))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 120, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
@@ -292,8 +293,41 @@ public class NhaCungCapJFrame extends javax.swing.JFrame {
         });
         jPanel3.add(btn_xoa);
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel7.setText("Bảng quản lý nhà cung cấp:");
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel7.setText("Tìm kiếm:");
+
+        tf_timkiem.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        tf_timkiem.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                tf_timkiemCaretUpdate(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tf_timkiem)
+                .addContainerGap())
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(tf_timkiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel5.setBackground(new java.awt.Color(153, 153, 255));
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Bảng quản lý nhà cung cấp"));
 
         tb_nhaCungCap.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         tb_nhaCungCap.setModel(new javax.swing.table.DefaultTableModel(
@@ -325,6 +359,23 @@ public class NhaCungCapJFrame extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tb_nhaCungCap);
 
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2)
+                .addContainerGap())
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -332,20 +383,16 @@ public class NhaCungCapJFrame extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(317, 317, 317)
-                                .addComponent(jLabel1)))
+                        .addGap(317, 317, 317)
+                        .addComponent(jLabel1)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane2)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -357,22 +404,23 @@ public class NhaCungCapJFrame extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -390,6 +438,8 @@ public class NhaCungCapJFrame extends javax.swing.JFrame {
     private void btn_lammoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_lammoiActionPerformed
         // TODO add your handling code here:
         clear();
+        loadList();
+        loadTable();
     }//GEN-LAST:event_btn_lammoiActionPerformed
 
     private void btn_suaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suaActionPerformed
@@ -409,6 +459,14 @@ public class NhaCungCapJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         xoa();
     }//GEN-LAST:event_btn_xoaActionPerformed
+
+    private void tf_timkiemCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_tf_timkiemCaretUpdate
+        // TODO add your handling code here:
+        String sdtTimKiem = tf_timkiem.getText().trim();
+        System.out.println(sdtTimKiem);
+        list = nccService.findListNhaCungCapBySDT(sdtTimKiem);
+        loadTable();
+    }//GEN-LAST:event_tf_timkiemCaretUpdate
 
     /**
      * @param args the command line arguments
@@ -460,6 +518,8 @@ public class NhaCungCapJFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea ta_ghichu;
@@ -468,5 +528,6 @@ public class NhaCungCapJFrame extends javax.swing.JFrame {
     private javax.swing.JTextField tf_email;
     private javax.swing.JTextField tf_nhacungcap;
     private javax.swing.JTextField tf_sodienthoai;
+    private javax.swing.JTextField tf_timkiem;
     // End of variables declaration//GEN-END:variables
 }

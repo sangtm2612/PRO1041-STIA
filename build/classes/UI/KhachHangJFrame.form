@@ -387,6 +387,9 @@
                   <Font name="Tahoma" size="12" style="0"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="tf_timkiemCaretUpdate"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

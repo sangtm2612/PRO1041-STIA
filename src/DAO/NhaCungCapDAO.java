@@ -69,7 +69,7 @@ public class NhaCungCapDAO extends StiaDAO<NhaCungCap, Integer> {
         }
         return list.get(0);
     }
-    
+
     public NhaCungCap selectByName(String name) {
         List<NhaCungCap> list = selectBySql(SELECT_BY_Name_SQL, name);
         if (list.isEmpty()) {
@@ -78,12 +78,17 @@ public class NhaCungCapDAO extends StiaDAO<NhaCungCap, Integer> {
         return list.get(0);
     }
 
+    public List<NhaCungCap> findSDT(String sdt) {
+        String sql = "SELECT * FROM NhaCungCap WHERE TrangThai = 1 AND SDT like '%" + sdt + "%'";
+        return selectBySql(sql);
+    }
+
     @Override
     protected List<NhaCungCap> selectBySql(String sql, Object... args) {
         List<NhaCungCap> list = new ArrayList<>();
         try {
             ResultSet rs = jdbcHelper.query(sql, args);
-            while(rs.next()) {
+            while (rs.next()) {
                 NhaCungCap entity = new NhaCungCap();
                 entity.setId(rs.getInt("Id"));
                 entity.setTenNCC(rs.getString("TenNCC"));
@@ -99,7 +104,7 @@ public class NhaCungCapDAO extends StiaDAO<NhaCungCap, Integer> {
         }
         return list;
     }
-    
+
     public NhaCungCap selectBySDT(String SDT) {
         List<NhaCungCap> list = selectBySql(SELECT_BY_SDT_SQL, SDT);
         if (list.isEmpty()) {
@@ -107,7 +112,5 @@ public class NhaCungCapDAO extends StiaDAO<NhaCungCap, Integer> {
         }
         return list.get(0);
     }
-    
-    
 
 }
