@@ -16,7 +16,7 @@ CREATE TABLE KhachHang
 	TrangThai BIT NOT NULL,
 )
 GO
-
+--test
 
 CREATE TABLE PhongBan
 (
