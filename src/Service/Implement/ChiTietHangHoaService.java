@@ -24,12 +24,28 @@ public class ChiTietHangHoaService implements ChiTietHangHoaInterface{
 
     @Override
     public void suaHangHoaChiTiet(ChiTietHangHoa cthh) {
+        if (cthh.getId_ApSuat() == 0) {
+            cthh.setId_ApSuat(null);
+        }
+        if (cthh.getId_KichThuoc()== 0) {
+            cthh.setId_KichThuoc(null);
+        }
+        if (cthh.getId_MauSac() == 0) {
+            cthh.setId_MauSac(null);
+        }
+        if (cthh.getId_ChieuDay()== 0) {
+            cthh.setId_ChieuDay(null);
+        }
         ctDAO.update(cthh);
     }
 
     @Override
     public List<ChiTietHangHoa> findAllChiTietHangHoa() {
         return ctDAO.selectAll();
+    }
+    
+    public List<ChiTietHangHoa> findAllChiTietHangHoaByName(String tenHang) {
+        return ctDAO.findTenHang(tenHang);
     }
 
     @Override

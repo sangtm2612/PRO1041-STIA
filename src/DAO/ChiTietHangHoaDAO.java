@@ -22,6 +22,7 @@ public class ChiTietHangHoaDAO extends StiaDAO<ChiTietHangHoa, Integer> {
 
     final String INSERT_SQL = "INSERT INTO dbo.ChiTietHangHoa(SoLuong,GiaNhap,GiaBan,GhiChu,TrangThai,Id_KichThuoc,Id_MauSac,Id_HangHoa,Id_ApSuat,Id_DonViTinh,Id_LoaiHang,Id_ChieuDay) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
     final String UPDATE_SQL = "UPDATE dbo.ChiTietHangHoa SET SoLuong = ?, GiaNhap = ?, GiaBan = ?, GhiChu = ?, TrangThai = ?, Id_KichThuoc = ?, Id_MauSac = ?, Id_HangHoa = ?, Id_ApSuat = ?, Id_DonViTinh = ?, Id_LoaiHang = ?, Id_ChieuDay = ? WHERE Id = ?";
+    final String UPDATE_SOLUONG_ID = "UPDATE dbo.ChiTietHangHoa SET SoLuong = ? WHERE Id = ?";
     final String DELETE_SQL = "";
     final String SELECT_ALL_SQL = "SELECT * FROM ChiTietHangHoa WHERE TrangThai = 1";
     final String SELECT_BY_ID_SQL = "SELECT * FROM ChiTietHangHoa WHERE Id = ?";
@@ -29,7 +30,7 @@ public class ChiTietHangHoaDAO extends StiaDAO<ChiTietHangHoa, Integer> {
     @Override
     public void insert(ChiTietHangHoa entity) {
         try {
-            jdbcHelper.Update(INSERT_SQL,entity.getSoLuong(),entity.getGiaNhap(),entity.getGiaBan(),entity.getGhiChu(),entity.isTrangThai(),entity.getId_KichThuoc(),entity.getId_MauSac(),entity.getId_HangHoa(),entity.getId_ApSuat(),entity.getId_DonViTinh(),entity.getId_LoaiHang(),entity.getId_ChieuDay());
+            jdbcHelper.Update(INSERT_SQL, entity.getSoLuong(), entity.getGiaNhap(), entity.getGiaBan(), entity.getGhiChu(), entity.isTrangThai(), entity.getId_KichThuoc(), entity.getId_MauSac(), entity.getId_HangHoa(), entity.getId_ApSuat(), entity.getId_DonViTinh(), entity.getId_LoaiHang(), entity.getId_ChieuDay());
         } catch (SQLException ex) {
             Logger.getLogger(ChiTietHangHoaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -38,7 +39,7 @@ public class ChiTietHangHoaDAO extends StiaDAO<ChiTietHangHoa, Integer> {
     @Override
     public void update(ChiTietHangHoa entity) {
         try {
-            jdbcHelper.Update(UPDATE_SQL,entity.getSoLuong(),entity.getGiaNhap(),entity.getGiaBan(),entity.getGhiChu(),entity.isTrangThai(),entity.getId_KichThuoc(),entity.getId_MauSac(),entity.getId_HangHoa(),entity.getId_ApSuat(),entity.getId_DonViTinh(),entity.getId_LoaiHang(),entity.getId_ChieuDay(),entity.getId());
+            jdbcHelper.Update(UPDATE_SQL, entity.getSoLuong(), entity.getGiaNhap(), entity.getGiaBan(), entity.getGhiChu(), entity.isTrangThai(), entity.getId_KichThuoc(), entity.getId_MauSac(), entity.getId_HangHoa(), entity.getId_ApSuat(), entity.getId_DonViTinh(), entity.getId_LoaiHang(), entity.getId_ChieuDay(), entity.getId());
         } catch (SQLException ex) {
             Logger.getLogger(ChiTietHangHoaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -47,6 +48,11 @@ public class ChiTietHangHoaDAO extends StiaDAO<ChiTietHangHoa, Integer> {
     @Override
     public void delete(Integer Key) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public List<ChiTietHangHoa> findTenHang(String tenHang) {
+        String sql = "SELECT * FROM dbo.HangHoa JOIN dbo.ChiTietHangHoa ON ChiTietHangHoa.Id_HangHoa = HangHoa.Id WHERE TenHang like N'%" + tenHang + "%'";
+        return selectBySql(sql);
     }
 
     @Override
@@ -90,7 +96,5 @@ public class ChiTietHangHoaDAO extends StiaDAO<ChiTietHangHoa, Integer> {
         }
         return list;
     }
-
-    
 
 }

@@ -23,9 +23,9 @@ public class HoaDonChiTietDAO extends StiaDAO<HoaDonChiTiet, Integer> {
     final String INSERT_SQL = "INSERT INTO dbo.HoaDonChiTiet(SoLuong,TrangThai,Id_HoaDon,Id_CTHangHoa)VALUES(?,?,?,?)";
     final String UPDATE_SQL = "UPDATE dbo.HoaDonChiTiet SET SoLuong=?, TrangThai=? WHERE Id = ?";
     final String DELETE_SQL = "";
-    final String SELECT_ALL_SQL = "SELECT * FROM HoaDonChiTiet";
+    final String SELECT_ALL_SQL = "SELECT * FROM HoaDonChiTiet ";
     final String SELECT_BY_ID_SQL = "SELECT * FROM HoaDonChiTiet WHERE Id = ?";
-    final String SELECT_All_IDHD_SQL = "SELECT * FROM HoaDonChiTiet WHERE Id_HoaDon = ?";
+    final String SELECT_All_IDHD_SQL = "SELECT * FROM HoaDonChiTiet WHERE Id_HoaDon = ? AND TrangThai = 1";
 
     @Override
     public void insert(HoaDonChiTiet entity) {

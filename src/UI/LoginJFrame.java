@@ -37,10 +37,16 @@ public class LoginJFrame extends javax.swing.JFrame {
     }
 
     public void checkLogin() {
-        validateHelper.showMessage(tf_tenTK, this, "Vui lòng nhập tên tài khoản!");
-        validateHelper.showMessage(pf_matkhau, this, "Vui lòng nhập mật khẩu!");
-        String tenTK = tf_tenTK.getText();
+        String tenTK = tf_tenTK.getText().trim();
+        if (tenTK.isEmpty()) {
+            validateHelper.message(this, "Vui lòng nhập tên tài khoản");
+            return;
+        }
         String matKhau = pf_matkhau.getText();
+        if (matKhau.isEmpty()) {
+            validateHelper.message(this, "Vui lòng nhập mật khẩu");
+            return;
+        }
         boolean check = false;
         for (TaiKhoan tk : tkList) {
             if (tenTK.equals(tk.getTenTK()) && matKhau.equals(tk.getMatKhau())) {
@@ -50,7 +56,8 @@ public class LoginJFrame extends javax.swing.JFrame {
             }
         }
         if (check == false) {
-            validateHelper.showMessage(this,"Tài khoản không tồn tại!");
+            validateHelper.message(this,"Tài khoản không tồn tại!");
+            return;
         }
     }
 

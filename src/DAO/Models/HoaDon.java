@@ -15,10 +15,11 @@ public class HoaDon {
     private int Id;
     private Integer ThanhTien;
     private Integer DatCoc;
+    private Integer PhiShip;
     private Date NgayTao;
     private String GhiChu;
     private String DiaChi;
-    private boolean TrangThaiHD;
+    private int TrangThaiHD;
     private boolean TrangThaiTT;
     private int Id_NhanVien;
     private int Id_KhachHang;
@@ -26,10 +27,11 @@ public class HoaDon {
     public HoaDon() {
     }
 
-    public HoaDon(int Id, Integer ThanhTien, Integer DatCoc, Date NgayTao, String GhiChu, String DiaChi, boolean TrangThaiHD, boolean TrangThaiTT, int Id_NhanVien, int Id_KhachHang) {
+    public HoaDon(int Id, Integer ThanhTien, Integer DatCoc, Integer PhiShip, Date NgayTao, String GhiChu, String DiaChi, int TrangThaiHD, boolean TrangThaiTT, int Id_NhanVien, int Id_KhachHang) {
         this.Id = Id;
         this.ThanhTien = ThanhTien;
         this.DatCoc = DatCoc;
+        this.PhiShip = PhiShip;
         this.NgayTao = NgayTao;
         this.GhiChu = GhiChu;
         this.DiaChi = DiaChi;
@@ -39,9 +41,10 @@ public class HoaDon {
         this.Id_KhachHang = Id_KhachHang;
     }
 
-    public HoaDon(Integer ThanhTien, Integer DatCoc, Date NgayTao, String GhiChu, String DiaChi, boolean TrangThaiHD, boolean TrangThaiTT, int Id_NhanVien, int Id_KhachHang) {
+    public HoaDon(Integer ThanhTien, Integer DatCoc, Integer PhiShip, Date NgayTao, String GhiChu, String DiaChi, int TrangThaiHD, boolean TrangThaiTT, int Id_NhanVien, int Id_KhachHang) {
         this.ThanhTien = ThanhTien;
         this.DatCoc = DatCoc;
+        this.PhiShip = PhiShip;
         this.NgayTao = NgayTao;
         this.GhiChu = GhiChu;
         this.DiaChi = DiaChi;
@@ -75,6 +78,14 @@ public class HoaDon {
         this.DatCoc = DatCoc;
     }
 
+    public Integer getPhiShip() {
+        return PhiShip;
+    }
+
+    public void setPhiShip(Integer PhiShip) {
+        this.PhiShip = PhiShip;
+    }
+
     public Date getNgayTao() {
         return NgayTao;
     }
@@ -99,11 +110,11 @@ public class HoaDon {
         this.DiaChi = DiaChi;
     }
 
-    public boolean isTrangThaiHD() {
+    public int getTrangThaiHD() {
         return TrangThaiHD;
     }
 
-    public void setTrangThaiHD(boolean TrangThaiHD) {
+    public void setTrangThaiHD(int TrangThaiHD) {
         this.TrangThaiHD = TrangThaiHD;
     }
 
@@ -130,9 +141,7 @@ public class HoaDon {
     public void setId_KhachHang(int Id_KhachHang) {
         this.Id_KhachHang = Id_KhachHang;
     }
+    
 
-    
-    
-    
     
 }

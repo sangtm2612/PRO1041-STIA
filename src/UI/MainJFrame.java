@@ -62,6 +62,8 @@ public class MainJFrame extends javax.swing.JFrame {
         btn_hanghoa = new javax.swing.JButton();
         jSeparator4 = new javax.swing.JToolBar.Separator();
         btn_banhang = new javax.swing.JButton();
+        jSeparator7 = new javax.swing.JToolBar.Separator();
+        btn_hoadon = new javax.swing.JButton();
         jSeparator6 = new javax.swing.JToolBar.Separator();
         btn_nhanvien = new javax.swing.JButton();
         jSeparator5 = new javax.swing.JToolBar.Separator();
@@ -131,6 +133,24 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
         jToolBar1.add(btn_banhang);
+        jToolBar1.add(jSeparator7);
+
+        btn_hoadon.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btn_hoadon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/hoadon.png"))); // NOI18N
+        btn_hoadon.setText("Hóa đơn");
+        btn_hoadon.setFocusable(false);
+        btn_hoadon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_hoadon.setMargin(new java.awt.Insets(40, 24, 40, 24));
+        btn_hoadon.setMaximumSize(new java.awt.Dimension(139, 137));
+        btn_hoadon.setMinimumSize(new java.awt.Dimension(139, 137));
+        btn_hoadon.setPreferredSize(new java.awt.Dimension(139, 101));
+        btn_hoadon.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btn_hoadon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_hoadonActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btn_hoadon);
         jToolBar1.add(jSeparator6);
 
         btn_nhanvien.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -233,7 +253,7 @@ public class MainJFrame extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 795, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lb_dongho)
                 .addGap(18, 18, 18))
         );
@@ -254,7 +274,7 @@ public class MainJFrame extends javax.swing.JFrame {
         );
         dp_contentLayout.setVerticalGroup(
             dp_contentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 535, Short.MAX_VALUE)
+            .addGap(0, 516, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -263,7 +283,7 @@ public class MainJFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(dp_content)
-            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 1272, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -319,6 +339,12 @@ public class MainJFrame extends javax.swing.JFrame {
         openX(dmk);
     }//GEN-LAST:event_btn_doimkActionPerformed
 
+    private void btn_hoadonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_hoadonActionPerformed
+        // TODO add your handling code here:
+        HoaDonJInternal hd = new HoaDonJInternal();
+        openX(hd);
+    }//GEN-LAST:event_btn_hoadonActionPerformed
+
     public void openX(JInternalFrame x) {
         for (JInternalFrame frmChild : dp_content.getAllFrames()) {
             frmChild.dispose();
@@ -370,6 +396,7 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JButton btn_dangxuat;
     private javax.swing.JButton btn_doimk;
     private javax.swing.JButton btn_hanghoa;
+    private javax.swing.JButton btn_hoadon;
     private javax.swing.JButton btn_khachhang;
     private javax.swing.JButton btn_ncc;
     private javax.swing.JButton btn_nhanvien;
@@ -383,6 +410,7 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JToolBar.Separator jSeparator4;
     private javax.swing.JToolBar.Separator jSeparator5;
     private javax.swing.JToolBar.Separator jSeparator6;
+    private javax.swing.JToolBar.Separator jSeparator7;
     private javax.swing.JToolBar.Separator jSeparator8;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JLabel lb_dongho;

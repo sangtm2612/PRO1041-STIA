@@ -16,23 +16,11 @@ import javax.swing.JTextField;
  */
 public class validateHelper {
     
-    public static void showMessage(Component c, String message) {
+    public static void message(Component c, String message) {
         JOptionPane.showMessageDialog(c, message);
     }
-
-    public static boolean showMessage(JTextField tf, Component c, String message) {
-        if (tf.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(c, message);
-            return false;
-        }
-        return true;
-    }
     
-    public static boolean showMessage(JPasswordField pf, Component c, String message) {
-        if (pf.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(c, message);
-            return false;
-        }
-        return true;
+    public static int confirm(Component c, String message, String tilte) {
+        return JOptionPane.showConfirmDialog(c, message, tilte, JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
     }
 }

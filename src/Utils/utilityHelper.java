@@ -27,7 +27,6 @@ public class utilityHelper {
         try {
             return Double.parseDouble(tf.getText().trim());
         } catch (NumberFormatException e) {
-            e.printStackTrace();
         }
         return null;
     }
