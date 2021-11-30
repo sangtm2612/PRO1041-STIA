@@ -79,7 +79,7 @@ public class NhaCungCapDAO extends StiaDAO<NhaCungCap, Integer> {
     }
 
     public List<NhaCungCap> findSDT(String sdt) {
-        String sql = "SELECT * FROM NhaCungCap WHERE TrangThai = 1 AND SDT like '%" + sdt + "%'";
+        String sql = "SELECT * FROM NhaCungCap WHERE TrangThai = 1 AND SDT like '%" + sdt + "%' OR TenNCC like N'%" + sdt + "%'";
         return selectBySql(sql);
     }
 

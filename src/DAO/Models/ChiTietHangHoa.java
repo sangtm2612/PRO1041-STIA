@@ -106,11 +106,11 @@ public class ChiTietHangHoa {
         this.TrangThai = TrangThai;
     }
 
-    public int getId_KichThuoc() {
+    public Integer getId_KichThuoc() {
         return Id_KichThuoc;
     }
 
-    public void setId_KichThuoc(int Id_KichThuoc) {
+    public void setId_KichThuoc(Integer Id_KichThuoc) {
         this.Id_KichThuoc = Id_KichThuoc;
     }
 
@@ -122,7 +122,6 @@ public class ChiTietHangHoa {
         this.Id_MauSac = Id_MauSac;
     }
 
-
     public int getId_HangHoa() {
         return Id_HangHoa;
     }
@@ -131,11 +130,11 @@ public class ChiTietHangHoa {
         this.Id_HangHoa = Id_HangHoa;
     }
 
-    public int getId_ApSuat() {
+    public Integer getId_ApSuat() {
         return Id_ApSuat;
     }
 
-    public void setId_ApSuat(int Id_ApSuat) {
+    public void setId_ApSuat(Integer Id_ApSuat) {
         this.Id_ApSuat = Id_ApSuat;
     }
 
@@ -155,12 +154,14 @@ public class ChiTietHangHoa {
         this.Id_LoaiHang = Id_LoaiHang;
     }
 
-    public int getId_ChieuDay() {
+    public Integer getId_ChieuDay() {
         return Id_ChieuDay;
     }
 
-    public void setId_ChieuDay(int Id_ChieuDay) {
+    public void setId_ChieuDay(Integer Id_ChieuDay) {
         this.Id_ChieuDay = Id_ChieuDay;
-    }    
+    }
+
+       
 
 }

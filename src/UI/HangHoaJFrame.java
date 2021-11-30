@@ -84,16 +84,21 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
             String danhMuc = dmService.findDanhMucById(hh.getId_DanhMuc()).getTenDanhMuc();
             String loaiHang = lhService.findIdLoaiHang(cthh.getId_LoaiHang()).getTenLoai();
             String mauSac = "";
-            System.out.println(cthh.getId_MauSac());
             if (cthh.getId_MauSac() != 0) {
                 mauSac = msService.findMauSacId(cthh.getId_MauSac()).getTenMau();
             }
             String kichThuoc = "";
-            if (cthh.getId_KichThuoc()!= 0) {
+            if (cthh.getId_KichThuoc() != 0) {
                 kichThuoc = ktService.findKichThuocId(cthh.getId_KichThuoc()).getTenKichThuoc();
             }
-            String apSuat = asService.findApSuatId(cthh.getId_ApSuat()).getTenApSuat();
-            Double chieuDay = cdService.findChieuDayId(cthh.getId_ChieuDay()).getDoDay();
+            String apSuat = "";
+            if (cthh.getId_ApSuat()!= 0) {
+                apSuat = asService.findApSuatId(cthh.getId_ApSuat()).getTenApSuat();
+            }
+            Double chieuDay = null;
+            if (cthh.getId_ChieuDay()!= 0) {
+                chieuDay = cdService.findChieuDayId(cthh.getId_ChieuDay()).getDoDay();
+            }
             String donViTinh = dvtService.findDonViTinhId(cthh.getId_DonViTinh()).getTenDonVi();
             dtm.addRow(new Object[]{tenHang, ncc, danhMuc, loaiHang, mauSac, kichThuoc, apSuat, chieuDay, donViTinh, cthh.getSoLuong(), cthh.getGiaNhap(), cthh.getGiaBan(), cthh.getGhiChu()});
         }
@@ -261,6 +266,7 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
         int Id_DonViTinh = getDonViTinh().getId();
         int Id_LoaiHang = getLoaiHang().getId();
         Integer Id_ChieuDay = timChieuDayTheoTen().getId();
+        if (Id_ChieuDay == 0) Id_ChieuDay = null;
         ChiTietHangHoa cthh = new ChiTietHangHoa(soLuong, giaNhap, giaBan, ghiChu, true, Id_KichThuoc, Id_MauSac, Id_HangHoa, Id_ApSuat, Id_DonViTinh, Id_LoaiHang, Id_ChieuDay);
         return cthh;
     }
@@ -350,10 +356,16 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
     }
 
     public void themCTHH() {
-        themHangHoa();
-        themChieuDay();
-        cthhService.themHangHoaChiTiet(getCTHH());
-        loadTable();
+        if (tf_chieuday.getText().trim().isEmpty()) {
+            themHangHoa();
+            cthhService.themHangHoaChiTiet(getCTHH());
+            loadTable();
+        } else {
+            themHangHoa();
+            themChieuDay();
+            cthhService.themHangHoaChiTiet(getCTHH());
+            loadTable();
+        }
     }
 
     @SuppressWarnings("unchecked")

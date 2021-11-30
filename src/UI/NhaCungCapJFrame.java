@@ -8,7 +8,9 @@ package UI;
 import DAO.Models.NhaCungCap;
 import Service.Implement.NhaCungCapService;
 import UI.HangHoaJFrame;
+import Utils.validateHelper;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
@@ -67,15 +69,27 @@ public class NhaCungCapJFrame extends javax.swing.JFrame {
     }
 
     public void sua() {
-        NhaCungCap ncc = getNhaCungCap();
-        ncc.setId(nccClick.getId());
-        nccService.suaNhaCungCap(ncc);
-        loadList();
-        loadTable();
-        HangHoaJFrame.loadCbbNhaCungCap();
+        int i = tb_nhaCungCap.getSelectedRow();
+        if (i == -1) {
+            validateHelper.message(this, "Vui lòng chọn nhà cung cấp cần sửa");
+            return;
+        }
+        if (validateF()) {
+            NhaCungCap ncc = getNhaCungCap();
+            ncc.setId(nccClick.getId());
+            nccService.suaNhaCungCap(ncc);
+            loadList();
+            loadTable();
+            HangHoaJFrame.loadCbbNhaCungCap();
+        }
     }
 
     public void xoa() {
+        int i = tb_nhaCungCap.getSelectedRow();
+        if (i == -1) {
+            validateHelper.message(this, "Vui lòng chọn nhà cung cấp cần xóa");
+            return;
+        }
         nccClick.setTrangThai(false);
         nccService.suaNhaCungCap(nccClick);
         loadList();
@@ -85,8 +99,9 @@ public class NhaCungCapJFrame extends javax.swing.JFrame {
     }
 
     public NhaCungCap getNhaCungCap() {
+        String tenNCC = tf_nhacungcap.getText().trim();
         NhaCungCap ncc = new NhaCungCap();
-        ncc.setTenNCC(tf_nhacungcap.getText());
+        ncc.setTenNCC(tenNCC);
         ncc.setDiaChi(tf_diachi.getText());
         ncc.setEmail(tf_email.getText());
         ncc.setSDT(tf_sodienthoai.getText());
@@ -95,11 +110,37 @@ public class NhaCungCapJFrame extends javax.swing.JFrame {
         return ncc;
     }
 
+    public boolean validateF() {
+        String tenNCC = tf_nhacungcap.getText().trim();
+        if (tenNCC.isEmpty()) {
+            validateHelper.message(this, "Vui lòng nhập nhà cung cấp!");
+            return false;
+        }
+        String diaChi = tf_diachi.getText().trim();
+        if (diaChi.isEmpty()) {
+            validateHelper.message(this, "Vui lòng nhập địa chỉ!");
+            return false;
+        }
+        String sdt = tf_sodienthoai.getText().trim();
+        if (sdt.isEmpty()) {
+            validateHelper.message(this, "Số điện thoại không hợp lệ!");
+            return false;
+        }
+        String email = tf_email.getText().trim();
+        if (!email.matches("\\w+@\\w+(\\.\\w+){1,2}")) {
+            validateHelper.message(this, "Email không hợp lệ!");
+            return false;
+        }
+        return true;
+    }
+
     public void them() {
-        nccService.themNhaCungCap(getNhaCungCap());
-        loadList();
-        loadTable();
-        HangHoaJFrame.loadCbbNhaCungCap();
+        if (validateF()) {
+            nccService.themNhaCungCap(getNhaCungCap());
+            loadList();
+            loadTable();
+            HangHoaJFrame.loadCbbNhaCungCap();
+        }
     }
 
     public void fillForm() {
