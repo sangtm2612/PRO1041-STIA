@@ -20,8 +20,8 @@ import java.util.logging.Logger;
  */
 public class HoaDonDAO extends StiaDAO<HoaDon, Integer> {
 
-    final String INSERT_SQL = "INSERT INTO dbo.HoaDon(ThanhTien,DatCoc,PhiShip,NgayTao,GhiChu,DiaChi,TrangThaiHD,TrangThaiTT,Id_NhanVien,Id_KhachHang)VALUES(?,?,?,?,?,?,?,?,?,?)";
-    final String UPDATE_SQL = "UPDATE dbo.HoaDon SET ThanhTien=?, DatCoc=?, TrangThaiHD=?, TrangThaiTT=?, GhiChu=? WHERE Id = ?";
+    final String INSERT_SQL = "INSERT INTO dbo.HoaDon(ThanhTien,TongTienTT,DatCoc,PhiShip,NgayTao,GhiChu,DiaChi,TrangThaiHD,TrangThaiTT,Id_NhanVien,Id_KhachHang)VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+    final String UPDATE_SQL = "UPDATE dbo.HoaDon SET ThanhTien=?, TongTienTT = ?, DatCoc=?, PhiShip=?, TrangThaiHD=?, TrangThaiTT=?, GhiChu=? WHERE Id = ?";
     final String DELETE_SQL = "";
     final String SELECT_ALL_SQL = "SELECT * FROM HoaDon Where TrangThaiHD != 3 AND TrangThaiHD != 0";
     final String SELECT_ALL_SQL_TT3 = "SELECT * FROM HoaDon Where TrangThaiHD = 3";
@@ -31,7 +31,7 @@ public class HoaDonDAO extends StiaDAO<HoaDon, Integer> {
     @Override
     public void insert(HoaDon entity) {
         try {
-            jdbcHelper.Update(INSERT_SQL, entity.getThanhTien(), entity.getDatCoc(), entity.getPhiShip(), entity.getNgayTao(), entity.getGhiChu(), entity.getDiaChi(), entity.getTrangThaiHD(), entity.isTrangThaiTT(), entity.getId_NhanVien(), entity.getId_KhachHang());
+            jdbcHelper.Update(INSERT_SQL, entity.getThanhTien(), entity.getTongTienTT(), entity.getDatCoc(), entity.getPhiShip(), entity.getNgayTao(), entity.getGhiChu(), entity.getDiaChi(), entity.getTrangThaiHD(), entity.getTrangThaiTT(), entity.getId_NhanVien(), entity.getId_KhachHang());
         } catch (SQLException ex) {
             Logger.getLogger(HoaDonDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -40,7 +40,7 @@ public class HoaDonDAO extends StiaDAO<HoaDon, Integer> {
     @Override
     public void update(HoaDon entity) {
         try {
-            jdbcHelper.Update(UPDATE_SQL, entity.getThanhTien(), entity.getDatCoc(), entity.getTrangThaiHD(), entity.isTrangThaiTT(), entity.getGhiChu(), entity.getId());
+            jdbcHelper.Update(UPDATE_SQL, entity.getThanhTien(), entity.getTongTienTT(), entity.getDatCoc(), entity.getPhiShip(), entity.getTrangThaiHD(), entity.getTrangThaiTT(), entity.getGhiChu(), entity.getId());
         } catch (SQLException ex) {
             Logger.getLogger(HoaDonDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -64,7 +64,7 @@ public class HoaDonDAO extends StiaDAO<HoaDon, Integer> {
         final String sql = "SELECT * FROM dbo.HoaDon JOIN dbo.KhachHang ON KhachHang.Id = HoaDon.Id_KhachHang\n"
                 + "JOIN dbo.NhanVien ON NhanVien.Id = HoaDon.Id_NhanVien\n"
                 + "JOIN dbo.TaiKhoan ON TaiKhoan.Id = NhanVien.Id_TaiKhoan\n"
-                + "WHERE TrangThaiHD = 3 AND TenTK LIKE '%" + i + "%' OR KhachHang.SoDienThoai LIKE '%" + i + "%' OR HoaDon.DiaChi LIKE N'%" +  i + "%'";
+                + "WHERE (TrangThaiHD = 3 AND TenTK LIKE '%" + i + "%') OR (KhachHang.SoDienThoai LIKE '%" + i + "%' AND TrangThaiHD = 3)";
         return selectBySql(sql);
     }
 
@@ -86,13 +86,14 @@ public class HoaDonDAO extends StiaDAO<HoaDon, Integer> {
                 HoaDon entity = new HoaDon();
                 entity.setId(rs.getInt("Id"));
                 entity.setThanhTien(rs.getInt("ThanhTien"));
+                entity.setTongTienTT(rs.getInt("TongTienTT"));
                 entity.setDatCoc(rs.getInt("DatCoc"));
                 entity.setPhiShip(rs.getInt("PhiShip"));
                 entity.setNgayTao(rs.getDate("NgayTao"));
                 entity.setGhiChu(rs.getString("GhiChu"));
                 entity.setDiaChi(rs.getString("DiaChi"));
                 entity.setTrangThaiHD(rs.getInt("TrangThaiHD"));
-                entity.setTrangThaiTT(rs.getBoolean("TrangThaiTT"));
+                entity.setTrangThaiTT(rs.getInt("TrangThaiTT"));
                 entity.setId_NhanVien(rs.getInt("Id_NhanVien"));
                 entity.setId_KhachHang(rs.getInt("Id_KhachHang"));
                 list.add(entity);

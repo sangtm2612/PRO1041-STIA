@@ -86,7 +86,7 @@ public class HoaDonJInternal extends javax.swing.JInternalFrame {
             KhachHang kh = khService.findKhachHangId(hd.getId_KhachHang());
             NhanVien nv = nvService.findIdNhanVien(hd.getId_NhanVien());
             TaiKhoan tk = tkService.findTaiKhoanId(nv.getId_TaiKhoan());
-            dtm.addRow(new Object[] {hd.getId(), hd.getNgayTao(), tk.getTenTK(), kh.getSoDienThoai(), hd.getDiaChi(), hd.getPhiShip(), hd.getThanhTien(), hd.getDatCoc(), hd.getGhiChu()});
+            dtm.addRow(new Object[] {hd.getId(), hd.getNgayTao(), tk.getTenTK(), kh.getTen(), kh.getSoDienThoai(), hd.getDiaChi(), hd.getPhiShip(), hd.getThanhTien(), hd.getDatCoc(), hd.getGhiChu()});
         }
     }
     
@@ -181,17 +181,17 @@ public class HoaDonJInternal extends javax.swing.JInternalFrame {
 
         tb_hoaDon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã hóa đơn", "Ngày tạo", "NV tạo", "SDT khách hàng", "Địa chỉ giao hàng", "Phí giao hàng", "Thanh toán", "Đặt cọc", "Ghi chú"
+                "Mã hóa đơn", "Ngày tạo", "NV tạo", "Tên khách hàng", "SDT khách hàng", "Địa chỉ giao hàng", "Phí giao hàng", "Tiền cần thanh toán", "Đặt cọc", "Thanh toán", "Ghi chú"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false
+                false, false, false, true, false, false, false, true, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

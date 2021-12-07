@@ -6,6 +6,7 @@
 package UI;
 
 import DAO.Models.DonViTinh;
+import DAO.Models.TaiKhoan;
 import Service.Implement.DonViTinhService;
 import UI.HangHoaJFrame;
 import java.util.List;
@@ -16,24 +17,33 @@ import javax.swing.table.DefaultTableModel;
  * @author sangt
  */
 public class DonViTinhJFrame extends javax.swing.JFrame {
+
     DonViTinhService dvtService = new DonViTinhService();
     List<DonViTinh> dAL;
     DefaultTableModel dtm;
     DonViTinh dvtClick;
+    TaiKhoan tk;
+
     /**
      * Creates new form NewJFrame
      */
-    public DonViTinhJFrame() {
+    public DonViTinhJFrame(TaiKhoan tk) {
         initComponents();
         init();
+        this.tk = tk;
+        if (tk.isVaiTro() == false) {
+            btn_luu.setEnabled(false);
+            btn_them.setEnabled(false);
+            btn_xoa.setEnabled(false);
+        }
     }
-    
-    public void init(){
+
+    public void init() {
         setResizable(false);
         setLocationRelativeTo(null);
         loadTable();
     }
-    
+
     public void loadTable() {
         loadList();
         dtm = (DefaultTableModel) tb_donvitinh.getModel();
@@ -42,17 +52,17 @@ public class DonViTinhJFrame extends javax.swing.JFrame {
             dtm.addRow(new Object[]{d.getTenDonVi()});
         }
     }
-    
+
     public void loadList() {
         dAL = dvtService.findAllDonViTinh();
     }
-    
+
     public void add() {
         dvtService.themDonViTinh(getDonViTinh());
         loadTable();
         HangHoaJFrame.loadCbbDonViTinh();
     }
-    
+
     public void edit() {
         DonViTinh dvt = getDonViTinh();
         dvt.setId(dvtClick.getId());
@@ -60,7 +70,7 @@ public class DonViTinhJFrame extends javax.swing.JFrame {
         loadTable();
         HangHoaJFrame.loadCbbDonViTinh();
     }
-    
+
     public void remove() {
         DonViTinh dvt = getDonViTinh();
         dvt.setId(dvtClick.getId());
@@ -86,7 +96,7 @@ public class DonViTinhJFrame extends javax.swing.JFrame {
         dvt.setTrangThai(true);
         return dvt;
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -258,7 +268,7 @@ public class DonViTinhJFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DonViTinhJFrame().setVisible(true);
+                //new DonViTinhJFrame().setVisible(true);
             }
         });
     }

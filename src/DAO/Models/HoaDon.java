@@ -12,24 +12,27 @@ import java.util.Date;
  * @author sangt
  */
 public class HoaDon {
+
     private int Id;
     private Integer ThanhTien;
+    private Integer TongTienTT;
     private Integer DatCoc;
     private Integer PhiShip;
     private Date NgayTao;
     private String GhiChu;
     private String DiaChi;
     private int TrangThaiHD;
-    private boolean TrangThaiTT;
+    private int TrangThaiTT;
     private int Id_NhanVien;
     private int Id_KhachHang;
 
     public HoaDon() {
     }
 
-    public HoaDon(int Id, Integer ThanhTien, Integer DatCoc, Integer PhiShip, Date NgayTao, String GhiChu, String DiaChi, int TrangThaiHD, boolean TrangThaiTT, int Id_NhanVien, int Id_KhachHang) {
+    public HoaDon(int Id, Integer ThanhTien, Integer TongTienTT, Integer DatCoc, Integer PhiShip, Date NgayTao, String GhiChu, String DiaChi, int TrangThaiHD, int TrangThaiTT, int Id_NhanVien, int Id_KhachHang) {
         this.Id = Id;
         this.ThanhTien = ThanhTien;
+        this.TongTienTT = TongTienTT;
         this.DatCoc = DatCoc;
         this.PhiShip = PhiShip;
         this.NgayTao = NgayTao;
@@ -41,8 +44,9 @@ public class HoaDon {
         this.Id_KhachHang = Id_KhachHang;
     }
 
-    public HoaDon(Integer ThanhTien, Integer DatCoc, Integer PhiShip, Date NgayTao, String GhiChu, String DiaChi, int TrangThaiHD, boolean TrangThaiTT, int Id_NhanVien, int Id_KhachHang) {
+    public HoaDon(Integer ThanhTien, Integer TongTienTT, Integer DatCoc, Integer PhiShip, Date NgayTao, String GhiChu, String DiaChi, int TrangThaiHD, int TrangThaiTT, int Id_NhanVien, int Id_KhachHang) {
         this.ThanhTien = ThanhTien;
+        this.TongTienTT = TongTienTT;
         this.DatCoc = DatCoc;
         this.PhiShip = PhiShip;
         this.NgayTao = NgayTao;
@@ -68,6 +72,14 @@ public class HoaDon {
 
     public void setThanhTien(Integer ThanhTien) {
         this.ThanhTien = ThanhTien;
+    }
+
+    public Integer getTongTienTT() {
+        return TongTienTT;
+    }
+
+    public void setTongTienTT(Integer TongTienTT) {
+        this.TongTienTT = TongTienTT;
     }
 
     public Integer getDatCoc() {
@@ -118,11 +130,11 @@ public class HoaDon {
         this.TrangThaiHD = TrangThaiHD;
     }
 
-    public boolean isTrangThaiTT() {
+    public int getTrangThaiTT() {
         return TrangThaiTT;
     }
 
-    public void setTrangThaiTT(boolean TrangThaiTT) {
+    public void setTrangThaiTT(int TrangThaiTT) {
         this.TrangThaiTT = TrangThaiTT;
     }
 
@@ -141,7 +153,7 @@ public class HoaDon {
     public void setId_KhachHang(int Id_KhachHang) {
         this.Id_KhachHang = Id_KhachHang;
     }
-    
 
     
+
 }

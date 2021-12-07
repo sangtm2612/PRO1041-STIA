@@ -55,8 +55,7 @@ public class KhachHangDAO extends StiaDAO<KhachHang, Integer>{
     }
     
     public List<KhachHang> selectListKHBySDT(String sdt) {
-        String sql = "SELECT * FROM KhachHang WHERE TrangThai = 1 AND SoDienThoai like '%" + sdt +"%'";
-        System.out.println(sql);
+        String sql = "SELECT * FROM KhachHang WHERE (TrangThai = 1 AND SoDienThoai like '%" + sdt +"%') OR (TEN like '%" + sdt + "%' AND TrangThai = 1)";
         return selectBySql(sql);
     }
 

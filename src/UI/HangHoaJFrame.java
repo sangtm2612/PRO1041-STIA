@@ -15,6 +15,7 @@ import DAO.Models.KichThuoc;
 import DAO.Models.LoaiHang;
 import DAO.Models.MauSac;
 import DAO.Models.NhaCungCap;
+import DAO.Models.TaiKhoan;
 import Service.Implement.ApSuatService;
 import Service.Implement.ChiTietHangHoaService;
 import Service.Implement.ChieuDayService;
@@ -37,13 +38,6 @@ import javax.swing.table.DefaultTableModel;
  */
 public class HangHoaJFrame extends javax.swing.JInternalFrame {
 
-    NhaCungCapJFrame ncc = new NhaCungCapJFrame();
-    ApSuatJFrame as = new ApSuatJFrame();
-    DanhMucJFrame dm = new DanhMucJFrame();
-    DonViTinhJFrame dvt = new DonViTinhJFrame();
-    LoaiHangJFrame lh = new LoaiHangJFrame();
-    MauSacJFrame ms = new MauSacJFrame();
-    KichThuocJFrame kt = new KichThuocJFrame();
     static HangHoaService hhService = new HangHoaService();
     ChiTietHangHoaService cthhService = new ChiTietHangHoaService();
     static ChieuDayService cdService = new ChieuDayService();
@@ -57,9 +51,16 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
     static NhaCungCapService nccService = new NhaCungCapService();
     static DefaultComboBoxModel dcm;
     static DefaultTableModel dtm;
+    TaiKhoan tk;
 
-    public HangHoaJFrame() {
+    public HangHoaJFrame(TaiKhoan tk) {
         initComponents();
+        this.tk = tk;
+        if (tk.isVaiTro() == false) {
+            btn_sua.setEnabled(false);
+            btn_them.setEnabled(false);
+            btn_xoa.setEnabled(false);
+        }
         init();
     }
 
@@ -92,11 +93,11 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
                 kichThuoc = ktService.findKichThuocId(cthh.getId_KichThuoc()).getTenKichThuoc();
             }
             String apSuat = "";
-            if (cthh.getId_ApSuat()!= 0) {
+            if (cthh.getId_ApSuat() != 0) {
                 apSuat = asService.findApSuatId(cthh.getId_ApSuat()).getTenApSuat();
             }
             Double chieuDay = null;
-            if (cthh.getId_ChieuDay()!= 0) {
+            if (cthh.getId_ChieuDay() != 0) {
                 chieuDay = cdService.findChieuDayId(cthh.getId_ChieuDay()).getDoDay();
             }
             String donViTinh = dvtService.findDonViTinhId(cthh.getId_DonViTinh()).getTenDonVi();
@@ -266,7 +267,9 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
         int Id_DonViTinh = getDonViTinh().getId();
         int Id_LoaiHang = getLoaiHang().getId();
         Integer Id_ChieuDay = timChieuDayTheoTen().getId();
-        if (Id_ChieuDay == 0) Id_ChieuDay = null;
+        if (Id_ChieuDay == 0) {
+            Id_ChieuDay = null;
+        }
         ChiTietHangHoa cthh = new ChiTietHangHoa(soLuong, giaNhap, giaBan, ghiChu, true, Id_KichThuoc, Id_MauSac, Id_HangHoa, Id_ApSuat, Id_DonViTinh, Id_LoaiHang, Id_ChieuDay);
         return cthh;
     }
@@ -401,8 +404,6 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
         tf_soluong = new javax.swing.JTextField();
         tf_gianhap = new javax.swing.JTextField();
         tf_giaban = new javax.swing.JTextField();
-        jLabel17 = new javax.swing.JLabel();
-        lb_TongTien = new javax.swing.JLabel();
         btn_QLNhaCungCap = new javax.swing.JLabel();
         btn_QLMauSac = new javax.swing.JLabel();
         btn_QLKichThuoc = new javax.swing.JLabel();
@@ -418,7 +419,7 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jPanel2 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
-        kt_timkiem = new javax.swing.JTextField();
+        tf_timkiem = new javax.swing.JTextField();
 
         setClosable(true);
         setIconifiable(true);
@@ -507,13 +508,6 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
                 tf_giabanActionPerformed(evt);
             }
         });
-
-        jLabel17.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel17.setText("Tiền nhập:");
-
-        lb_TongTien.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        lb_TongTien.setForeground(new java.awt.Color(204, 0, 0));
-        lb_TongTien.setText("300000000");
 
         btn_QLNhaCungCap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/suaHangHoa.png"))); // NOI18N
         btn_QLNhaCungCap.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -617,10 +611,6 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
                 .addGap(87, 87, 87)
                 .addGroup(pn_iinputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel11)
-                    .addGroup(pn_iinputLayout.createSequentialGroup()
-                        .addComponent(jLabel17)
-                        .addGap(18, 18, 18)
-                        .addComponent(lb_TongTien))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(25, 25, 25))
         );
@@ -640,11 +630,7 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
                         .addGroup(pn_iinputLayout.createSequentialGroup()
                             .addComponent(jLabel13)
                             .addGap(8, 8, 8)
-                            .addGroup(pn_iinputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(pn_iinputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel17)
-                                    .addComponent(lb_TongTien))
-                                .addComponent(tf_gianhap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tf_gianhap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(18, 18, 18)
                             .addComponent(jLabel14)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -787,7 +773,12 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
         jLabel15.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel15.setText("Tìm kiếm:");
 
-        kt_timkiem.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        tf_timkiem.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        tf_timkiem.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                tf_timkiemCaretUpdate(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -797,7 +788,7 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jLabel15)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(kt_timkiem)
+                .addComponent(tf_timkiem)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -806,7 +797,7 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
-                    .addComponent(kt_timkiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tf_timkiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -857,36 +848,43 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
 
     private void btn_QLNhaCungCapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_QLNhaCungCapMouseClicked
         // TODO add your handling code here:
+        NhaCungCapJFrame ncc = new NhaCungCapJFrame(tk);
         ncc.setVisible(true);
     }//GEN-LAST:event_btn_QLNhaCungCapMouseClicked
 
     private void btn_themLoaiHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_themLoaiHangMouseClicked
         // TODO add your handling code here:
+        LoaiHangJFrame lh = new LoaiHangJFrame(tk);
         lh.setVisible(true);
     }//GEN-LAST:event_btn_themLoaiHangMouseClicked
 
     private void btn_QLMauSacMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_QLMauSacMouseClicked
         // TODO add your handling code here:
+        MauSacJFrame ms = new MauSacJFrame(tk);
         ms.setVisible(true);
     }//GEN-LAST:event_btn_QLMauSacMouseClicked
 
     private void btn_QLApSuatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_QLApSuatMouseClicked
         // TODO add your handling code here:
+        ApSuatJFrame as = new ApSuatJFrame(tk);
         as.setVisible(true);
     }//GEN-LAST:event_btn_QLApSuatMouseClicked
 
     private void btn_QLDonViTinhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_QLDonViTinhMouseClicked
         // TODO add your handling code here:
+        DonViTinhJFrame dvt = new DonViTinhJFrame(tk);
         dvt.setVisible(true);
     }//GEN-LAST:event_btn_QLDonViTinhMouseClicked
 
     private void btn_QLKichThuocMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_QLKichThuocMouseClicked
         // TODO add your handling code here:
+        KichThuocJFrame kt = new KichThuocJFrame(tk);
         kt.setVisible(true);
     }//GEN-LAST:event_btn_QLKichThuocMouseClicked
 
     private void btn_QLDanhMucMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_QLDanhMucMouseClicked
         // TODO add your handling code here:
+        DanhMucJFrame dm = new DanhMucJFrame(tk);
         dm.setVisible(true);
     }//GEN-LAST:event_btn_QLDanhMucMouseClicked
 
@@ -912,6 +910,12 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         fillForm();
     }//GEN-LAST:event_tb_hanghoaMouseClicked
+
+    private void tf_timkiemCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_tf_timkiemCaretUpdate
+        // TODO add your handling code here:
+        String timkiem = tf_timkiem.getText().trim();
+
+    }//GEN-LAST:event_tf_timkiemCaretUpdate
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -940,7 +944,6 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -953,8 +956,6 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField kt_timkiem;
-    private javax.swing.JLabel lb_TongTien;
     private javax.swing.JPanel pn_iinput;
     private javax.swing.JTextArea ta_ghichu;
     public final javax.swing.JTable tb_hanghoa = new javax.swing.JTable();
@@ -963,5 +964,6 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
     private javax.swing.JTextField tf_gianhap;
     private javax.swing.JTextField tf_soluong;
     private javax.swing.JTextField tf_tenhang;
+    private javax.swing.JTextField tf_timkiem;
     // End of variables declaration//GEN-END:variables
 }

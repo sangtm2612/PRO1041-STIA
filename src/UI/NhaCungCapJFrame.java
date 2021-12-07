@@ -6,6 +6,7 @@
 package UI;
 
 import DAO.Models.NhaCungCap;
+import DAO.Models.TaiKhoan;
 import Service.Implement.NhaCungCapService;
 import UI.HangHoaJFrame;
 import Utils.validateHelper;
@@ -28,12 +29,19 @@ public class NhaCungCapJFrame extends javax.swing.JFrame {
     DefaultTableModel dtm;
     List<NhaCungCap> list;
     NhaCungCap nccClick;
+    TaiKhoan tk;
 
     /**
      * Creates new form NhaCungCapJFrame
      */
-    public NhaCungCapJFrame() {
+    public NhaCungCapJFrame(TaiKhoan tk) {
         initComponents();
+        this.tk = tk;
+        if (tk.isVaiTro() == false) {
+            btn_them.setEnabled(false);
+            btn_sua.setEnabled(false);
+            btn_xoa.setEnabled(false);
+        }
         init();
     }
 
@@ -539,7 +547,7 @@ public class NhaCungCapJFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NhaCungCapJFrame().setVisible(true);
+                //new NhaCungCapJFrame().setVisible(true);
             }
         });
     }

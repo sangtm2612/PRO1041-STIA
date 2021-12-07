@@ -24,7 +24,7 @@ public class NhanVienDAO extends StiaDAO<NhanVien, Integer> {
     final String INSERT_SQL = "INSERT dbo.NHANVIEN(HoTen,GioiTinh,NgaySinh,DiaChi,Email,SoDienThoai,CCCD,ChucVu,GhiChu,TrangThai,Id_PhongBan,Id_TaiKhoan, Id_TruongPhong) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
     final String UPDATE_SQL = "UPDATE NHANVIEN SET HoTen = ?, GioiTinh = ?, NgaySinh = ?, DiaChi = ?, Email = ?, SoDienThoai = ?, CCCD = ?, ChucVu = ?, GhiChu = ?, TrangThai = ?, Id_PhongBan = ?, Id_TaiKhoan = ?, Id_TruongPhong = ? Where Id = ?";
     final String DELETE_SQL = "UPDATE NHANVIEN SET TrangThai = 0 Where Id = ?";
-    final String SELECT_ALL_SQL = "SELECT * FROM NHANVIEN";
+    final String SELECT_ALL_SQL = "SELECT * FROM NHANVIEN WHERE TrangThai = 1";
     final String SELECT_BY_ID_SQL = "SELECT * FROM NHANVIEN WHERE Id = ?";
     final String SELECT_BY_SDT_SQL = "SELECT * FROM NHANVIEN WHERE SoDienThoai = ?";
 

@@ -6,6 +6,7 @@
 package UI;
 
 import DAO.Models.LoaiHang;
+import DAO.Models.TaiKhoan;
 import Service.Implement.LoaiHangService;
 import UI.HangHoaJFrame;
 import java.util.List;
@@ -20,12 +21,20 @@ public class LoaiHangJFrame extends javax.swing.JFrame {
     List<LoaiHang> lAL;
     DefaultTableModel dtm;
     LoaiHang lhClick;
+    TaiKhoan tk;
     /**
      * Creates new form NewJFrame
      */
-    public LoaiHangJFrame() {
+    public LoaiHangJFrame(TaiKhoan tk) {
         initComponents();
         init();
+        this.tk = tk;
+        if (tk.isVaiTro() == false) {
+            btn_luu.setEnabled(false);
+            btn_them.setEnabled(false);
+            btn_xoa.setEnabled(false);
+
+        }
     }
     
     public void init(){
@@ -259,7 +268,7 @@ public class LoaiHangJFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new LoaiHangJFrame().setVisible(true);
+                //new LoaiHangJFrame().setVisible(true);
             }
         });
     }
