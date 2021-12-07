@@ -7,6 +7,7 @@ package UI;
 
 import DAO.Models.KhachHang;
 import Service.Implement.KhachHangService;
+import Utils.validateHelper;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -50,12 +51,97 @@ public class KhachHangJFrame extends javax.swing.JFrame {
     }
 
     public void them() {
+        String maSoThue = tf_masothue.getText().trim();
+        String tenKhachHang = tf_ten.getText().trim();
+        String diaChi = tf_diachi.getText().trim();
+        String email = tf_email.getText().trim();
+        String sdt = tf_sodienthoai.getText().trim();
+        String ghiChu = ta_ghichu.getText().trim();
+        if (maSoThue.isEmpty()) {
+            validateHelper.message(this, "Vui lòng nhập mã số thuế!");
+            return;
+        }
+        if (tenKhachHang.isEmpty()) {
+            validateHelper.message(this, "Vui lòng nhập tên khách hàng!");
+            return;
+        }
+        if (diaChi.isEmpty()) {
+            validateHelper.message(this, "Vui lòng nhập địa chỉ!");
+            return;
+        }
+        if (email.isEmpty()) {
+            validateHelper.message(this, "Vui lòng nhập email!");
+            return;
+        }
+        if (sdt.isEmpty()) {
+            validateHelper.message(this, "Vui lòng nhập số điện thoại!");
+            return;
+        }
+        for (KhachHang kh : khList) {
+            if (kh.getMaSoThue().equals(maSoThue)) {
+                validateHelper.message(this, "Mã số thuế đã tồn tại!");
+                return;
+            }
+            if (kh.getEmail().equals(email)) {
+                validateHelper.message(this, "Email đã tồn tại!");
+                return;
+            }
+            if (kh.getSoDienThoai().equals(sdt)) {
+                validateHelper.message(this, "Số điện thoại đã tồn tại!");
+                return;
+            }
+        }
         khService.themKhachHang(getKhachHang());
         loadTable();
         BanHangJFrame.loadCbbKhachHang();
     }
 
     public void edit() {
+        int i = tb_khachhang.getSelectedRow();
+        if (i == -1) {
+            validateHelper.message(this, "Vui lòng chọn khách hàng cần xóa!");
+            return;
+        }
+        String maSoThue = tf_masothue.getText().trim();
+        String tenKhachHang = tf_ten.getText().trim();
+        String diaChi = tf_diachi.getText().trim();
+        String email = tf_email.getText().trim();
+        String sdt = tf_sodienthoai.getText().trim();
+        String ghiChu = ta_ghichu.getText().trim();
+        if (maSoThue.isEmpty()) {
+            validateHelper.message(this, "Vui lòng nhập mã số thuế!");
+            return;
+        }
+        if (tenKhachHang.isEmpty()) {
+            validateHelper.message(this, "Vui lòng nhập tên khách hàng!");
+            return;
+        }
+        if (diaChi.isEmpty()) {
+            validateHelper.message(this, "Vui lòng nhập địa chỉ!");
+            return;
+        }
+        if (email.isEmpty()) {
+            validateHelper.message(this, "Vui lòng nhập email!");
+            return;
+        }
+        if (sdt.isEmpty()) {
+            validateHelper.message(this, "Vui lòng nhập số điện thoại!");
+            return;
+        }
+        for (KhachHang kh : khList) {
+            if (kh.getMaSoThue().equals(maSoThue)) {
+                validateHelper.message(this, "Mã số thuế đã tồn tại!");
+                return;
+            }
+            if (kh.getEmail().equals(email)) {
+                validateHelper.message(this, "Email đã tồn tại!");
+                return;
+            }
+            if (kh.getSoDienThoai().equals(sdt)) {
+                validateHelper.message(this, "Số điện thoại đã tồn tại!");
+                return;
+            }
+        }
         KhachHang kh = getKhachHang();
         kh.setID(khClick.getID());
         khService.suaKhachHang(kh);
@@ -65,11 +151,18 @@ public class KhachHangJFrame extends javax.swing.JFrame {
     }
 
     public void remove() {
+        int i = tb_khachhang.getSelectedRow();
+        if (i == -1) {
+            validateHelper.message(this, "Vui lòng chọn khách hàng cần xóa!");
+            return;
+        }
         khClick.setTrangThai(false);
         khService.suaKhachHang(khClick);
         loadList();
         loadTable();
         BanHangJFrame.loadCbbKhachHang();
+        clear();
+
     }
 
     public KhachHang getKhachHang() {
@@ -146,7 +239,7 @@ public class KhachHangJFrame extends javax.swing.JFrame {
         tf_masothue.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setText("Tên:");
+        jLabel2.setText("Tên khách hàng:");
 
         tf_ten.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
@@ -416,7 +509,6 @@ public class KhachHangJFrame extends javax.swing.JFrame {
     private void btn_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoaActionPerformed
         // TODO add your handling code here:
         remove();
-        clear();
     }//GEN-LAST:event_btn_xoaActionPerformed
 
     private void tf_timkiemCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_tf_timkiemCaretUpdate

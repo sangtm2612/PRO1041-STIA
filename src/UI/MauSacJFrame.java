@@ -7,6 +7,7 @@ package UI;
 
 
 import DAO.Models.MauSac;
+import DAO.Models.TaiKhoan;
 import Service.Implement.MauSacService;
 import UI.HangHoaJFrame;
 import java.util.List;
@@ -21,13 +22,20 @@ public class MauSacJFrame extends javax.swing.JFrame {
     List<MauSac> mAL;
     DefaultTableModel dtm;
     MauSac msClick;
+    TaiKhoan tk;
     
     /**
      * Creates new form NewJFrame
      */
-    public MauSacJFrame() {
+    public MauSacJFrame(TaiKhoan tk) {
         initComponents();
         init();
+        this.tk = tk;
+        if (tk.isVaiTro() == false) {
+            btn_luu.setEnabled(false);
+            btn_them.setEnabled(false);
+            btn_xoa.setEnabled(false);
+        }
     }
     
     public void init(){
@@ -260,7 +268,7 @@ public class MauSacJFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MauSacJFrame().setVisible(true);
+                //new MauSacJFrame().setVisible(true);
             }
         });
     }

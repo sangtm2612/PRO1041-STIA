@@ -6,6 +6,7 @@
 package UI;
 
 import DAO.Models.KichThuoc;
+import DAO.Models.TaiKhoan;
 import Service.Implement.KichThuocService;
 import UI.HangHoaJFrame;
 import java.util.List;
@@ -20,12 +21,19 @@ public class KichThuocJFrame extends javax.swing.JFrame {
     List<KichThuoc> kAL;
     DefaultTableModel dtm;
     KichThuoc ktClick;
+    TaiKhoan tk;
     /**
      * Creates new form NewJFrame
      */
-    public KichThuocJFrame() {
+    public KichThuocJFrame(TaiKhoan tk) {
         initComponents();
         init();
+        this.tk = tk;
+        if (tk.isVaiTro() == false) {
+            btn_luu.setEnabled(false);
+            btn_them.setEnabled(false);
+            btn_xoa.setEnabled(false);
+        }
     }
     
     public void init(){
@@ -258,7 +266,7 @@ public class KichThuocJFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new KichThuocJFrame().setVisible(true);
+                //new KichThuocJFrame().setVisible(true);
             }
         });
     }

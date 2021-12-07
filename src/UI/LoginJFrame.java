@@ -31,9 +31,9 @@ public class LoginJFrame extends javax.swing.JFrame {
         setResizable(false);
         tkList = tkService.findAllTaiKhoan();
     }
-    
+
     public void openQuenMK() {
-        
+
     }
 
     public void checkLogin() {
@@ -56,7 +56,7 @@ public class LoginJFrame extends javax.swing.JFrame {
             }
         }
         if (check == false) {
-            validateHelper.message(this,"Tài khoản không tồn tại!");
+            validateHelper.message(this, "Tài khoản không tồn tại!");
             return;
         }
     }
@@ -108,6 +108,11 @@ public class LoginJFrame extends javax.swing.JFrame {
         lb_quenmk.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 lb_quenmkMouseMoved(evt);
+            }
+        });
+        lb_quenmk.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lb_quenmkMouseClicked(evt);
             }
         });
 
@@ -191,6 +196,12 @@ public class LoginJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         lb_quenmk.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_lb_quenmkMouseMoved
+
+    private void lb_quenmkMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_quenmkMouseClicked
+        // TODO add your handling code here:
+        this.dispose();
+        new ForgotJFrame().setVisible(true);
+    }//GEN-LAST:event_lb_quenmkMouseClicked
 
     /**
      * @param args the command line arguments

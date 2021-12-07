@@ -6,10 +6,8 @@
 package UI;
 
 import DAO.Models.DanhMuc;
+import DAO.Models.TaiKhoan;
 import Service.Implement.DanhMucService;
-import UI.HangHoaJFrame;
-import java.awt.Container;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -23,12 +21,20 @@ public class DanhMucJFrame extends javax.swing.JFrame {
     DefaultTableModel dtm;
     DanhMuc dmClick;
     DanhMuc getForm = new DanhMuc();
+    TaiKhoan tk;
     /**
      * Creates new form NewJFrame
      */
-    public DanhMucJFrame() {
+    public DanhMucJFrame(TaiKhoan tk) {
         initComponents();
         init();
+        this.tk = tk;
+        if (tk.isVaiTro() == false) {
+            btn_luu.setEnabled(false);
+            btn_them.setEnabled(false);
+            btn_xoa.setEnabled(false);
+
+        }
     }
     
     public void init(){
@@ -137,7 +143,7 @@ public class DanhMucJFrame extends javax.swing.JFrame {
 
         btn_luu.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btn_luu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/luu.png"))); // NOI18N
-        btn_luu.setText("Lưu  ");
+        btn_luu.setText("Sưa  ");
         btn_luu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_luuActionPerformed(evt);
@@ -257,7 +263,7 @@ public class DanhMucJFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DanhMucJFrame().setVisible(true);
+                //new DanhMucJFrame().setVisible(true);
             }
         });
     }

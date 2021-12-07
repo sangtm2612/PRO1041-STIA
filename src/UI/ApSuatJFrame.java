@@ -6,13 +6,8 @@
 package UI;
 
 import DAO.Models.ApSuat;
-import DAO.Models.DanhMuc;
-import DAO.Models.NhaCungCap;
+import DAO.Models.TaiKhoan;
 import Service.Implement.ApSuatService;
-import Service.Implement.DanhMucService;
-import UI.HangHoaJFrame;
-import java.awt.Container;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -26,13 +21,20 @@ public class ApSuatJFrame extends javax.swing.JFrame {
     List<ApSuat> aAL;
     ApSuat asClick;
     DefaultTableModel dtm;
+    TaiKhoan tk;
 
     /**
      * Creates new form NewJFrame
      */
-    public ApSuatJFrame() {
+    public ApSuatJFrame(TaiKhoan tk) {
         initComponents();
         init();
+        this.tk = tk;
+        if (tk.isVaiTro() == false) {
+            btn_luu.setEnabled(false);
+            btn_them.setEnabled(false);
+            btn_xoa.setEnabled(false);
+        }
     }
 
     public void init() {
@@ -136,7 +138,7 @@ public class ApSuatJFrame extends javax.swing.JFrame {
 
         btn_luu.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btn_luu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/luu.png"))); // NOI18N
-        btn_luu.setText("Lưu  ");
+        btn_luu.setText("Sửa  ");
         btn_luu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_luuActionPerformed(evt);
@@ -261,7 +263,7 @@ public class ApSuatJFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ApSuatJFrame().setVisible(true);
+                //new ApSuatJFrame().setVisible(true);
             }
         });
     }

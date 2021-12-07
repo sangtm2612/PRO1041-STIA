@@ -16,19 +16,26 @@ import javax.swing.JInternalFrame;
  * @author sangt
  */
 public class MainJFrame extends javax.swing.JFrame {
-    NhaCungCapJFrame ncc = new NhaCungCapJFrame();
-    KhachHangJFrame kh = new KhachHangJFrame();
-    TaiKhoan tk;
+
     
+    KhachHangJFrame kh = new KhachHangJFrame();
+    static TaiKhoan tk;
+
     /**
      * Creates new form MainJFrame
      */
     public MainJFrame(TaiKhoan tk) {
         initComponents();
         this.tk = tk;
+        if (tk.isVaiTro() == false) {
+            jToolBar1.remove(btn_thongke);
+            jToolBar1.remove(sepa_thongke);
+            jToolBar1.remove(btn_nhanvien);
+            jToolBar1.remove(sape_nhanvien);
+        }
         init();
     }
-    
+
     public void init() {
         setResizable(false);
         setLocationRelativeTo(null);
@@ -36,12 +43,12 @@ public class MainJFrame extends javax.swing.JFrame {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/com.myPro.Icon/STIA.png")));
         initClock();
     }
-    
-    public void initClock(){
+
+    public void initClock() {
         ClockThread c = new ClockThread(lb_dongho);
         c.start();
     }
-    
+
     public void logOut() {
         this.dispose();
         new LoginJFrame().setVisible(true);
@@ -66,11 +73,11 @@ public class MainJFrame extends javax.swing.JFrame {
         btn_hoadon = new javax.swing.JButton();
         jSeparator6 = new javax.swing.JToolBar.Separator();
         btn_nhanvien = new javax.swing.JButton();
-        jSeparator5 = new javax.swing.JToolBar.Separator();
+        sape_nhanvien = new javax.swing.JToolBar.Separator();
         btn_khachhang = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JToolBar.Separator();
         btn_thongke = new javax.swing.JButton();
-        jSeparator1 = new javax.swing.JToolBar.Separator();
+        sepa_thongke = new javax.swing.JToolBar.Separator();
         btn_doimk = new javax.swing.JButton();
         jSeparator8 = new javax.swing.JToolBar.Separator();
         btn_dangxuat = new javax.swing.JButton();
@@ -169,7 +176,7 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
         jToolBar1.add(btn_nhanvien);
-        jToolBar1.add(jSeparator5);
+        jToolBar1.add(sape_nhanvien);
 
         btn_khachhang.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btn_khachhang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/khachhahng.png"))); // NOI18N
@@ -199,8 +206,13 @@ public class MainJFrame extends javax.swing.JFrame {
         btn_thongke.setMinimumSize(new java.awt.Dimension(139, 137));
         btn_thongke.setPreferredSize(new java.awt.Dimension(139, 101));
         btn_thongke.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btn_thongke.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_thongkeActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btn_thongke);
-        jToolBar1.add(jSeparator1);
+        jToolBar1.add(sepa_thongke);
 
         btn_doimk.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btn_doimk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/doiMK.png"))); // NOI18N
@@ -301,7 +313,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void btn_hanghoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_hanghoaActionPerformed
         // TODO add your handling code here:
-        HangHoaJFrame hanghoa = new HangHoaJFrame();
+        HangHoaJFrame hanghoa = new HangHoaJFrame(tk);
         openX(hanghoa);
     }//GEN-LAST:event_btn_hanghoaActionPerformed
 
@@ -309,11 +321,12 @@ public class MainJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         BanHangJFrame banhang = new BanHangJFrame(tk);
         openX(banhang);
-        
+
     }//GEN-LAST:event_btn_banhangActionPerformed
 
     private void btn_nccActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_nccActionPerformed
         // TODO add your handling code here:
+        NhaCungCapJFrame ncc = new NhaCungCapJFrame(tk);
         ncc.setVisible(true);
     }//GEN-LAST:event_btn_nccActionPerformed
 
@@ -345,6 +358,12 @@ public class MainJFrame extends javax.swing.JFrame {
         openX(hd);
     }//GEN-LAST:event_btn_hoadonActionPerformed
 
+    private void btn_thongkeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_thongkeActionPerformed
+        // TODO add your handling code here:
+        ThongKeJInternalFrame tk = new ThongKeJInternalFrame();
+        openX(tk);
+    }//GEN-LAST:event_btn_thongkeActionPerformed
+
     public void openX(JInternalFrame x) {
         for (JInternalFrame frmChild : dp_content.getAllFrames()) {
             frmChild.dispose();
@@ -355,7 +374,7 @@ public class MainJFrame extends javax.swing.JFrame {
         dp_content.add(x);
         x.setVisible(true);
     }
-    
+
     /**
      * @param args the command line arguments
      */
@@ -404,15 +423,15 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JDesktopPane dp_content;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JToolBar.Separator jSeparator3;
     private javax.swing.JToolBar.Separator jSeparator4;
-    private javax.swing.JToolBar.Separator jSeparator5;
     private javax.swing.JToolBar.Separator jSeparator6;
     private javax.swing.JToolBar.Separator jSeparator7;
     private javax.swing.JToolBar.Separator jSeparator8;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JLabel lb_dongho;
+    private javax.swing.JToolBar.Separator sape_nhanvien;
+    private javax.swing.JToolBar.Separator sepa_thongke;
     // End of variables declaration//GEN-END:variables
 }

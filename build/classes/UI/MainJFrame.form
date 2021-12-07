@@ -193,7 +193,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_nhanvienActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JToolBar$Separator" name="jSeparator5">
+        <Component class="javax.swing.JToolBar$Separator" name="sape_nhanvien">
         </Component>
         <Component class="javax.swing.JButton" name="btn_khachhang">
           <Properties>
@@ -251,8 +251,11 @@
             </Property>
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_thongkeActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JToolBar$Separator" name="jSeparator1">
+        <Component class="javax.swing.JToolBar$Separator" name="sepa_thongke">
         </Component>
         <Component class="javax.swing.JButton" name="btn_doimk">
           <Properties>

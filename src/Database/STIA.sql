@@ -169,13 +169,14 @@ CREATE TABLE HoaDon
 (
 	Id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
 	ThanhTien INT NULL,
+	TongTienTT INT,
 	DatCoc INT NULL,
 	PhiShip INT NULL,
 	NgayTao DATETIME NOT NULL,
 	GhiChu NVARCHAR(100) NULL,
 	DiaChi NVARCHAR(100) NOT NULL,
 	TrangThaiHD INT,
-	TrangThaiTT BIT,
+	TrangThaiTT INT,
 	Id_NhanVien INT NOT NULL,
 	Id_KhachHang INT NULL,
 	FOREIGN KEY(Id_NhanVien) REFERENCES dbo.NhanVien(Id),
@@ -263,14 +264,16 @@ INSERT INTO dbo.ChiTietHangHoa(SoLuong,GiaNhap,GiaBan,GhiChu,TrangThai,Id_KichTh
 INSERT INTO dbo.ChiTietHangHoa(SoLuong,GiaNhap,GiaBan,GhiChu,TrangThai,Id_KichThuoc,Id_MauSac,Id_HangHoa,Id_ApSuat,Id_DonViTinh,Id_LoaiHang,Id_ChieuDay) VALUES (1,1000,2000,N'',1,Null,Null,6,NULL,2,3,NULL)
 --Thêm dữ liệu tài khoản
 INSERT INTO dbo.TaiKhoan(TenTK,MatKhau,VaiTro,TrangThai)VALUES(N'admin','admin',1,1)
+INSERT INTO dbo.TaiKhoan(TenTK,MatKhau,VaiTro,TrangThai)VALUES(N'hieudv','hieudv',0,1)
 --Thêm dữ liệu nhân viên
-INSERT dbo.NHANVIEN(HoTen,GioiTinh,NgaySinh,DiaChi,Email,SoDienThoai,CCCD,ChucVu,GhiChu,TrangThai,Id_PhongBan,Id_TaiKhoan,Id_TruongPhong) VALUES (N'Trần Minh Sáng', 1, '20020102', 'NINHBINH', 'sangtm@gmail.com', '0988615111', '037202000666', 1, NULL, 1,1,1, 1);
+INSERT dbo.NHANVIEN(HoTen,GioiTinh,NgaySinh,DiaChi,Email,SoDienThoai,CCCD,ChucVu,GhiChu,TrangThai,Id_PhongBan,Id_TaiKhoan,Id_TruongPhong) VALUES (N'Trần Minh Sáng', 1, '20020102', N'NINHBINH', 'sangtm@gmail.com', '0988615111', '037202000666', 1, NULL, 1,1,1, 1);
+INSERT dbo.NHANVIEN(HoTen,GioiTinh,NgaySinh,DiaChi,Email,SoDienThoai,CCCD,ChucVu,GhiChu,TrangThai,Id_PhongBan,Id_TaiKhoan,Id_TruongPhong) VALUES (N'Đào Văn Hiếu', 1, '20021202', N'Ba Vì', 'hieudv@gmail.com', '0988615222', '037202000777', 0, NULL, 1,1,2, null);
 --Thêm dữ liệu khách hàng
-INSERT INTO dbo.KhachHang(MaSoThue,Ten,DiaChi,Email,SoDienThoai,GhiChu,TrangThai)VALUES(Null,N'Nguyễn Anh Dũng',N'Hà Nội',N'dungna@gmail.com',N'0988765567',N'Giám đốc',1)
-INSERT INTO dbo.KhachHang(MaSoThue,Ten,DiaChi,Email,SoDienThoai,GhiChu,TrangThai)VALUES(Null,N'Trần Minh Sáng',N'Ninh Bình',N'sangtm@gmail.com',N'0123456789',N'',1)
-INSERT INTO dbo.KhachHang(MaSoThue,Ten,DiaChi,Email,SoDienThoai,GhiChu,TrangThai)VALUES(N'NGU',N'THAO NGU',N'Hà Nội',N'thaongu@gmail.com',N'0222222222',N'Ngu',1)
---INSERT INTO dbo.KhachHang(MaSoThue,Ten,DiaChi,Email,SoDienThoai,GhiChu,TrangThai)VALUES(N'',N'',N'',N'',N'',N'',NULL)
---INSERT INTO dbo.KhachHang(MaSoThue,Ten,DiaChi,Email,SoDienThoai,GhiChu,TrangThai)VALUES(N'',N'',N'',N'',N'',N'',NULL)
+INSERT INTO dbo.KhachHang(MaSoThue,Ten,DiaChi,Email,SoDienThoai,GhiChu,TrangThai)VALUES(N'111111',N'Nguyễn Anh Dũng',N'Hà Nội',N'dungna@gmail.com',N'0988765567',N'',1)
+INSERT INTO dbo.KhachHang(MaSoThue,Ten,DiaChi,Email,SoDienThoai,GhiChu,TrangThai)VALUES(N'222222',N'Trần Minh Sáng',N'Ninh Bình',N'sangtm@gmail.com',N'0123456789',N'',1)
+INSERT INTO dbo.KhachHang(MaSoThue,Ten,DiaChi,Email,SoDienThoai,GhiChu,TrangThai)VALUES(N'333333',N'Chu Ngọc Thao',N'Hà Nội',N'thaocn@gmail.com',N'0222222222',N'',1)
+INSERT INTO dbo.KhachHang(MaSoThue,Ten,DiaChi,Email,SoDienThoai,GhiChu,TrangThai)VALUES(N'444444',N'Đào Văn Hiếu',N'Ba Vì',N'hieudv@gmail.com',N'0111111111',N'',1)
+INSERT INTO dbo.KhachHang(MaSoThue,Ten,DiaChi,Email,SoDienThoai,GhiChu,TrangThai)VALUES(N'555555',N'Nguyễn Hoàng Tiến',N'Hà Nội',N'tiennh@gmail.com',N'0987654321',N'',1)
 --Thêm dữ liệu hóa đơn
 INSERT INTO dbo.HOADON(ThanhTien,DatCoc,NgayTao,GhiChu,DiaChi,TrangThaiHD,TrangThaiTT,Id_NhanVien,Id_KhachHang) values (30000,10000, '20211111',N'',N'Nho Quan, Ninh Bình',1,1,1,1)
 --Thêm dữ liệu hóa đơn
@@ -285,6 +288,8 @@ SELECT * FROM HoaDon
 SELECT * FROM dbo.DonViTinh
 SELECT * FROM dbo.LoaiHang
 SELECT * FROM dbo.HangHoa JOIN dbo.DanhMuc ON DanhMuc.Id = HangHoa.Id_DanhMuc
+select * from hoadon
+SELECT * FROM HoaDon Where TrangThaiHD != 3 AND TrangThaiHD != 0
 delete from hoadon
 */
 
@@ -293,4 +298,4 @@ SELECT * FROM dbo.HangHoa JOIN dbo.ChiTietHangHoa ON ChiTietHangHoa.Id_HangHoa =
 SELECT * FROM dbo.HoaDon JOIN dbo.KhachHang ON KhachHang.Id = HoaDon.Id_KhachHang
 JOIN dbo.NhanVien ON NhanVien.Id = HoaDon.Id_NhanVien
 JOIN dbo.TaiKhoan ON TaiKhoan.Id = NhanVien.Id_TaiKhoan
-WHERE TrangThaiHD = 3 AND TenTK LIKE '%%' OR KhachHang.SoDienThoai LIKE '%%'
+WHERE (TrangThaiHD = 3 AND TenTK LIKE '%%') OR (KhachHang.SoDienThoai LIKE '%%' AND TrangThaiHD = 3)

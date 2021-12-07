@@ -151,20 +151,32 @@
             <Component class="javax.swing.JTable" name="tb_hoaDon">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="9" rowCount="4">
+                  <Table columnCount="11" rowCount="4">
                     <Column editable="false" title="Ma&#x303; ho&#x301;a &#x111;&#x1a1;n" type="java.lang.Object"/>
                     <Column editable="false" title="Nga&#x300;y ta&#x323;o" type="java.lang.Object"/>
                     <Column editable="false" title="NV ta&#x323;o" type="java.lang.Object"/>
+                    <Column editable="true" title="T&#xea;n kha&#x301;ch ha&#x300;ng" type="java.lang.Object"/>
                     <Column editable="false" title="SDT kha&#x301;ch ha&#x300;ng" type="java.lang.Object"/>
                     <Column editable="false" title="&#x110;i&#x323;a chi&#x309; giao ha&#x300;ng" type="java.lang.Object"/>
                     <Column editable="false" title="Phi&#x301; giao ha&#x300;ng" type="java.lang.Object"/>
-                    <Column editable="false" title="Thanh toa&#x301;n" type="java.lang.Object"/>
+                    <Column editable="true" title="Ti&#xea;&#x300;n c&#xe2;&#x300;n thanh toa&#x301;n" type="java.lang.Object"/>
                     <Column editable="false" title="&#x110;&#x103;&#x323;t co&#x323;c" type="java.lang.Object"/>
+                    <Column editable="false" title="Thanh toa&#x301;n" type="java.lang.Object"/>
                     <Column editable="false" title="Ghi chu&#x301;" type="java.lang.Object"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
                     <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                       <Title/>
                       <Editor/>

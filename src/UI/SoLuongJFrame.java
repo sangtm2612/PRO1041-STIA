@@ -43,7 +43,7 @@ public class SoLuongJFrame extends javax.swing.JFrame {
         bh.setTien();
         bh.loadListChiTietHangHoa();
         bh.loadTableHangHoa();
-        bh.setThanhToanHD();
+        bh.setTienThanhToanHD();
         validateHelper.message(bh, "Thêm thành công!");
         this.dispose();
     }
