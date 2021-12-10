@@ -5,17 +5,57 @@
  */
 package UI;
 
+import DAO.Models.NhanVien;
+import DAO.Models.TaiKhoan;
+import Service.Implement.NhanVienService;
+import Service.Implement.TaiKhoanService;
+import Utils.validateHelper;
+
 /**
  *
  * @author sangt
  */
 public class ForgotPassJFrame extends javax.swing.JFrame {
-
+    NhanVien nv;
+    NhanVienService nvService = new NhanVienService();
+    TaiKhoanService tkService = new TaiKhoanService();
     /**
      * Creates new form ForgotPassJFrame
      */
-    public ForgotPassJFrame() {
+    public ForgotPassJFrame(NhanVien nv) {
         initComponents();
+        init();
+        this.nv = nv;
+    }
+    
+    public void init() {
+        setResizable(false);
+        setLocationRelativeTo(null);
+    }
+    
+    public void doiMK() {
+        String mkMoi = pf_matKhau.getText();
+        String mkXacNhan = pf_xacnhanmk.getText();
+        if (mkMoi.isEmpty()) {
+            validateHelper.message(this, "Vui lòng nhập mật khẩu mới!");
+            return;
+        }
+        if (mkXacNhan.isEmpty()) {
+            validateHelper.message(this, "Vui lòng nhập mật khẩu xác nhận!");
+            return;
+        }
+        if (!mkMoi.equals(mkXacNhan)) {
+            validateHelper.message(this, "Mật khẩu xác nhận không khớp!");
+            return;
+        }
+        if (mkMoi.equals(mkXacNhan)) {
+            TaiKhoan tk = tkService.findTaiKhoanId(nv.getId());
+            tk.setMatKhau(mkMoi);
+            tkService.suaTaiKhoan(tk);
+            validateHelper.message(this, "Đổi mật khẩu thành công");
+            this.dispose();
+            new LoginJFrame().setVisible(true);
+        }
     }
 
     /**
@@ -36,7 +76,8 @@ public class ForgotPassJFrame extends javax.swing.JFrame {
         btn_ketthuc = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setUndecorated(true);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/forgotmk.png"))); // NOI18N
 
@@ -55,6 +96,11 @@ public class ForgotPassJFrame extends javax.swing.JFrame {
 
         btn_ketthuc.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btn_ketthuc.setText("Kết thúc");
+        btn_ketthuc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ketthucActionPerformed(evt);
+            }
+        });
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/back.png"))); // NOI18N
 
@@ -105,6 +151,11 @@ public class ForgotPassJFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btn_ketthucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ketthucActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_btn_ketthucActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -135,7 +186,7 @@ public class ForgotPassJFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ForgotPassJFrame().setVisible(true);
+                //new ForgotPassJFrame().setVisible(true);
             }
         });
     }

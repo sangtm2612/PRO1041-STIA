@@ -44,7 +44,7 @@ public class SoLuongJFrame extends javax.swing.JFrame {
         bh.loadListChiTietHangHoa();
         bh.loadTableHangHoa();
         bh.setTienThanhToanHD();
-        validateHelper.message(bh, "Thêm thành công!");
+        validateHelper.message(bh, "Thêm hàng thành công!");
         this.dispose();
     }
 

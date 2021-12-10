@@ -21,6 +21,10 @@ public class jdbcHelper {
         }
     }
     
+    public static Connection getConnect() throws SQLException {
+        return DriverManager.getConnection(url, user, password);
+    }
+    
     public static PreparedStatement getStmt(String sql, Object...args) throws SQLException {
         Connection conn = DriverManager.getConnection(url, user, password);
         PreparedStatement stmt;
@@ -33,7 +37,6 @@ public class jdbcHelper {
             stmt.setObject(i+1, args[i]);
         }
         return stmt;
-            
     }
     
     public static ResultSet query(String sql, Object...args) throws SQLException {

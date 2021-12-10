@@ -24,16 +24,16 @@ public class ChiTietHangHoaService implements ChiTietHangHoaInterface{
 
     @Override
     public void suaHangHoaChiTiet(ChiTietHangHoa cthh) {
-        if (cthh.getId_ApSuat() == 0) {
+        if (cthh.getId_ApSuat() == null || cthh.getId_ApSuat() == 0) {
             cthh.setId_ApSuat(null);
         }
-        if (cthh.getId_KichThuoc()== 0) {
-            cthh.setId_KichThuoc(null);
+        if (cthh.getId_KichThuoc() == null || cthh.getId_KichThuoc() == 0) {
+            cthh.setId_KichThuoc( null);
         }
-        if (cthh.getId_MauSac() == 0) {
+        if (cthh.getId_MauSac() == null || cthh.getId_MauSac() == 0) {
             cthh.setId_MauSac(null);
         }
-        if (cthh.getId_ChieuDay()== 0) {
+        if (cthh.getId_ChieuDay() == null || cthh.getId_ChieuDay() == 0) {
             cthh.setId_ChieuDay(null);
         }
         ctDAO.update(cthh);

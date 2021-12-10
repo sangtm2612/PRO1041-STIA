@@ -177,8 +177,9 @@ CREATE TABLE HoaDon
 	DiaChi NVARCHAR(100) NOT NULL,
 	TrangThaiHD INT,
 	TrangThaiTT INT,
+	TienTrinh INT,
 	Id_NhanVien INT NOT NULL,
-	Id_KhachHang INT NULL,
+	Id_KhachHang INT NOT NULL,
 	FOREIGN KEY(Id_NhanVien) REFERENCES dbo.NhanVien(Id),
 	FOREIGN KEY(Id_KhachHang) REFERENCES dbo.KhachHang(Id)
 )
@@ -275,11 +276,10 @@ INSERT INTO dbo.KhachHang(MaSoThue,Ten,DiaChi,Email,SoDienThoai,GhiChu,TrangThai
 INSERT INTO dbo.KhachHang(MaSoThue,Ten,DiaChi,Email,SoDienThoai,GhiChu,TrangThai)VALUES(N'444444',N'Đào Văn Hiếu',N'Ba Vì',N'hieudv@gmail.com',N'0111111111',N'',1)
 INSERT INTO dbo.KhachHang(MaSoThue,Ten,DiaChi,Email,SoDienThoai,GhiChu,TrangThai)VALUES(N'555555',N'Nguyễn Hoàng Tiến',N'Hà Nội',N'tiennh@gmail.com',N'0987654321',N'',1)
 --Thêm dữ liệu hóa đơn
-INSERT INTO dbo.HOADON(ThanhTien,DatCoc,NgayTao,GhiChu,DiaChi,TrangThaiHD,TrangThaiTT,Id_NhanVien,Id_KhachHang) values (30000,10000, '20211111',N'',N'Nho Quan, Ninh Bình',1,1,1,1)
 --Thêm dữ liệu hóa đơn
 
 --Truy vấn
-select * from HoaDonChiTiet
+select * from HoaDonChiTiet where TrangThai = 1
 select * from ChiTietHangHoa
 select * from ChieuDay
 SELECT * FROM dbo.NhaCungCap
@@ -292,6 +292,7 @@ select * from hoadon
 SELECT * FROM HoaDon Where TrangThaiHD != 3 AND TrangThaiHD != 0
 delete from hoadon
 */
+SELECT * FROM HoaDonChiTiet WHERE SoLuong > 0
 
 SELECT * FROM dbo.HangHoa JOIN dbo.ChiTietHangHoa ON ChiTietHangHoa.Id_HangHoa = HangHoa.Id WHERE TenHang like N'%Ống%'
 
@@ -299,3 +300,62 @@ SELECT * FROM dbo.HoaDon JOIN dbo.KhachHang ON KhachHang.Id = HoaDon.Id_KhachHan
 JOIN dbo.NhanVien ON NhanVien.Id = HoaDon.Id_NhanVien
 JOIN dbo.TaiKhoan ON TaiKhoan.Id = NhanVien.Id_TaiKhoan
 WHERE (TrangThaiHD = 3 AND TenTK LIKE '%%') OR (KhachHang.SoDienThoai LIKE '%%' AND TrangThaiHD = 3)
+
+
+SELECT * FROM HoaDon Where TrangThaiHD != 3 AND TrangThaiHD != 0
+
+select * from TaiKhoan join NhanVien on Id_TaiKhoan = taikhoan.id
+
+SELECT * FROM dbo.HangHoa JOIN dbo.ChiTietHangHoa ON ChiTietHangHoa.Id_HangHoa = HangHoa.Id WHERE TenHang like N'%PPR%'
+
+--hàm thống kê doanh thu theo năm
+IF OBJECT_ID('f_thongkethang') IS NOT NULL
+DROP FUNCTION dbo.f_thongkethang
+go
+CREATE FUNCTION f_thongkethang(@nam int)
+RETURNS @thongKeThang TABLE 
+(Thang INT, Tongtien INT)
+AS
+BEGIN
+	--tháng 1 -> tháng 12
+	DECLARE @i int = 0
+	WHILE (@i != 12)
+		BEGIN
+		SET @i = @i + 1;
+
+		--Tổng tiền hàng tháng
+		DECLARE @tongtien INT 
+		SELECT @tongtien = SUM(ThanhTien) FROM dbo.HoaDon WHERE YEAR(NgayTao) = @nam AND MONTH(NgayTao) = @i AND TrangThaiHD = 3
+		IF (@tongtien IS NULL) 
+			SET @tongtien = 0
+
+			INSERT INTO @thongKeThang
+			(
+			    Thang,
+			    Tongtien
+			)
+			VALUES
+			(   
+				@i,  -- Thang - int
+			    @tongtien
+			)
+        END
+	RETURN
+END
+GO
+
+SELECT * FROM dbo.f_thongkethang(2021)
+
+--INSERT INTO dbo.HOADON(ThanhTien,TongTienTT,DatCoc,NgayTao,GhiChu,DiaChi,TrangThaiHD,TrangThaiTT,TienTrinh,Id_NhanVien,Id_KhachHang) values (20000,30000,10000, '20210611',N'',N'Nho Quan, Ninh Bình',1,1,1,1)
+
+
+SELECT DISTINCT * FROM dbo.HoaDon
+
+SELECT * FROM dbo.HoaDon JOIN dbo.KhachHang ON KhachHang.Id = HoaDon.Id_KhachHang
+JOIN dbo.NhanVien ON NhanVien.Id = HoaDon.Id_NhanVien
+JOIN dbo.TaiKhoan ON TaiKhoan.Id = NhanVien.Id_TaiKhoan
+Where 
+(TrangThaiHD != 3 AND TrangThaiHD != 0 AND HoaDon.Id like '') OR 
+(TrangThaiHD != 3 AND TrangThaiHD != 0 AND TenTK LIKE '%ad%') OR 
+(TrangThaiHD != 3 AND TrangThaiHD != 0 AND KhachHang.SoDienThoai LIKE '3') OR 
+(TrangThaiHD != 3 AND TrangThaiHD != 0 AND KhachHang.Ten LIKE N'3')

@@ -25,6 +25,7 @@ public class HoaDon {
     private int TrangThaiTT;
     private int Id_NhanVien;
     private int Id_KhachHang;
+    private int TienTrinh;
 
     public HoaDon() {
     }
@@ -154,6 +155,12 @@ public class HoaDon {
         this.Id_KhachHang = Id_KhachHang;
     }
 
-    
+    public int getTienTrinh() {
+        return TienTrinh;
+    }
 
+    public void setTienTrinh(int TienTrinh) {
+        this.TienTrinh = TienTrinh;
+    }
+    
 }
