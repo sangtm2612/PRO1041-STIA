@@ -5,13 +5,18 @@
  */
 package UI;
 
+import DAO.Models.ChiTietHangHoa;
+import DAO.Models.TaiKhoan;
+import Utils.utilityHelper;
 import Utils.validateHelper;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author sangt
  */
 public class SoLuongHuyJFrame extends javax.swing.JFrame {
+
     BanHangJFrame bh;
 
     /**
@@ -27,19 +32,69 @@ public class SoLuongHuyJFrame extends javax.swing.JFrame {
         setResizable(false);
         setLocationRelativeTo(null);
     }
-    
-    public void xacNhan() {
-        bh.soLuong = Integer.parseInt(tf_soLuongHuy.getText().trim());
-        bh.cthhClick.setSoLuong(bh.cthhClick.getSoLuong() + bh.soLuong);
-        bh.cthhService.suaHangHoaChiTiet(bh.cthhClick);
-        bh.setTien();
-        bh.loadListChiTietHangHoa();
-        bh.loadTableHangHoa();
-        //bh.setThanhToanHD();
-        validateHelper.message(bh, "Thêm thành công!");
-        this.dispose();
+
+    public void noteLyDoHuy() {
+        String soLuongHuy = tf_soLuongHuy.getText().trim();
+        int sl = Integer.parseInt(soLuongHuy);
+        String lyDo = ta_lyDo.getText().trim();
+        bh.setHDClick();
+        String tk = bh.tk.getTenTK();
+        String note = bh.cthhClick.getGhiChu() + tk + " đã hủy " + sl + " " + bh.getTenHangValueTableHDCT() + " lý do: " + lyDo+";";
+        bh.hdClick.setGhiChu(note);
+        bh.hdService.suaHoaDon(bh.hdClick);
+        bh.setValueTBHoaDon(note, bh.iRowHD, 12);
     }
-    
+
+    public void xacNhan() {
+        String soLuongHuy = tf_soLuongHuy.getText().trim();
+        if (soLuongHuy.isEmpty()) {
+            validateHelper.message(this, "Vui lòng nhập số lượng hàng cần hủy!");
+            return;
+        }
+        if (utilityHelper.checkFormat("^[0-9]+$", soLuongHuy) == false) {
+            validateHelper.message(this, "Sai định dạng số lượng hủy!");
+            return;
+        }
+        if (ta_lyDo.getText().trim().isEmpty()) {
+            validateHelper.message(this, "Nhập lý do hủy hàng!");
+            return;
+        }
+        bh.soLuong = Integer.parseInt(soLuongHuy);
+        if (bh.soLuong <= 0 || bh.soLuong > 999) {
+            validateHelper.message(this, "Số lượng hàng 1-999!");
+            return;
+        }
+        if (bh.soLuong > bh.hdctClick.getSoLuong()) {
+            validateHelper.message(this, "Số lượng hủy <= số lượng hàng trong hóa đơn!");
+            return;
+        }
+        if (validateHelper.confirm(this, "Bạn có chắc chắn muốn hủy hàng!", "XÁC NHẬN HỦY HÀNG") == JOptionPane.YES_OPTION) {
+            if (bh.soLuong == bh.hdctClick.getSoLuong()) {
+                bh.hdctClick.setTrangThai(false);
+            }
+
+            bh.hdctClick.setSoLuong(bh.hdctClick.getSoLuong() - bh.soLuong);
+            ChiTietHangHoa cthh = bh.cthhService.findIdChiTietHangHoa(bh.hdctClick.getId_CTHangHoa());
+            cthh.setSoLuong(cthh.getSoLuong() + bh.soLuong);
+            bh.cthhService.suaHangHoaChiTiet(cthh);
+            bh.hdctService.suaHoaDonChiTiet(bh.hdctClick);
+            noteLyDoHuy();
+            bh.setTien();
+            bh.loadListChiTietHangHoa();
+            bh.loadListHDCT();
+            bh.loadTableHangHoa();
+            bh.loadTableHDCT();
+            bh.setTienThanhToanHD();
+            validateHelper.message(bh, "Hủy hàng thành công!");
+            this.dispose();
+        }
+
+    }
+
+    public void setHoaDon() {
+
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -148,6 +203,7 @@ public class SoLuongHuyJFrame extends javax.swing.JFrame {
 
     private void btn_huyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_huyActionPerformed
         // TODO add your handling code here:
+        xacNhan();
     }//GEN-LAST:event_btn_huyActionPerformed
 
     /**

@@ -39,12 +39,22 @@ public class HoaDonService implements HoaDonInterface{
     public List<HoaDon> findAllHoaDonDoneTimKiem(String i) {
         return hdDAO.selectBySDTKhachVaTK(i);
     }
+    
+    public List<HoaDon> findHoaDonTreo(String i) {
+        return hdDAO.selectHDTreo(i);
+    }
 
     @Override
     public HoaDon findHoaDonId(int id) {
         return hdDAO.selectById(id);
     }
     
+    public List<HoaDon> findNamHoaDonTK() {
+        return hdDAO.selectNamHoaDonThongKe();
+    }
     
+    public List<HoaDon> findHoaDonTT(int i) {
+        return hdDAO.selectHDTT(i);
+    }
     
 }

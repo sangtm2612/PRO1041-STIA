@@ -5,6 +5,7 @@
  */
 package Utils;
 
+import java.util.regex.Pattern;
 import javax.swing.JTextField;
 
 /**
@@ -12,7 +13,7 @@ import javax.swing.JTextField;
  * @author sangt
  */
 public class utilityHelper {
-    
+
     //ép kiểu text
     public static Integer parseInt(JTextField tf) {
         try {
@@ -22,12 +23,21 @@ public class utilityHelper {
         }
         return null;
     }
-    
+
     public static Double parseDouble(JTextField tf) {
         try {
             return Double.parseDouble(tf.getText().trim());
         } catch (NumberFormatException e) {
         }
         return null;
+    }
+
+    public static boolean checkFormat(String regex, String input) {
+        Pattern p = Pattern.compile(regex);
+        if (p.matcher(input).find()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

@@ -5,9 +5,7 @@
  */
 package UI;
 
-import DAO.Models.KhachHang;
 import DAO.Models.NhanVien;
-import Service.Implement.KhachHangService;
 import Service.Implement.NhanVienService;
 import Utils.validateHelper;
 import java.util.List;
@@ -28,8 +26,10 @@ import javax.swing.JOptionPane;
  */
 public class ForgotJFrame extends javax.swing.JFrame {
 
+    Integer code;
     List<NhanVien> nvList;
     NhanVienService nvService = new NhanVienService();
+    NhanVien nv;
 
     /**
      * Creates new form QuenMKJFrame
@@ -57,10 +57,10 @@ public class ForgotJFrame extends javax.swing.JFrame {
         Random rd = new Random();
         int n = rd.nextInt(999999);
         Properties prop = new Properties();
-        prop.put("mail.smtp.starttls.enable", "true");
-        prop.put("mail.smtp.host", "smtp.mailtrap.io");
-        prop.put("mail.smtp.port", "2525");
-        prop.put("mail.smtp.auth", "LOGIN");
+        prop.put("mail.smtp.host", "smtp.gmail.com");
+        prop.put("mail.smtp.port", "587");
+        prop.put("mail.smtp.auth", "true");
+        prop.put("mail.smtp.starttls.enable", "true"); //TLS
         //TLS
 
         Session session = Session.getInstance(prop,
@@ -74,11 +74,11 @@ public class ForgotJFrame extends javax.swing.JFrame {
             if (email.equals("")) {
                 JOptionPane.showMessageDialog(this, "Vui lòng nhập Email!");
                 return;
-
             }
             for (NhanVien nv : nvList) {
                 if (email.equals(nv.getEmail())) {
                     check = true;
+                    this.nv = nv;
                 }
             }
             if (check == false) {
@@ -93,15 +93,34 @@ public class ForgotJFrame extends javax.swing.JFrame {
             );
             message.setSubject("MÃ XÁC NHẬN");
             String Htmlcode = "<h1>Mã xác nhận của bạn: </h1> ";
-            message.setContent(Htmlcode + n, "text/html; charset=UTF-8");
+            message.setContent(Htmlcode + "<h1 style=\"color:red;font-weight: bold;\">" + n + "</h1>", "text/html; charset=UTF-8");
 
             Transport.send(message);
+            this.code = n;
             JOptionPane.showMessageDialog(this, "Code đã được gửi tới email của bạn!");
-
         } catch (MessagingException e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
 
+    }
+
+    public void xacNhan() {
+        String codeString = tf_macode.getText().trim();
+        if (codeString.isEmpty()) {
+            validateHelper.message(this, "Vui lòng nhập mã code!");
+            return;
+        }
+        int code = Integer.parseInt(codeString);
+
+        if (code != this.code) {
+            validateHelper.message(this, "Sai mã code vui lòng kiểm tra lại email!");
+            return;
+        }
+        if (code == this.code) {
+            this.dispose();
+            ForgotPassJFrame fp = new ForgotPassJFrame(nv);
+            fp.setVisible(true);
+        }
     }
 
     /**
@@ -158,6 +177,11 @@ public class ForgotJFrame extends javax.swing.JFrame {
 
         btn_xacnhan.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btn_xacnhan.setText("Xác nhận");
+        btn_xacnhan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_xacnhanActionPerformed(evt);
+            }
+        });
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.myPro.Icon/back.png"))); // NOI18N
         jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -218,7 +242,6 @@ public class ForgotJFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(tf_email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -240,6 +263,7 @@ public class ForgotJFrame extends javax.swing.JFrame {
 
     private void btn_guimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guimaActionPerformed
         // TODO add your handling code here:
+        guiMail();
     }//GEN-LAST:event_btn_guimaActionPerformed
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
@@ -252,6 +276,11 @@ public class ForgotJFrame extends javax.swing.JFrame {
         this.dispose();
         new LoginJFrame().setVisible(true);
     }//GEN-LAST:event_jLabel5MouseClicked
+
+    private void btn_xacnhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xacnhanActionPerformed
+        // TODO add your handling code here:
+        xacNhan();
+    }//GEN-LAST:event_btn_xacnhanActionPerformed
 
     /**
      * @param args the command line arguments
