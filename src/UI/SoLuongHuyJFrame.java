@@ -39,7 +39,7 @@ public class SoLuongHuyJFrame extends javax.swing.JFrame {
         String lyDo = ta_lyDo.getText().trim();
         bh.setHDClick();
         String tk = bh.tk.getTenTK();
-        String note = bh.cthhClick.getGhiChu() + tk + " đã hủy " + sl + " " + bh.getTenHangValueTableHDCT() + " lý do: " + lyDo+";";
+        String note = bh.hdClick.getGhiChu() + tk + " đã hủy " + sl + " " + bh.getTenHangValueTableHDCT() + " lý do: " + lyDo+";";
         bh.hdClick.setGhiChu(note);
         bh.hdService.suaHoaDon(bh.hdClick);
         bh.setValueTBHoaDon(note, bh.iRowHD, 12);
