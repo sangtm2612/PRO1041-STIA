@@ -10,6 +10,7 @@ import DAO.Models.TaiKhoan;
 import Service.Implement.NhanVienService;
 import Service.Implement.PhongBanService;
 import Service.Implement.TaiKhoanService;
+import Utils.validateHelper;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -122,18 +123,18 @@ public class NhanVienJFrame extends javax.swing.JInternalFrame {
         nv.setTrangThai(true);
         return nv;
     }
-    
+
     public Integer themTK() {
         tkService.themTaiKhoan(getTaiKhoan());
         TaiKhoan nv = tkService.findTaiKhoanName(tf_taikhoan.getText());
         return nv.getId();
     }
-    
+
     public int getIdPhongBan() {
         PhongBan pb = (PhongBan) dcm.getSelectedItem();
         return pb.getId();
     }
-    
+
     public void themNV() {
         Integer idTK = themTK();
         int idPhongBan = getIdPhongBan();
@@ -143,7 +144,7 @@ public class NhanVienJFrame extends javax.swing.JInternalFrame {
         nv.setId_TruongPhong(null);
         nvService.themNhanVien(nv);
     }
-    
+
     public void suaNV() {
         NhanVien nv = getNhanVien();
         nv.setId(nvClick.getId());
@@ -151,17 +152,17 @@ public class NhanVienJFrame extends javax.swing.JInternalFrame {
         nv.setId_PhongBan(getIdPhongBan());
         nvService.suaNhanVien(nv);
     }
-    
+
     public void xoaTK() {
         TaiKhoan tk = tkService.findTaiKhoanId(nvClick.getId_TaiKhoan());
         tk.setTrangThai(false);
         tkService.suaTaiKhoan(tk);
     }
-    
+
     public void xoaNV() {
         nvService.xoaNhanVien(nvClick.getId());
     }
-    
+
     //xóa nhân viên kho theo nghiệp vụ chỉ có nhân viên kho mới có tài khoản
     public void xoaNVK() {
         xoaTK();
@@ -191,7 +192,6 @@ public class NhanVienJFrame extends javax.swing.JInternalFrame {
         dc_ngaysinh.setDate(new Date(nvClick.getNgaySinh().getTime()));
         ta_ghichu.setText(nvClick.getGhiChu());
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -684,18 +684,118 @@ public class NhanVienJFrame extends javax.swing.JInternalFrame {
 
     private void btn_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themActionPerformed
         // TODO add your handling code here:
-        themNV();
-        loadTable();
+        try {
+            String hoTen = tf_hoten.getText().trim();
+            String cccd = tf_cccd.getText().trim();
+            String diaChi = tf_diachi.getText().trim();
+            String sdt = tf_sdt.getText().trim();
+            String email = tf_email.getText().trim();
+            String tenTK = tf_taikhoan.getText().trim();
+            String mk = pf_matkhau.getText();
+            String mkXacNhan = pf_xacnhanmk.getText();
+            if (hoTen.isEmpty()) {
+                validateHelper.message(this, "Vui lòng nhập tên nhân viên!");
+                return;
+            }
+            if (cccd.isEmpty()) {
+                validateHelper.message(this, "Vui lòng nhập căn cước công dân!");
+                return;
+            }
+            if (diaChi.isEmpty()) {
+                validateHelper.message(this, "Vui lòng nhập địa chỉ!");
+                return;
+            }
+            if (sdt.isEmpty()) {
+                validateHelper.message(this, "Vui lòng nhập số điện thoại!");
+                return;
+            }
+            if (email.isEmpty()) {
+                validateHelper.message(this, "Vui lòng nhập email!");
+                return;
+            }
+            if (tenTK.isEmpty()) {
+                validateHelper.message(this, "Vui lòng nhập tên tài khoản!");
+                return;
+            }
+            if (mk.isEmpty()) {
+                validateHelper.message(this, "Vui lòng nhập mật khẩu!");
+                return;
+            }
+            if (mkXacNhan.isEmpty()) {
+                validateHelper.message(this, "Vui lòng nhập mật khẩu xác nhận!");
+                return;
+            }
+            themNV();
+            loadTable();
+        } catch (Exception e) {
+            e.printStackTrace();
+            validateHelper.message(this, "Thêm nhân viên thất bại!");
+        }
     }//GEN-LAST:event_btn_themActionPerformed
 
     private void btn_suaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suaActionPerformed
         // TODO add your handling code here:
-        suaNV();
-        loadTable();
+        int i = tb_nhanvien.getSelectedRow();
+        if (i == -1) {
+            validateHelper.message(this, "Chọn nhân viên cần xóa!");
+            return;
+        }
+        try {
+            String hoTen = tf_hoten.getText().trim();
+            String cccd = tf_cccd.getText().trim();
+            String diaChi = tf_diachi.getText().trim();
+            String sdt = tf_sdt.getText().trim();
+            String email = tf_email.getText().trim();
+            String tenTK = tf_taikhoan.getText().trim();
+            String mk = pf_matkhau.getText();
+            String mkXacNhan = pf_xacnhanmk.getText();
+            if (hoTen.isEmpty()) {
+                validateHelper.message(this, "Vui lòng nhập tên nhân viên!");
+                return;
+            }
+            if (cccd.isEmpty()) {
+                validateHelper.message(this, "Vui lòng nhập căn cước công dân!");
+                return;
+            }
+            if (diaChi.isEmpty()) {
+                validateHelper.message(this, "Vui lòng nhập địa chỉ!");
+                return;
+            }
+            if (sdt.isEmpty()) {
+                validateHelper.message(this, "Vui lòng nhập số điện thoại!");
+                return;
+            }
+            if (email.isEmpty()) {
+                validateHelper.message(this, "Vui lòng nhập email!");
+                return;
+            }
+            if (tenTK.isEmpty()) {
+                validateHelper.message(this, "Vui lòng nhập tên tài khoản!");
+                return;
+            }
+            if (mk.isEmpty()) {
+                validateHelper.message(this, "Vui lòng nhập mật khẩu!");
+                return;
+            }
+            if (mkXacNhan.isEmpty()) {
+                validateHelper.message(this, "Vui lòng nhập mật khẩu xác nhận!");
+                return;
+            }
+            suaNV();
+            loadTable();
+        } catch (Exception e) {
+            e.printStackTrace();
+            validateHelper.message(this, "Thêm nhân viên thất bại!");
+        }
     }//GEN-LAST:event_btn_suaActionPerformed
 
     private void btn_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoaActionPerformed
         // TODO add your handling code here:
+        int i = tb_nhanvien.getSelectedRow();
+        if (i == -1) {
+            validateHelper.message(this, "Chọn nhân viên cần xóa!");
+            return;
+        }
         xoaNVK();
         loadTable();
     }//GEN-LAST:event_btn_xoaActionPerformed

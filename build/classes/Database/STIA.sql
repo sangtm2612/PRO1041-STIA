@@ -173,7 +173,7 @@ CREATE TABLE HoaDon
 	DatCoc INT NULL,
 	PhiShip INT NULL,
 	NgayTao DATETIME NOT NULL,
-	GhiChu NVARCHAR(100) NULL,
+	GhiChu NVARCHAR NULL,
 	DiaChi NVARCHAR(100) NOT NULL,
 	TrangThaiHD INT,
 	TrangThaiTT INT,
@@ -235,11 +235,11 @@ INSERT INTO dbo.DanhMuc(TenDanhMuc,TrangThai)VALUES(N'Vật tư nước',1)
 INSERT INTO dbo.DanhMuc(TenDanhMuc,TrangThai)VALUES(N'Bảo hộ lao động',1)
 --Thêm dữ liệu nhà cung cấp
 INSERT INTO dbo.NhaCungCap(TenNCC,DiaChi,SDT,Email,GhiChu,TrangThai)VALUES(N'Rạng Đông',N'Hà Nội','0987654321',N'rangdong@gmail.com',null,1)
-INSERT INTO dbo.NhaCungCap(TenNCC,DiaChi,SDT,Email,GhiChu,TrangThai)VALUES(N'Cadisun',N'Hà Nội','0987614321',N'randong@gmail.com',null,1)
-INSERT INTO dbo.NhaCungCap(TenNCC,DiaChi,SDT,Email,GhiChu,TrangThai)VALUES(N'Sino',N'Hà Nội','0987653321',N'rangdng@gmail.com',null,1)
-INSERT INTO dbo.NhaCungCap(TenNCC,DiaChi,SDT,Email,GhiChu,TrangThai)VALUES(N'Sino/ Vanloock',N'Hà Nội','0984654321',N'randng@gmail.com',null,1)
-INSERT INTO dbo.NhaCungCap(TenNCC,DiaChi,SDT,Email,GhiChu,TrangThai)VALUES(N'Điện cơ',N'Hà Nội','0987655621',N'rngdong@gmail.com',null,1)
-INSERT INTO dbo.NhaCungCap(TenNCC,DiaChi,SDT,Email,GhiChu,TrangThai)VALUES(N'Tiền phong/ Deko',N'Hà Nội','0945654321',N'randong@gmail.com',null,1)
+INSERT INTO dbo.NhaCungCap(TenNCC,DiaChi,SDT,Email,GhiChu,TrangThai)VALUES(N'Cadisun',N'Hà Nội','0987614328',N'cadisun@gmail.com',null,1)
+INSERT INTO dbo.NhaCungCap(TenNCC,DiaChi,SDT,Email,GhiChu,TrangThai)VALUES(N'Sino',N'Hà Nội','0987653329',N'sino@gmail.com',null,1)
+INSERT INTO dbo.NhaCungCap(TenNCC,DiaChi,SDT,Email,GhiChu,TrangThai)VALUES(N'Sino/ Vanloock',N'Hà Nội','0984654321',N'vanlook@gmail.com',null,1)
+INSERT INTO dbo.NhaCungCap(TenNCC,DiaChi,SDT,Email,GhiChu,TrangThai)VALUES(N'Điện cơ',N'Hà Nội','0987655621',N'diencog@gmail.com',null,1)
+INSERT INTO dbo.NhaCungCap(TenNCC,DiaChi,SDT,Email,GhiChu,TrangThai)VALUES(N'Tiền phong/ Deko',N'Hà Nội','0945654321',N'tienphong@gmail.com',null,1)
 --Thêm dữ liệu phòng ban
 INSERT INTO dbo.PhongBan(TenPhongBan,TrangThai)VALUES(N'Kho',1)
 INSERT INTO dbo.PhongBan(TenPhongBan,TrangThai)VALUES(N'Nhân sự',1)
@@ -271,12 +271,21 @@ INSERT dbo.NHANVIEN(HoTen,GioiTinh,NgaySinh,DiaChi,Email,SoDienThoai,CCCD,ChucVu
 INSERT dbo.NHANVIEN(HoTen,GioiTinh,NgaySinh,DiaChi,Email,SoDienThoai,CCCD,ChucVu,GhiChu,TrangThai,Id_PhongBan,Id_TaiKhoan,Id_TruongPhong) VALUES (N'Đào Văn Hiếu', 1, '20021202', N'Ba Vì', 'hieudv@gmail.com', '0988615222', '037202000777', 0, NULL, 1,1,2, null);
 --Thêm dữ liệu khách hàng
 INSERT INTO dbo.KhachHang(MaSoThue,Ten,DiaChi,Email,SoDienThoai,GhiChu,TrangThai)VALUES(N'111111',N'Nguyễn Anh Dũng',N'Hà Nội',N'dungna@gmail.com',N'0988765567',N'',1)
-INSERT INTO dbo.KhachHang(MaSoThue,Ten,DiaChi,Email,SoDienThoai,GhiChu,TrangThai)VALUES(N'222222',N'Trần Minh Sáng',N'Ninh Bình',N'sangtm@gmail.com',N'0123456789',N'',1)
+INSERT INTO dbo.KhachHang(MaSoThue,Ten,DiaChi,Email,SoDienThoai,GhiChu,TrangThai)VALUES(N'222222',N'Trần Minh Sáng',N'Ninh Bình',N'sangtmph17730@fpt.edu.vn',N'0123456789',N'',1)
 INSERT INTO dbo.KhachHang(MaSoThue,Ten,DiaChi,Email,SoDienThoai,GhiChu,TrangThai)VALUES(N'333333',N'Chu Ngọc Thao',N'Hà Nội',N'thaocn@gmail.com',N'0222222222',N'',1)
 INSERT INTO dbo.KhachHang(MaSoThue,Ten,DiaChi,Email,SoDienThoai,GhiChu,TrangThai)VALUES(N'444444',N'Đào Văn Hiếu',N'Ba Vì',N'hieudv@gmail.com',N'0111111111',N'',1)
 INSERT INTO dbo.KhachHang(MaSoThue,Ten,DiaChi,Email,SoDienThoai,GhiChu,TrangThai)VALUES(N'555555',N'Nguyễn Hoàng Tiến',N'Hà Nội',N'tiennh@gmail.com',N'0987654321',N'',1)
 --Thêm dữ liệu hóa đơn
---Thêm dữ liệu hóa đơn
+INSERT INTO dbo.HOADON(ThanhTien,TongTienTT,DatCoc, PhiShip, NgayTao,GhiChu,DiaChi,TrangThaiHD,TrangThaiTT,TienTrinh,Id_NhanVien,Id_KhachHang) values (50000,30000,10000,5000, '20210111',N'',N'Nho Quan, Ninh Bình',3,3,3,1,1);
+INSERT INTO dbo.HOADON(ThanhTien,TongTienTT,DatCoc, PhiShip, NgayTao,GhiChu,DiaChi,TrangThaiHD,TrangThaiTT,TienTrinh,Id_NhanVien,Id_KhachHang) values (30000,30000,10000,5000, '20210211',N'',N'Nho Quan, Ninh Bình',3,3,3,1,1);
+INSERT INTO dbo.HOADON(ThanhTien,TongTienTT,DatCoc, PhiShip, NgayTao,GhiChu,DiaChi,TrangThaiHD,TrangThaiTT,TienTrinh,Id_NhanVien,Id_KhachHang) values (60000,30000,10000,5000, '20210311',N'',N'Nho Quan, Ninh Bình',3,3,3,1,1);
+INSERT INTO dbo.HOADON(ThanhTien,TongTienTT,DatCoc, PhiShip, NgayTao,GhiChu,DiaChi,TrangThaiHD,TrangThaiTT,TienTrinh,Id_NhanVien,Id_KhachHang) values (45000,30000,10000,5000, '20210411',N'',N'Nho Quan, Ninh Bình',3,3,3,1,1);
+INSERT INTO dbo.HOADON(ThanhTien,TongTienTT,DatCoc, PhiShip, NgayTao,GhiChu,DiaChi,TrangThaiHD,TrangThaiTT,TienTrinh,Id_NhanVien,Id_KhachHang) values (70000,30000,10000,5000, '20210511',N'',N'Nho Quan, Ninh Bình',3,3,3,1,1);
+INSERT INTO dbo.HOADON(ThanhTien,TongTienTT,DatCoc, PhiShip, NgayTao,GhiChu,DiaChi,TrangThaiHD,TrangThaiTT,TienTrinh,Id_NhanVien,Id_KhachHang) values (77000,30000,10000,5000, '20210611',N'',N'Nho Quan, Ninh Bình',3,3,3,1,1);
+INSERT INTO dbo.HOADON(ThanhTien,TongTienTT,DatCoc, PhiShip, NgayTao,GhiChu,DiaChi,TrangThaiHD,TrangThaiTT,TienTrinh,Id_NhanVien,Id_KhachHang) values (65000,30000,10000,5000, '20210711',N'',N'Nho Quan, Ninh Bình',3,3,3,1,1);
+INSERT INTO dbo.HOADON(ThanhTien,TongTienTT,DatCoc, PhiShip, NgayTao,GhiChu,DiaChi,TrangThaiHD,TrangThaiTT,TienTrinh,Id_NhanVien,Id_KhachHang) values (68000,30000,10000,5000, '20210911',N'',N'Nho Quan, Ninh Bình',3,3,3,1,1);
+INSERT INTO dbo.HOADON(ThanhTien,TongTienTT,DatCoc, PhiShip, NgayTao,GhiChu,DiaChi,TrangThaiHD,TrangThaiTT,TienTrinh,Id_NhanVien,Id_KhachHang) values (100000,30000,10000,5000, '20210111',N'',N'Nho Quan, Ninh Bình',3,3,3,1,1);
+INSERT INTO dbo.HOADON(ThanhTien,TongTienTT,DatCoc, PhiShip, NgayTao,GhiChu,DiaChi,TrangThaiHD,TrangThaiTT,TienTrinh,Id_NhanVien,Id_KhachHang) values (9000,30000,10000,5000, '20211111',N'',N'Nho Quan, Ninh Bình',3,3,3,1,1);
 
 --Truy vấn
 select * from HoaDonChiTiet where TrangThai = 1
@@ -290,23 +299,10 @@ SELECT * FROM dbo.LoaiHang
 SELECT * FROM dbo.HangHoa JOIN dbo.DanhMuc ON DanhMuc.Id = HangHoa.Id_DanhMuc
 select * from hoadon
 SELECT * FROM HoaDon Where TrangThaiHD != 3 AND TrangThaiHD != 0
+select * from khachhang
 delete from hoadon
 */
-SELECT * FROM HoaDonChiTiet WHERE SoLuong > 0
 
-SELECT * FROM dbo.HangHoa JOIN dbo.ChiTietHangHoa ON ChiTietHangHoa.Id_HangHoa = HangHoa.Id WHERE TenHang like N'%Ống%'
-
-SELECT * FROM dbo.HoaDon JOIN dbo.KhachHang ON KhachHang.Id = HoaDon.Id_KhachHang
-JOIN dbo.NhanVien ON NhanVien.Id = HoaDon.Id_NhanVien
-JOIN dbo.TaiKhoan ON TaiKhoan.Id = NhanVien.Id_TaiKhoan
-WHERE (TrangThaiHD = 3 AND TenTK LIKE '%%') OR (KhachHang.SoDienThoai LIKE '%%' AND TrangThaiHD = 3)
-
-
-SELECT * FROM HoaDon Where TrangThaiHD != 3 AND TrangThaiHD != 0
-
-select * from TaiKhoan join NhanVien on Id_TaiKhoan = taikhoan.id
-
-SELECT * FROM dbo.HangHoa JOIN dbo.ChiTietHangHoa ON ChiTietHangHoa.Id_HangHoa = HangHoa.Id WHERE TenHang like N'%PPR%'
 
 --hàm thống kê doanh thu theo năm
 IF OBJECT_ID('f_thongkethang') IS NOT NULL
@@ -346,16 +342,7 @@ GO
 
 SELECT * FROM dbo.f_thongkethang(2021)
 
---INSERT INTO dbo.HOADON(ThanhTien,TongTienTT,DatCoc,NgayTao,GhiChu,DiaChi,TrangThaiHD,TrangThaiTT,TienTrinh,Id_NhanVien,Id_KhachHang) values (20000,30000,10000, '20210611',N'',N'Nho Quan, Ninh Bình',1,1,1,1)
 
 
-SELECT DISTINCT * FROM dbo.HoaDon
 
-SELECT * FROM dbo.HoaDon JOIN dbo.KhachHang ON KhachHang.Id = HoaDon.Id_KhachHang
-JOIN dbo.NhanVien ON NhanVien.Id = HoaDon.Id_NhanVien
-JOIN dbo.TaiKhoan ON TaiKhoan.Id = NhanVien.Id_TaiKhoan
-Where 
-(TrangThaiHD != 3 AND TrangThaiHD != 0 AND HoaDon.Id like '') OR 
-(TrangThaiHD != 3 AND TrangThaiHD != 0 AND TenTK LIKE '%ad%') OR 
-(TrangThaiHD != 3 AND TrangThaiHD != 0 AND KhachHang.SoDienThoai LIKE '3') OR 
-(TrangThaiHD != 3 AND TrangThaiHD != 0 AND KhachHang.Ten LIKE N'3')
+

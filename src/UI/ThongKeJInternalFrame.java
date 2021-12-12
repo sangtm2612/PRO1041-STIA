@@ -13,17 +13,27 @@ import DAO.Models.HoaDon;
 import Service.Implement.ChiTietHangHoaService;
 import Service.Implement.HoaDonService;
 import Utils.jdbcHelper;
+import Utils.validateHelper;
 import com.lowagie.text.Document;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 import java.awt.Component;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.text.NumberFormat;
 import java.util.List;
 import java.util.Locale;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import org.apache.poi.ss.usermodel.BorderStyle;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFCellStyle;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -127,27 +137,44 @@ public class ThongKeJInternalFrame extends javax.swing.JInternalFrame {
     }
 
     public void printPDF() {
-        DefaultTableModel dcm = (DefaultTableModel) tb_thongke.getModel();
-        try {
-            int count = dcm.getRowCount();
-            Document document = new Document();
-            PdfWriter.getInstance(document, new FileOutputStream("E:/thongke.pdf"));
-            document.open();
-            PdfPTable tab = new PdfPTable(2);
-            
+        DefaultTableModel dtm = (DefaultTableModel) tb_thongke.getModel();
+        JFileChooser fchoChooser = new JFileChooser();
+        int result = fchoChooser.showSaveDialog(null);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            try {
+                if (!fchoChooser.getSelectedFile().toString().endsWith(".xlsx")) {
+                    JOptionPane.showMessageDialog(this, "Không đúng định dạng!");
+                    return;
+                }
+                File newFile = new File(fchoChooser.getSelectedFile().toString());
+                FileOutputStream file = new FileOutputStream(newFile.getAbsoluteFile().getPath());
+                XSSFWorkbook wb = new XSSFWorkbook();
+                XSSFSheet hangHoaSheet = wb.createSheet("TK_DoanhThu");
+                XSSFRow row = hangHoaSheet.createRow((short) 0);
+                XSSFCell h;
 
-            tab.addCell("Tháng");
-            tab.addCell("Doanh thu");
-            for (int i = 0; i < count; i++) {
-                String value1 = String.valueOf(tb_thongke.getValueAt(i, 0));
-                String value2 = String.valueOf(tb_thongke.getValueAt(i, 1));
+                for (int i = 0; i < dtm.getColumnCount(); i++) {
+                    h = row.createCell((short) i);
+                    h.setCellValue(dtm.getColumnName(i));
+                }
+                XSSFRow row1;
+                XSSFCell a1;
+                for (int i = 0; i < dtm.getRowCount(); i++) {
+                    row1 = hangHoaSheet.createRow((short) i + 1);
+                    for (int j = 0; j < dtm.getColumnCount(); j++) {
+                        a1 = row1.createCell((short) j);
+                        a1.setCellValue(String.valueOf(dtm.getValueAt(i, j)));
+                    }
+                }
+                wb.write(file);
+                wb.close();
+                file.close();
+                validateHelper.message(this, "Xuất file thành công!");
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
 
-                tab.addCell(value1);
-                tab.addCell(value2);
             }
-            document.add(tab);
-            document.close();
-        } catch (Exception e) {
         }
     }
     

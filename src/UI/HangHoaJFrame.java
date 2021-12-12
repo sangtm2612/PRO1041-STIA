@@ -64,7 +64,7 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
     static NhaCungCapService nccService = new NhaCungCapService();
     static DefaultComboBoxModel dcm;
     static DefaultTableModel dtm;
-    TaiKhoan tk;
+    static TaiKhoan tk;
 
     public HangHoaJFrame(TaiKhoan tk) {
         initComponents();
@@ -210,7 +210,8 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
     }
 
     public static void loadCbbNhaCungCap() {
-        dcm = (DefaultComboBoxModel) cbb_nhacungcap.getModel();
+        new BanHangJFrame(tk);
+        DefaultComboBoxModel dcm = (DefaultComboBoxModel) cbb_nhacungcap.getModel();
         dcm.removeAllElements();
         List<NhaCungCap> nccList = nccService.findAllNhaCungCap();
         for (NhaCungCap ncc : nccList) {
@@ -286,19 +287,14 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
         int giaNhap = utilityHelper.parseInt(tf_gianhap);
         int giaBan = utilityHelper.parseInt(tf_giaban);
         String ghiChu = ta_ghichu.getText().trim();
-        Integer Id_KichThuoc = null;
-        if (cbb_kichthuoc.getSelectedIndex() != 0) {
-            Id_KichThuoc = getKichThuoc().getId();
-        }
+        Integer Id_KichThuoc = getKichThuoc().getId();
         Integer Id_MauSac = getMauSac().getId();
         int Id_HangHoa = timHangTheoTen(tf_tenhang.getText()).getId();
         Integer Id_ApSuat = getApSuat().getId();
         int Id_DonViTinh = getDonViTinh().getId();
         Integer Id_ChieuDay = null;
         int Id_LoaiHang = getLoaiHang().getId();
-        if (timChieuDayTheoTen() == null) {
-            Id_ChieuDay = timChieuDayTheoTen().getId();
-        }
+        Id_ChieuDay = 0;
         if (Id_ChieuDay == null || Id_ChieuDay == 0) {
             Id_ChieuDay = null;
         }
@@ -423,13 +419,13 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
                 XSSFSheet hangHoaSheet = wb.createSheet("TK_HangHoa");
                 XSSFRow row = hangHoaSheet.createRow((short) 0);
                 XSSFCell h;
-                
+
                 XSSFCellStyle cellStyle = wb.createCellStyle();
                 cellStyle.setBorderBottom(BorderStyle.MEDIUM);
                 cellStyle.setBorderTop(BorderStyle.MEDIUM);
                 cellStyle.setBorderRight(BorderStyle.MEDIUM);
                 cellStyle.setBorderLeft(BorderStyle.MEDIUM);
-                
+
                 for (int i = 0; i < dtm.getColumnCount(); i++) {
                     h = row.createCell((short) i);
                     h.setCellValue(dtm.getColumnName(i));
@@ -688,7 +684,7 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
                     .addComponent(btn_QLMauSac)
                     .addComponent(btn_QLKichThuoc)
                     .addComponent(btn_QLApSuat))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
                 .addGroup(pn_iinputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel12)
                     .addComponent(jLabel10)
@@ -910,10 +906,6 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(611, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(412, 412, 412))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -922,6 +914,10 @@ public class HangHoaJFrame extends javax.swing.JInternalFrame {
                     .addComponent(jScrollPane2)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(472, 472, 472))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
